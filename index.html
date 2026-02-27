@@ -1,0 +1,2181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mohamed Ashar | IT Support & Network Engineer</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+:root{
+  --bg:#f6f7fb;
+  --panel:#ffffff;
+  --soft:#f1f5f9;
+  --border:#e5e7eb;
+  --ink:#0b1220;
+  --ink2:#111827;
+  --muted:#6b7280;
+  --primary: #2563eb;
+  --primary-light: #3b82f6;
+  --primary-dark: #1d4ed8;
+  --gradient: linear-gradient(135deg, #2563eb, #7c3aed);
+  --success: #10b981;
+  --course: #8b5cf6;
+  --network: #0891b2;
+  --future: #f59e0b;
+
+  --radius:18px;
+  --shadow: 0 22px 60px rgba(17,24,39,0.10);
+  --shadow2: 0 12px 28px rgba(17,24,39,0.08);
+  --ease: cubic-bezier(.2,.9,.2,1);
+}
+
+/* Dark mode */
+body.dark-mode {
+  --bg: #0f172a;
+  --panel: #1e293b;
+  --soft: #1e293b;
+  --border: #334155;
+  --ink: #f1f5f9;
+  --ink2: #f1f5f9;
+  --muted: #94a3b8;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:'Inter',system-ui,-apple-system,Segoe UI,Arial,sans-serif;
+  background:radial-gradient(circle at 20% 10%, rgba(17,24,39,.04), transparent 45%),
+             radial-gradient(circle at 80% 20%, rgba(17,24,39,.04), transparent 45%),
+             var(--bg);
+  color:var(--ink2);
+  overflow:hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+a{color:inherit}
+.wrap{width:min(1150px, 92%); margin:0 auto}
+
+/* Loader */
+.loader {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: white;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s ease;
+}
+body.dark-mode .loader {
+  background: #0f172a;
+}
+.loader.hide { opacity: 0; pointer-events: none; }
+.loader-spinner {
+  width: 50px;
+  height: 50px;
+  border: 3px solid var(--border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 1s ease infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Particle background */
+.particle-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ===== NAV ===== */
+.nav{
+  position:fixed; top:0; left:0; right:0;
+  z-index:999;
+  background:rgba(255,255,255,.72);
+  backdrop-filter: blur(14px);
+  border-bottom:1px solid var(--border);
+}
+body.dark-mode .nav {
+  background: rgba(30,41,59,.72);
+}
+.nav-inner{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px 0;
+}
+.brand{
+  display:flex; align-items:center; gap:10px;
+  font-weight:950; letter-spacing:-0.4px;
+}
+.brand-badge{
+  width:34px;height:34px;border-radius:12px;
+  background:var(--gradient);
+  display:grid;place-items:center;
+  color:#fff;
+  box-shadow:0 14px 34px rgba(37,99,235,.30);
+  font-weight:950;
+}
+.menu{display:flex; align-items:center; gap:6px;}
+.menu button{
+  border:none;
+  background:transparent;
+  font-weight:900;
+  font-size:13px;
+  opacity:.82;
+  padding:10px 12px;
+  border-radius:999px;
+  cursor:pointer;
+  transition:.2s ease;
+}
+.menu button:hover{opacity:1;background:rgba(17,24,39,.06)}
+.menu button.active{
+  opacity:1;
+  background:var(--gradient);
+  color: white;
+}
+.right{display:flex; align-items:center; gap:10px;}
+.smallpill{
+  font-size:12px;
+  font-weight:900;
+  color:#374151;
+  background:rgba(17,24,39,.04);
+  border:1px solid var(--border);
+  padding:8px 10px;
+  border-radius:999px;
+}
+
+/* Theme toggle */
+.theme-toggle {
+  border: none;
+  background: rgba(17,24,39,0.06);
+  padding: 8px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: 0.2s ease;
+}
+.theme-toggle:hover {
+  transform: scale(1.1);
+}
+
+/* Mobile menu */
+.mobile-menu-btn {
+  display: none;
+  border: none;
+  background: rgba(17,24,39,0.06);
+  padding: 10px 15px;
+  border-radius: 999px;
+  font-size: 20px;
+  cursor: pointer;
+}
+.mobile-menu {
+  position: fixed;
+  top: 72px;
+  left: 0;
+  right: 0;
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+  padding: 20px;
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 998;
+  backdrop-filter: blur(14px);
+}
+.mobile-menu.show { display: flex; }
+.mobile-menu button {
+  border: none;
+  background: transparent;
+  font-weight: 900;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: left;
+  font-size: 16px;
+  border: 1px solid var(--border);
+}
+
+/* ===== VIEWPORT ===== */
+.viewport{
+  position:fixed;
+  top:64px; left:0; right:0; bottom:0;
+  overflow:hidden;
+}
+.page{
+  position:absolute; inset:0;
+  opacity:0;
+  transform: translateY(18px) scale(.995);
+  pointer-events:none;
+  transition: .55s var(--ease);
+}
+.page.active{
+  opacity:1;
+  transform: translateY(0) scale(1);
+  pointer-events:auto;
+}
+
+/* Enhanced scrollbar */
+.page-inner::-webkit-scrollbar {
+  width: 8px;
+}
+.page-inner::-webkit-scrollbar-track {
+  background: rgba(17,24,39,0.03);
+  border-radius: 10px;
+}
+.page-inner::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #94a3b8, #64748b);
+  border-radius: 10px;
+  border: 2px solid transparent;
+}
+.page-inner::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #64748b, #475569);
+}
+
+/* ===== HERO ===== */
+.hero{
+  height:100%;
+  display:flex;
+  align-items:center;
+  position:relative;
+  overflow:hidden;
+  background:
+    linear-gradient(135deg, rgba(17,24,39,.86), rgba(17,24,39,.62)),
+    url('images/hero-bg.jpg');
+  background-size:cover;
+  background-position:center;
+}
+.hero::after{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    radial-gradient(800px 520px at 18% 18%, rgba(255,255,255,0.10), transparent 55%),
+    radial-gradient(800px 520px at 86% 30%, rgba(255,255,255,0.08), transparent 60%);
+  pointer-events:none;
+}
+
+/* Orbs */
+.orb{
+  position:absolute;
+  width:560px;height:560px;border-radius:50%;
+  background:radial-gradient(circle at 30% 30%, rgba(255,255,255,.18), transparent 60%);
+  left:-160px; top:-160px;
+  filter: blur(2px);
+  animation: floatOrb 9s var(--ease) infinite;
+  pointer-events:none;
+}
+.orb2{
+  position:absolute;
+  width:640px;height:640px;border-radius:50%;
+  background:radial-gradient(circle at 30% 30%, rgba(255,255,255,.12), transparent 62%);
+  right:-220px; bottom:-240px;
+  filter: blur(3px);
+  animation: floatOrb2 10s var(--ease) infinite;
+  pointer-events:none;
+}
+@keyframes floatOrb{
+  0%,100%{transform:translate(0,0) scale(1)}
+  50%{transform:translate(14px,18px) scale(1.03)}
+}
+@keyframes floatOrb2{
+  0%,100%{transform:translate(0,0) scale(1)}
+  50%{transform:translate(-18px,-14px) scale(1.04)}
+}
+
+.hero-inner{
+  position:relative;
+  display:grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap:26px;
+  align-items:center;
+  color:#fff;
+  z-index:2;
+}
+.kicker{
+  display:inline-flex; align-items:center; gap:10px;
+  border:1px solid rgba(255,255,255,0.22);
+  background:rgba(255,255,255,0.10);
+  padding:10px 14px;
+  border-radius:999px;
+  font-weight:950;
+  width:fit-content;
+}
+.kdot{
+  width:10px;height:10px;border-radius:50%;
+  background:#fff;
+  box-shadow:0 0 18px rgba(255,255,255,.7);
+}
+.h1{
+  margin-top:14px;
+  font-size:54px;
+  line-height:1.02;
+  font-weight:950;
+  letter-spacing:-1px;
+  background: linear-gradient(135deg, #fff, #e2e8f0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.sub{
+  margin-top:14px;
+  color:rgba(255,255,255,0.90);
+  font-weight:650;
+  line-height:1.75;
+  max-width:780px;
+}
+.role{
+  display:inline-block;
+  border-bottom:2px solid var(--primary-light);
+  font-weight:950;
+}
+
+.btns{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;}
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:12px 18px;
+  border-radius:999px;
+  font-weight:950;
+  text-decoration:none;
+  transition:.25s var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+.btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+.btn.primary{
+  background:#fff;
+  color:#111827;
+  box-shadow:0 18px 40px rgba(0,0,0,.18);
+}
+.btn.primary:hover{transform:translateY(-3px)}
+.btn.ghost{
+  border:1px solid rgba(255,255,255,0.55);
+  color:#fff;
+  background:rgba(255,255,255,0.10)
+}
+.btn.ghost:hover{transform:translateY(-3px);background:rgba(255,255,255,0.16)}
+.btn.link{
+  border:1px solid rgba(255,255,255,0.55);
+  color:#fff;
+  background:transparent;
+}
+.btn.link:hover{transform:translateY(-3px);background:rgba(255,255,255,0.10)}
+
+/* KPI */
+.kpis{
+  margin-top:20px;
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0,1fr));
+  gap:10px;
+}
+.kpi{
+  background:rgba(255,255,255,0.10);
+  border:1px solid rgba(255,255,255,0.18);
+  border-radius:16px;
+  padding:12px;
+  text-align:center;
+  backdrop-filter: blur(5px);
+  transition: transform 0.3s ease;
+}
+.kpi:hover {
+  transform: translateY(-5px);
+  background: rgba(255,255,255,0.15);
+}
+.kpi .num{font-size:22px;font-weight:950}
+.kpi .lab{font-size:12px;font-weight:850;color:rgba(255,255,255,0.88)}
+
+/* Profile card */
+.profile{
+  background:rgba(255,255,255,0.10);
+  border:1px solid rgba(255,255,255,0.18);
+  border-radius:var(--radius);
+  padding:18px;
+  box-shadow: 0 28px 90px rgba(0,0,0,0.35);
+  animation: floatCard 6.5s var(--ease) infinite;
+  backdrop-filter: blur(10px);
+}
+@keyframes floatCard{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-8px)}
+}
+.profile-img-container {
+  width: 140px;
+  height: 140px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  border: 4px solid rgba(255,255,255,0.9);
+  box-shadow: 0 0 0 8px rgba(255,255,255,0.14);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+}
+.profile-img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.profile h3{font-weight:950;text-align:center}
+.profile p{margin-top:8px;text-align:center;color:rgba(255,255,255,0.9);font-weight:750;font-size:13px}
+.badges{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:14px}
+.badge{
+  font-size:12px;font-weight:950;
+  padding:7px 10px;border-radius:999px;
+  border:1px solid rgba(255,255,255,0.20);
+  background:rgba(255,255,255,0.08);
+  color:#fff;
+  transition: 0.2s ease;
+}
+.badge:hover {
+  background: var(--gradient);
+  transform: scale(1.05);
+}
+
+/* ===== PAGE CONTENT ===== */
+.page-inner{
+  height:100%;
+  overflow:auto;
+  padding:34px 0 60px;
+  scroll-behavior: smooth;
+}
+
+/* Gradient section titles */
+.sectionTitle{
+  font-size:34px;
+  font-weight:950;
+  letter-spacing:-0.6px;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+}
+.sectionDesc{
+  margin-top:10px;
+  color:var(--muted);
+  font-weight:650;
+  line-height:1.75;
+  max-width:920px;
+}
+
+/* Grid layouts */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(280px,1fr));
+  gap:18px;
+  margin-top:22px;
+}
+
+/* Card styles with shine effect */
+.card{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow2);
+  overflow:hidden;
+  transition:.28s var(--ease);
+  position: relative;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  transition: left 0.7s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+.card:hover::before {
+  left: 100%;
+}
+.card:hover{transform: translateY(-10px); box-shadow: var(--shadow);}
+.card .card-img-container {
+  width: 100%;
+  height: 210px;
+  overflow: hidden;
+  background: #f3f4f6;
+}
+.card .card-img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.card:hover img {
+  transform: scale(1.05);
+}
+.pad{padding:18px}
+.card h4{font-weight:950;margin-bottom:10px}
+.card ul{margin-left:18px;color:var(--muted);font-weight:650}
+.card li{margin:7px 0}
+
+/* Experience cards */
+.exp{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(320px,1fr));
+  gap:18px;
+  margin-top:22px;
+}
+.exp-item{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow2);
+  padding:18px;
+  transition:.28s var(--ease);
+  text-align:center;
+  position: relative;
+  overflow: hidden;
+}
+.exp-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  transition: left 0.7s ease;
+  pointer-events: none;
+}
+.exp-item:hover::before {
+  left: 100%;
+}
+.exp-item:hover{transform:translateY(-10px); box-shadow:var(--shadow);}
+.meta{
+  display:flex; justify-content:center; flex-wrap:wrap;
+  gap:8px; margin:10px 0 12px;
+}
+.pill{
+  background:rgba(17,24,39,0.04);
+  border:1px solid var(--border);
+  padding:6px 10px;
+  border-radius:999px;
+  font-weight:900;
+  color:#374151;
+  font-size:12px;
+}
+body.dark-mode .pill {
+  color: #e2e8f0;
+}
+.exp-item ul{list-style:none; padding:0; margin:10px 0 0;}
+.exp-item li{
+  margin:10px 0;
+  color:var(--muted);
+  font-weight:650;
+  line-height:1.65;
+}
+.exp-item li::before{content:"• "; font-weight:950; color: var(--primary)}
+
+/* Course Certifications */
+.certs-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(280px,1fr));
+  gap:18px;
+  margin-top:22px;
+}
+.cert{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow2);
+  padding:18px;
+  transition:.28s var(--ease);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  border-top: 4px solid var(--course);
+}
+.cert::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  transition: left 0.7s ease;
+  pointer-events: none;
+}
+.cert:hover::before {
+  left: 100%;
+}
+.cert:hover{transform:translateY(-10px); box-shadow:var(--shadow);}
+.cert h4{
+  font-weight:950; 
+  margin-bottom:8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.cert h4 i {
+  color: var(--course);
+  font-size: 24px;
+}
+.cert p{color:var(--muted); font-weight:650; line-height:1.6}
+.cert-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid var(--border);
+}
+.cert-badge {
+  display: inline-block;
+  background: var(--gradient);
+  color: white;
+  font-size: 12px;
+  font-weight: 900;
+  padding: 4px 8px;
+  border-radius: 999px;
+}
+.cert-date {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 600;
+}
+.cert-duration {
+  display: inline-block;
+  background: rgba(139, 92, 246, 0.1);
+  color: var(--course);
+  font-size: 12px;
+  font-weight: 900;
+  padding: 4px 8px;
+  border-radius: 999px;
+  margin-left: 8px;
+}
+
+/* Future Certifications */
+.future-section {
+  margin-top: 40px;
+}
+.future-title {
+  font-size: 24px;
+  font-weight: 950;
+  margin-bottom: 20px;
+  color: var(--ink2);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.future-title i {
+  color: var(--future);
+}
+.future-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 18px;
+}
+.future-card {
+  background: var(--panel);
+  border: 2px dashed var(--future);
+  border-radius: var(--radius);
+  padding: 20px;
+  text-align: center;
+  opacity: 0.8;
+  transition: 0.3s ease;
+}
+.future-card:hover {
+  transform: translateY(-5px);
+  opacity: 1;
+}
+.future-card i {
+  font-size: 32px;
+  color: var(--future);
+  margin-bottom: 10px;
+}
+.future-card h4 {
+  font-weight: 950;
+  margin-bottom: 5px;
+}
+.future-card p {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+}
+.future-card .target-date {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 4px 10px;
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--future);
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+/* Skill bars */
+.skill-bars { margin-top: 30px; }
+.skill-item { margin-bottom: 20px; }
+.skill-item span { 
+  font-weight: 650; 
+  display: block;
+  margin-bottom: 8px;
+  color: var(--ink2);
+}
+.progress-bar {
+  height: 8px;
+  background: var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.progress-bar div {
+  height: 100%;
+  background: var(--gradient);
+  border-radius: 999px;
+  transition: width 1.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+  width: 0;
+}
+
+/* Testimonials */
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+.testimonial-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 25px;
+  position: relative;
+  transition: 0.3s ease;
+}
+.testimonial-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow);
+}
+.quote {
+  font-size: 60px;
+  color: var(--primary);
+  opacity: 0.3;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-family: serif;
+}
+.testimonial-card p {
+  color: var(--muted);
+  font-weight: 600;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+.author {
+  font-weight: 900;
+  color: var(--ink2);
+  border-top: 1px solid var(--border);
+  padding-top: 15px;
+}
+
+/* Projects */
+#projectsGrid .card .card-img-container {
+  height: 260px;
+  background: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+#projectsGrid .card img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 10px;
+}
+.project{cursor:pointer}
+.network-diagram {
+  font-family: 'Courier New', monospace;
+  background: #1e293b;
+  color: #e2e8f0;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 10px 0;
+  font-size: 14px;
+  line-height: 1.8;
+}
+.diagram-ip {
+  color: var(--network);
+  font-weight: bold;
+}
+.diagram-device {
+  color: var(--primary-light);
+  font-weight: bold;
+}
+
+/* Floating contact button */
+.floating-contact {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 1000;
+}
+.float-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  background: var(--gradient);
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(37,99,235,0.3);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.float-btn:hover {
+  width: 140px;
+  gap: 8px;
+}
+.float-btn:hover .float-text {
+  display: inline;
+  font-size: 14px;
+  font-weight: 600;
+}
+.float-text { display: none; }
+
+/* Animations */
+.reveal{opacity:0; transform: translateY(14px); transition: .55s var(--ease);}
+.reveal.show{opacity:1; transform: translateY(0);}
+
+/* Modal */
+.modal{
+  position:fixed; inset:0;
+  background:rgba(0,0,0,0.65);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  z-index:2000;
+}
+.modal.show{display:flex;}
+.modal-card{
+  width:min(780px, 96vw);
+  background:var(--panel);
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 24px 80px rgba(0,0,0,0.35);
+}
+.modal-top{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:14px 16px; border-bottom:1px solid var(--border);
+}
+.modal-title{
+  font-weight:950;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.modal-title i {
+  color: var(--primary);
+  font-size: 24px;
+}
+.modal-close{
+  border:none;
+  background:rgba(17,24,39,0.06);
+  padding:10px 12px;
+  border-radius:12px;
+  cursor:pointer;
+  font-weight:900;
+}
+.modal-body{
+  padding: 24px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+.modal-body h3 {
+  font-size: 24px;
+  font-weight: 950;
+  margin-bottom: 16px;
+  color: var(--ink2);
+}
+.modal-body .course-type {
+  display: inline-block;
+  background: var(--course);
+  color: white;
+  font-size: 12px;
+  font-weight: 900;
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-bottom: 20px;
+}
+.modal-body .cert-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 20px 0;
+}
+.modal-body .detail-item {
+  background: rgba(37,99,235,0.04);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+}
+.modal-body .detail-item .label {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.modal-body .detail-item .value {
+  font-weight: 950;
+  color: var(--ink2);
+  font-size: 16px;
+}
+.modal-body .description {
+  color: var(--muted);
+  font-weight: 650;
+  line-height: 1.7;
+  margin: 20px 0;
+  padding: 16px;
+  background: rgba(37,99,235,0.02);
+  border-radius: 12px;
+  border-left: 4px solid var(--course);
+}
+.modal-body .skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+.modal-body .skill-tag {
+  background: var(--gradient);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 900;
+}
+.modal-body .certificate-note {
+  margin-top: 20px;
+  padding: 12px;
+  background: rgba(139, 92, 246, 0.1);
+  border-radius: 12px;
+  color: var(--course);
+  font-weight: 600;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.modal-body .network-topology {
+  background: #0f172a;
+  color: #e2e8f0;
+  padding: 20px;
+  border-radius: 12px;
+  margin: 20px 0;
+  font-family: 'Courier New', monospace;
+  border-left: 4px solid var(--network);
+}
+.modal-body .device-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px;
+  border-bottom: 1px solid #334155;
+}
+.modal-body .device-row:last-child {
+  border-bottom: none;
+}
+.modal-body .device-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--network);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+.modal-body .device-details {
+  flex: 1;
+}
+.modal-body .device-name {
+  font-weight: 900;
+  color: var(--primary-light);
+}
+.modal-body .device-ip {
+  color: var(--network);
+  font-family: monospace;
+  font-size: 14px;
+}
+
+/* Contact page */
+.contact-premium{height:100%;}
+.contact-header{
+  display:flex; align-items:flex-end; justify-content:space-between;
+  gap:16px; flex-wrap:wrap;
+}
+.contact-grid{
+  display:grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap:18px;
+  margin-top:22px;
+}
+.contact-card2{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow2);
+  padding:18px;
+}
+.contact-item{
+  display:flex; gap:12px;
+  padding:12px;
+  border:1px solid var(--border);
+  border-radius:16px;
+  background:rgba(17,24,39,0.02);
+  margin-top:12px;
+  transition: 0.3s ease;
+}
+.contact-item:hover {
+  transform: translateX(5px);
+  border-color: var(--primary);
+}
+.ico{
+  width:42px;height:42px;border-radius:14px;
+  display:grid;place-items:center;
+  background:var(--gradient);
+  border:1px solid var(--border);
+  font-weight:950;
+  color: white;
+}
+.contact-item h5{font-weight:950;margin-bottom:4px}
+.contact-item p{color:var(--muted);font-weight:650;line-height:1.6}
+
+.formRow{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+.fld{
+  width:100%;
+  padding:12px 12px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  outline:none;
+  font-weight:650;
+  background:var(--panel);
+  color: var(--ink2);
+  transition: 0.2s ease;
+}
+.fld:focus{border-color:var(--primary); box-shadow:0 0 0 4px rgba(37,99,235,.12)}
+textarea.fld{min-height:140px;resize:vertical}
+.actionRow{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;margin-top:10px;}
+.btnSolid{
+  border:none;
+  background:var(--gradient);
+  color:#fff;
+  padding:12px 16px;
+  border-radius:999px;
+  font-weight:950;
+  cursor:pointer;
+  transition:.2s ease;
+}
+.btnSolid:hover{transform:translateY(-2px); box-shadow: 0 10px 20px rgba(37,99,235,0.3);}
+.btnOutline{
+  border:1px solid var(--border);
+  background:var(--panel);
+  color:var(--ink2);
+  padding:12px 16px;
+  border-radius:999px;
+  font-weight:950;
+  cursor:pointer;
+  transition:.2s ease;
+}
+.btnOutline:hover{transform:translateY(-2px); background:var(--soft);}
+
+/* Responsive */
+@media (max-width:980px){
+  .hero-inner{grid-template-columns:1fr}
+  .h1{font-size:40px}
+  .kpis{grid-template-columns:1fr 1fr;}
+  .modal-body .cert-details{grid-template-columns:1fr;}
+  .contact-grid{grid-template-columns:1fr}
+  .formRow{grid-template-columns:1fr}
+}
+@media (max-width:720px){ 
+  .menu{display:none} 
+  .mobile-menu-btn{display: block;}
+}
+@media (max-width:540px){ 
+  .kpis{grid-template-columns:1fr}
+  .floating-contact { bottom: 20px; right: 20px; }
+}
+</style>
+</head>
+
+<body>
+<!-- Loader -->
+<div class="loader" id="loader">
+  <div class="loader-spinner"></div>
+</div>
+
+<!-- Particle Canvas -->
+<canvas id="particleCanvas" class="particle-bg"></canvas>
+
+<!-- NAV -->
+<div class="nav">
+  <div class="wrap nav-inner">
+    <div class="brand">
+      <div class="brand-badge">MA</div>
+      Mohamed Ashar
+    </div>
+
+    <div class="menu" id="topMenu">
+      <button class="active" data-page="home">Home</button>
+      <button data-page="about">About</button>
+      <button data-page="skills">Skills</button>
+      <button data-page="experience">Experience</button>
+      <button data-page="education">Education</button>
+      <button data-page="certifications">Certifications</button>
+      <button data-page="testimonials">Testimonials</button>
+      <button data-page="projects">Projects</button>
+      <button data-page="contact">Contact</button>
+    </div>
+
+    <div class="right">
+      <span class="smallpill">Sharjah, UAE</span>
+      <button class="theme-toggle" id="themeToggle">🌙</button>
+      <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+    </div>
+  </div>
+</div>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <button data-page="home">Home</button>
+  <button data-page="about">About</button>
+  <button data-page="skills">Skills</button>
+  <button data-page="experience">Experience</button>
+  <button data-page="education">Education</button>
+  <button data-page="certifications">Certifications</button>
+  <button data-page="testimonials">Testimonials</button>
+  <button data-page="projects">Projects</button>
+  <button data-page="contact">Contact</button>
+</div>
+
+<div class="viewport">
+  <!-- HOME -->
+  <section class="page active" id="page-home">
+    <div class="hero">
+      <div class="orb"></div>
+      <div class="orb2"></div>
+
+      <div class="wrap hero-inner">
+        <div class="reveal">
+          <div class="kicker"><span class="kdot"></span> Premium IT Portfolio</div>
+          <div class="h1">Mohamed Ashar</div>
+
+          <p class="sub">
+            <span id="typing" class="role">IT Support Engineer</span><br>
+            IT support, networking, Windows Server, Active Directory, Office 365, firewall basics, and CCTV infrastructure.
+          </p>
+
+          <div class="btns">
+            <a class="btn primary" href="cv.pdf" download="Mohamed_Ashar_CV.pdf">Download CV</a>
+            <button class="btn ghost" data-page="contact">Contact Me</button>
+            <a class="btn link" href="https://www.linkedin.com/in/mohamed-ashar-a013b4234/"
+               target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          </div>
+
+          <div class="kpis">
+            <div class="kpi"><div class="num" id="years">0</div><div class="lab">Years Experience</div></div>
+            <div class="kpi"><div class="num" id="companies">0</div><div class="lab">Companies Worked</div></div>
+            <div class="kpi"><div class="num" id="issues">0</div><div class="lab">Avg Daily Issues</div></div>
+            <div class="kpi"><div class="num" id="visits">0</div><div class="lab">Public Visits</div></div>
+          </div>
+        </div>
+
+        <div class="profile reveal">
+          <div class="profile-img-container">
+            <img src="images/profile.jpg" alt="Mohamed Ashar">
+          </div>
+          <h3>IT Support / Network Engineer</h3>
+          <p>Sharjah, UAE • Open to opportunities</p>
+          <div class="badges">
+            <span class="badge">Networking</span>
+            <span class="badge">Windows Server</span>
+            <span class="badge">Security</span>
+            <span class="badge">CCTV</span>
+            <span class="badge">Cloud</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="page" id="page-about">
+    <div class="wrap page-inner">
+      <div class="sectionTitle reveal">About</div>
+      <div class="sectionDesc reveal">
+        Results-driven IT professional with experience supporting enterprise environments in UAE and India.
+        Strong hands-on expertise in troubleshooting, networking, Windows Server, Active Directory, Office 365,
+        CCTV systems, and infrastructure operations. Focused on uptime, fast resolution, and secure IT operations.
+      </div>
+
+      <div class="grid">
+        <div class="card reveal">
+          <div class="card-img-container">
+            <img src="images/network.jpg" alt="Network Infrastructure">
+          </div>
+          <div class="pad">
+            <h4>Profile</h4>
+            <ul>
+              <li>4+ years in IT Support & Infrastructure</li>
+              <li>Networking + Windows Server + Office 365</li>
+              <li>CCTV support + cabling basics</li>
+              <li>Strong troubleshooting & documentation</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-img-container">
+            <img src="images/server.jpg" alt="Server Room">
+          </div>
+          <div class="pad">
+            <h4>Focus Areas</h4>
+            <ul>
+              <li>Helpdesk & end-user support</li>
+              <li>Network connectivity troubleshooting</li>
+              <li>Windows system maintenance</li>
+              <li>Security awareness best practices</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="page" id="page-skills">
+    <div class="wrap page-inner">
+      <div class="sectionTitle reveal">Technical Skills</div>
+      <div class="sectionDesc reveal">Networking • Servers • Security • CCTV • Infrastructure</div>
+
+      <div class="grid">
+        <div class="card reveal">
+          <div class="card-img-container">
+            <img src="images/network.jpg" alt="Networking">
+          </div>
+          <div class="pad">
+            <h4>Networking</h4>
+            <ul>
+              <li>LAN/WAN basics, VLAN understanding</li>
+              <li>IP addressing & subnetting</li>
+              <li>Layer 1–3 troubleshooting</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-img-container">
+            <img src="images/server.jpg" alt="Servers">
+          </div>
+          <div class="pad">
+            <h4>Windows Server & Active Directory</h4>
+            <ul>
+              <li>AD user/group management</li>
+              <li>Basic GPO understanding</li>
+              <li>Office 365 support</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-img-container">
+            <img src="images/firewall.jpg" alt="Firewall">
+          </div>
+          <div class="pad">
+            <h4>Security & Firewall</h4>
+            <ul>
+              <li>FortiGate basics (policies/NAT)</li>
+              <li>Endpoint security basics</li>
+              <li>Backup & security best practices</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-img-container">
+            <img src="images/cctv.jpg" alt="CCTV">
+          </div>
+          <div class="pad">
+            <h4>CCTV & Infrastructure</h4>
+            <ul>
+              <li>Camera install & NVR support</li>
+              <li>CAT5/CAT6 cabling</li>
+              <li>Basic fiber handling</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skill Bars -->
+      <div class="skill-bars reveal">
+        <div class="sectionTitle" style="font-size:24px; margin-bottom:20px;">Proficiency Levels</div>
+        <div class="skill-item">
+          <span>Networking</span>
+          <div class="progress-bar"><div style="width:0%" data-width="85"></div></div>
+        </div>
+        <div class="skill-item">
+          <span>Windows Server</span>
+          <div class="progress-bar"><div style="width:0%" data-width="80"></div></div>
+        </div>
+        <div class="skill-item">
+          <span>Security & Firewall</span>
+          <div class="progress-bar"><div style="width:0%" data-width="75"></div></div>
+        </div>
+        <div class="skill-item">
+          <span>CCTV & Infrastructure</span>
+          <div class="progress-bar"><div style="width:0%" data-width="70"></div></div>
+        </div>
+        <div class="skill-item">
+          <span>Cloud (AWS)</span>
+          <div class="progress-bar"><div style="width:0%" data-width="65"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="page" id="page-experience">
+    <div class="wrap page-inner">
+      <div class="sectionTitle reveal">Experience</div>
+      <div class="sectionDesc reveal">Full responsibilities and work highlights</div>
+
+      <div class="exp">
+        <div class="exp-item reveal">
+          <h4>IT Support Engineer — Gulf Cars Auction LLC</h4>
+          <div class="meta">
+            <span class="pill">Sharjah, UAE</span>
+            <span class="pill">03/2025 – Present</span>
+          </div>
+          <ul>
+            <li>Provide daily IT support for end users and ensure minimal downtime.</li>
+            <li>Troubleshoot LAN/Wi-Fi, IP conflicts, DNS, gateway and switch port issues.</li>
+            <li>Install/configure desktops/laptops, OS, drivers and applications.</li>
+            <li>Support onboarding/offboarding, access requests and permission support.</li>
+            <li>Perform patching, antivirus checks, backups monitoring and health checks.</li>
+            <li>Support CCTV systems (camera/NVR troubleshooting and monitoring).</li>
+            <li>Assist infrastructure tasks (CAT6 checks, patch panels, basic fiber checks).</li>
+            <li>Coordinate with vendors/ISPs for escalations and SLA-based closure.</li>
+          </ul>
+        </div>
+
+        <div class="exp-item reveal">
+          <h4>End User Engineer — Team Computers Pvt. Ltd.</h4>
+          <div class="meta">
+            <span class="pill">Chennai, India</span>
+            <span class="pill">07/2024 – 08/2024</span>
+          </div>
+          <ul>
+            <li>End-user support for laptops/desktops, printers and applications.</li>
+            <li>OS installation, driver setup and device optimization.</li>
+            <li>Resolved Wi-Fi/LAN connectivity and access issues.</li>
+            <li>Remote troubleshooting and ticket handling to meet SLAs.</li>
+          </ul>
+        </div>
+
+        <div class="exp-item reveal">
+          <h4>IT Executive — Ideas 4 Transformation</h4>
+          <div class="meta">
+            <span class="pill">Chennai, India</span>
+            <span class="pill">02/2024 – 06/2024</span>
+          </div>
+          <ul>
+            <li>Supported store IT operations including POS devices.</li>
+            <li>Troubleshot network and system issues for continuity.</li>
+            <li>Assisted with basic firewall/network configuration.</li>
+            <li>Managed inventory and coordinated vendors.</li>
+          </ul>
+        </div>
+
+        <div class="exp-item reveal">
+          <h4>System Administrator (L1 Support) — Systech</h4>
+          <div class="meta">
+            <span class="pill">Trichy, India</span>
+            <span class="pill">01/2021 – 07/2023</span>
+          </div>
+          <ul>
+            <li>Maintained lab infrastructure and ensured systems readiness.</li>
+            <li>Installed Windows OS/software and performed troubleshooting.</li>
+            <li>Assisted with basic Active Directory tasks and user support.</li>
+            <li>Created documentation, maintenance logs, and asset records.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section class="page" id="page-education">
+    <div class="wrap page-inner">
+      <div class="sectionTitle reveal">Education</div>
+      <div class="sectionDesc reveal">Academic background</div>
+
+      <div class="exp">
+        <div class="exp-item reveal">
+          <h4>B.Com (Computer Applications) — Bharathidasan University</h4>
+          <div class="meta">
+            <span class="pill">Trichy, India</span>
+            <span class="pill">07/2017 – 05/2020</span>
+          </div>
+          <ul>
+            <li>Computer Applications fundamentals, IT tools and business systems basics.</li>
+            <li>Improved technical and analytical skills for IT support roles.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COURSE CERTIFICATIONS - Completed -->
+  <section class="page" id="page-certifications">
+    <div class="wrap page-inner">
+      <div class="sectionTitle reveal">Certifications</div>
+      <div class="sectionDesc reveal">Completed course certifications • Click to view details</div>
+
+      <!-- Completed Course Certifications -->
+      <div class="certs-grid">
+        <div class="cert reveal" 
+             data-title="CCNA Routing & Switching"
+             data-institution="Cisco Networking Academy"
+             data-duration="3 Months"
+             data-date="2020"
+             data-description="Comprehensive 3-month course covering networking fundamentals, routing protocols, switching concepts, and network troubleshooting. Hands-on labs with Cisco routers and switches."
+             data-skills="OSPF, EIGRP, VLANs, STP, IP Addressing, Subnetting, Network Security, Troubleshooting"
+             data-topics="Router Configuration, Switch Configuration, VLAN Trunking, Routing Protocols, Network Services">
+          <h4><i class="fas fa-network-wired"></i> CCNA Certification Course</h4>
+          <p>3-month comprehensive networking course</p>
+          <div class="cert-footer">
+            <span class="cert-badge">View Course</span>
+            <span><span class="cert-duration"><i class="far fa-clock"></i> 3 Months</span></span>
+          </div>
+        </div>
+
+        <div class="cert reveal"
+             data-title="Windows Server Administration"
+             data-institution="Microsoft Learning Partner"
+             data-duration="3 Months"
+             data-date="2023"
+             data-description="Intensive 3-month course on Windows Server administration covering installation, configuration, and management of Windows Server environments including Active Directory, Group Policy, and core network services."
+             data-skills="Active Directory, Group Policy, DNS, DHCP, File Services, Server Core, PowerShell"
+             data-topics="Domain Controllers, User Management, Group Policy Objects, DNS Zones, DHCP Scopes">
+          <h4><i class="fab fa-windows"></i> Windows Server Course</h4>
+          <p>3-month server administration course</p>
+          <div class="cert-footer">
+            <span class="cert-badge">View Course</span>
+            <span><span class="cert-duration"><i class="far fa-clock"></i> 3 Months</span></span>
+          </div>
+        </div>
+
+        <div class="cert reveal"
+             data-title="Network Security & Firewall"
+             data-institution="Fortinet Training Institute"
+             data-duration="3 Months"
+             data-date="2020"
+             data-description="3-month course focused on network security concepts, firewall configuration, VPN setup, and security policies. Hands-on experience with FortiGate firewall configuration and management."
+             data-skills="Firewall Policies, NAT, VPN, IPS/IDS, Security Policies, Threat Prevention"
+             data-topics="FortiGate Configuration, Site-to-Site VPN, SSL VPN, Security Profiles, Logging & Monitoring">
+          <h4><i class="fas fa-shield-alt"></i> Network Security Course</h4>
+          <p>3-month firewall & security course</p>
+          <div class="cert-footer">
+            <span class="cert-badge">View Course</span>
+            <span><span class="cert-duration"><i class="far fa-clock"></i> 3 Months</span></span>
+          </div>
+        </div>
+
+        <div class="cert reveal"
+             data-title="CCTV & Surveillance Systems"
+             data-institution="Security Systems Training Center"
+             data-duration="3 Months"
+             data-date="2020"
+             data-description="Practical 3-month course on CCTV installation, configuration, and maintenance. Covers camera types, NVR setup, cabling standards, and remote viewing configuration."
+             data-skills="Camera Installation, NVR Configuration, IP Cameras, Analog Systems, Cabling, Remote Access"
+             data-topics="Camera Placement, Network Video Recorders, PoE Setup, Storage Calculation, Mobile Viewing">
+          <h4><i class="fas fa-video"></i> CCTV Systems Course</h4>
+          <p>3-month surveillance systems course</p>
+          <div class="cert-footer">
+            <span class="cert-badge">View Course</span>
+            <span><span class="cert-duration"><i class="far fa-clock"></i> 3 Months</span></span>
+          </div>
+        </div>
+
+        <div class="cert reveal"
+             data-title="AWS Cloud Practitioner"
+             data-institution="Amazon Web Services Training"
+             data-duration="3 Months"
+             data-date="2020"
+             data-description="3-month introductory course to AWS cloud computing covering core services, architecture, pricing, and security. Hands-on labs with EC2, S3, VPC, and IAM."
+             data-skills="EC2, S3, VPC, IAM, Lambda, CloudWatch, AWS Pricing, Cloud Concepts"
+             data-topics="Compute Services, Storage Services, Networking, Security & Identity, Monitoring">
+          <h4><i class="fab fa-aws"></i> AWS Cloud Course</h4>
+          <p>3-month cloud fundamentals course</p>
+          <div class="cert-footer">
+            <span class="cert-badge">View Course</span>
+            <span><span class="cert-duration"><i class="far fa-clock"></i> 3 Months</span></span>
+          </div>
+        </div>
+
+        <div class="cert reveal"
+             data-title="Ethical Hacking Essentials"
+             data-institution="EC-Council"
+             data-duration="3 Months"
+             data-date="2020"
+             data-description="3-month course covering ethical hacking concepts, penetration testing methodologies, and security assessment techniques. Learn to identify vulnerabilities and strengthen system security."
+             data-skills="Penetration Testing, Vulnerability Assessment, Footprinting, Scanning, Enumeration, System Hacking"
+             data-topics="Information Gathering, Network Scanning, Vulnerability Analysis, System Hacking, Social Engineering">
+          <h4><i class="fas fa-lock"></i> Ethical Hacking Course</h4>
+          <p>3-month security testing course</p>
+          <div class="cert-footer">
+            <span class="cert-badge">View Course</span>
+            <span><span class="cert-duration"><i class="far fa-clock"></i> 3 Months</span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Future Professional Certifications -->
+      <div class="future-section reveal">
+        <div class="future-title">
+          <i class="fas fa-clock"></i>
+          <span>Future Professional Certifications</span>
+        </div>
+        <div class="future-grid">
+          <div class="future-card">
+            <i class="fas fa-network-wired"></i>
+            <h4>CCNP</h4>
+            <p>Cisco Certified Network Professional</p>
+            <span class="target-date">Target: 2026</span>
+          </div>
+          <div class="future-card">
+            <i class="fas fa-shield-alt"></i>
+            <h4>CompTIA Security+</h4>
+            <p>Security Certification</p>
+            <span class="target-date">Target: 2027</span>
+          </div>
+          <div class="future-card">
+            <i class="fab fa-aws"></i>
+            <h4>AWS Solutions Architect</h4>
+            <p>Associate Level</p>
+            <span class="target-date">Target: 2027</span>
+          </div>
+          <div class="future-card">
+            <i class="fas fa-fire"></i>
+            <h4>Fortinet NSE</h4>
+            <p>Network Security Expert</p>
+            <span class="target-date">Target: 2027</span>
+          </div>
+        </div>
+        <p style="color: var(--muted); font-size: 14px; margin-top: 20px; text-align: center;">
+          <i class="fas fa-info-circle"></i> These professional certifications will be added upon completion
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="page" id="page-testimonials">
+    <div class="wrap page-inner">
+      <div class="sectionTitle reveal">Recommendations</div>
+      <div class="sectionDesc reveal">What colleagues and managers say</div>
+
+      <div class="testimonial-grid">
+        <div class="testimonial-card reveal">
+          <div class="quote">"</div>
+          <p>Mohamed is exceptionally skilled in network troubleshooting and always delivers results under pressure. His dedication to IT infrastructure is commendable.</p>
+          <div class="author">- Senior IT Manager, Gulf Cars Auction</div>
+        </div>
+        <div class="testimonial-card reveal">
+          <div class="quote">"</div>
+          <p>A proactive IT professional with excellent problem-solving abilities. He consistently maintains high standards in system administration and user support.</p>
+          <div class="author">- Project Lead, Team Computers</div>
+        </div>
+        <div class="testimonial-card reveal">
+          <div class="quote">"</div>
+          <p>Great team player with deep knowledge of networking and security. His work on CCTV infrastructure was particularly impressive.</p>
+          <div class="author">- Operations Head, Ideas 4 Transformation</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="page" id="page-projects">
+    <div class="wrap page-inner">
+      <div class="sectionTitle reveal">Projects / Labs</div>
+      <div class="sectionDesc reveal">Network topology diagrams • click to view full details</div>
+
+      <div class="grid" id="projectsGrid">
+        <div class="card project reveal"
+             data-title="FortiGate Firewall Lab"
+             data-img="images/proj-fortigate.jpg"
+             data-desc="Configured LAN → Switch → FortiGate → Cloud with NAT and firewall policies. Verified internet connectivity from client network. Implemented security policies, NAT rules, and VPN configurations for secure remote access.">
+          <div class="card-img-container">
+            <img src="images/proj-fortigate.jpg" alt="FortiGate Firewall Lab">
+          </div>
+          <div class="pad">
+            <h4>FortiGate Firewall Lab</h4>
+            <div class="network-diagram">
+              <div><span class="diagram-device">PC1</span> <span class="diagram-ip">192.168.10.10/24</span> → <span class="diagram-device">VPC5</span></div>
+              <div><span class="diagram-device">Switch1</span> <span class="diagram-ip">192.168.10.0/24</span></div>
+              <div><span class="diagram-device">FortiGate7.0.9.1</span> <span class="diagram-ip">192.168.163.130/24</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card project reveal"
+             data-title="GNS3 Networking Lab"
+             data-img="images/network.jpg"
+             data-desc="Built routing/switching topologies and VLAN scenarios for troubleshooting practice. Configured OSPF, EIGRP, and STP protocols. Simulated enterprise network with multiple routers and switches for hands-on experience.">
+          <div class="card-img-container">
+            <img src="images/network.jpg" alt="GNS3 Network Simulator">
+          </div>
+          <div class="pad">
+            <h4>GNS3 Networking Lab</h4>
+            <p class="sectionDesc" style="margin-top:6px">Routing/Switching + VLAN practice</p>
+          </div>
+        </div>
+
+        <div class="card project reveal"
+             data-title="CCTV Installation & Support"
+             data-img="images/cctv.jpg"
+             data-desc="Installed cameras, configured NVR, ensured stable connectivity, and performed maintenance/troubleshooting support. Set up remote viewing, motion detection, and recording schedules for comprehensive security coverage.">
+          <div class="card-img-container">
+            <img src="images/cctv.jpg" alt="CCTV System">
+          </div>
+          <div class="pad">
+            <h4>CCTV Installation & Support</h4>
+            <p class="sectionDesc" style="margin-top:6px">NVR setup + camera connectivity</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="page" id="page-contact">
+    <div class="wrap page-inner contact-premium">
+      <div class="contact-header reveal">
+        <div>
+          <div class="sectionTitle">Contact</div>
+          <div class="sectionDesc">Let's connect — for IT Support / Network Support / System Admin roles.</div>
+        </div>
+        <div class="smallpill">Usually replies within 24 hours</div>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-card2 reveal">
+          <h4 style="font-weight:950;">Contact Details</h4>
+          <div class="sectionDesc" style="margin-top:8px;">You can reach me directly using the options below.</div>
+
+          <div class="contact-item">
+            <div class="ico"><i class="fas fa-envelope"></i></div>
+            <div><h5>Email</h5><p><a href="mailto:japzashar@gmail.com">japzashar@gmail.com</a></p></div>
+          </div>
+
+          <div class="contact-item">
+            <div class="ico"><i class="fas fa-phone"></i></div>
+            <div><h5>Phone</h5><p><a href="tel:+971568313538">+971 56 831 3538</a></p></div>
+          </div>
+
+          <div class="contact-item">
+            <div class="ico"><i class="fas fa-map-marker-alt"></i></div>
+            <div><h5>Location</h5><p>Sharjah, UAE</p></div>
+          </div>
+
+          <div class="contact-item">
+            <div class="ico"><i class="fab fa-linkedin-in"></i></div>
+            <div><h5>LinkedIn</h5>
+              <p><a href="https://www.linkedin.com/in/mohamed-ashar-a013b4234/" target="_blank" rel="noopener noreferrer">Open Profile</a></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-card2 reveal">
+          <h4 style="font-weight:950;">Send a Message</h4>
+          <div class="sectionDesc" style="margin-top:8px;">This opens your email app with the message.</div>
+
+          <form id="contactForm" style="margin-top:14px;">
+            <div class="formRow">
+              <input class="fld" type="text" name="firstName" placeholder="First name" required>
+              <input class="fld" type="text" name="lastName" placeholder="Last name" required>
+            </div>
+            <input class="fld" type="email" name="email" placeholder="Email" required style="margin-top:12px;">
+            <input class="fld" type="text" name="subject" placeholder="Subject (optional)" style="margin-top:12px;">
+            <textarea class="fld" name="message" placeholder="Write your message..." style="margin-top:12px;"></textarea>
+
+            <div class="actionRow">
+              <button type="reset" class="btnOutline">Clear</button>
+              <button type="submit" class="btnSolid">Send</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Floating Contact Button -->
+<div class="floating-contact">
+  <button class="float-btn" data-page="contact">
+    <i class="fas fa-comment"></i>
+    <span class="float-text">Hire Me</span>
+  </button>
+</div>
+
+<!-- COURSE CERTIFICATION MODAL -->
+<div class="modal" id="certModal">
+  <div class="modal-card">
+    <div class="modal-top">
+      <div class="modal-title" id="certModalTitle">
+        <i class="fas fa-graduation-cap"></i>
+        <span>Course Details</span>
+      </div>
+      <button class="modal-close" id="certModalClose">✕</button>
+    </div>
+    <div class="modal-body" id="certModalBody">
+      <!-- Content will be filled by JavaScript -->
+    </div>
+  </div>
+</div>
+
+<!-- PROJECT MODAL -->
+<div class="modal" id="projectModal">
+  <div class="modal-card">
+    <div class="modal-top">
+      <div class="modal-title" id="projectModalTitle">Project Details</div>
+      <button class="modal-close" id="projectModalClose">✕</button>
+    </div>
+    <div class="modal-body" id="projectModalBody">
+      <!-- Content will be filled by JavaScript -->
+    </div>
+  </div>
+</div>
+
+<script>
+// Loader
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    document.getElementById('loader').classList.add('hide');
+  }, 500);
+});
+
+// Particle background
+const canvas = document.getElementById('particleCanvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+
+function initParticles() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  
+  for (let i = 0; i < 50; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      radius: Math.random() * 2 + 1,
+      speedX: Math.random() * 2 - 1,
+      speedY: Math.random() * 2 - 1,
+      color: `rgba(37, 99, 235, ${Math.random() * 0.3})`
+    });
+  }
+}
+
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+  for (let particle of particles) {
+    ctx.beginPath();
+    ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+    ctx.fillStyle = particle.color;
+    ctx.fill();
+    
+    particle.x += particle.speedX;
+    particle.y += particle.speedY;
+    
+    if (particle.x < 0 || particle.x > canvas.width) particle.speedX *= -1;
+    if (particle.y < 0 || particle.y > canvas.height) particle.speedY *= -1;
+  }
+  
+  requestAnimationFrame(animateParticles);
+}
+
+initParticles();
+animateParticles();
+
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
+// Dark mode toggle
+const themeToggle = document.getElementById('themeToggle');
+themeToggle.addEventListener('click', () => {
+  document.body.classList.toggle('dark-mode');
+  themeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+});
+
+// Mobile menu
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+
+mobileMenuBtn.addEventListener('click', () => {
+  mobileMenu.classList.toggle('show');
+});
+
+// Page switching
+const pages = ["home","about","skills","experience","education","certifications","testimonials","projects","contact"];
+const pageEls = Object.fromEntries(pages.map(p => [p, document.getElementById(`page-${p}`)]));
+const menuBtns = Array.from(document.querySelectorAll('#topMenu button, [data-page], .mobile-menu button')).filter(x=>x.dataset.page);
+
+function runReveals(scope){
+  const els = scope.querySelectorAll('.reveal');
+  els.forEach(el => el.classList.remove('show'));
+  els.forEach((el, i) => setTimeout(() => el.classList.add('show'), 60 + i*45));
+  
+  // Animate skill bars
+  if (scope.id === 'page-skills') {
+    setTimeout(() => {
+      document.querySelectorAll('.progress-bar div').forEach(bar => {
+        const width = bar.getAttribute('data-width');
+        if (width) bar.style.width = width + '%';
+      });
+    }, 300);
+  }
+}
+
+function showPage(name){
+  pages.forEach(p => pageEls[p].classList.remove('active'));
+  pageEls[name].classList.add('active');
+  menuBtns.forEach(b => b.classList.toggle('active', b.dataset.page === name));
+  const inner = pageEls[name].querySelector('.page-inner');
+  if(inner) inner.scrollTop = 0;
+  requestAnimationFrame(()=> runReveals(pageEls[name]));
+  mobileMenu.classList.remove('show');
+}
+
+menuBtns.forEach(btn => btn.addEventListener('click', () => showPage(btn.dataset.page)));
+runReveals(pageEls.home);
+
+// Typing roles
+const typingEl = document.getElementById("typing");
+const roles = ["IT Support Engineer","Network Engineer","System Administrator","CCTV & Infrastructure Support"];
+let r=0, i=0, del=false;
+function type(){
+  const word = roles[r];
+  typingEl.textContent = word.substring(0,i);
+  if(!del && i < word.length) i++;
+  else if(del && i > 0) i--;
+  else{
+    if(!del){ del=true; setTimeout(type, 900); return; }
+    del=false; r=(r+1)%roles.length;
+  }
+  setTimeout(type, del ? 45 : 70);
+}
+type();
+
+// Counters with easing
+function animateCounter(el, start, end, duration) {
+  const range = end - start;
+  const increment = range / (duration / 16);
+  let current = start;
+  
+  const timer = setInterval(() => {
+    current += increment;
+    if (current >= end) {
+      current = end;
+      clearInterval(timer);
+    }
+    el.textContent = Math.round(current);
+  }, 16);
+}
+
+const startYear = 2021;
+const currentYear = new Date().getFullYear();
+const expYears = Math.max(1, currentYear - startYear);
+
+animateCounter(document.getElementById("years"), 0, expYears, 1000);
+animateCounter(document.getElementById("companies"), 0, 4, 1000);
+animateCounter(document.getElementById("issues"), 0, 15, 1000);
+
+// Public visits counter
+(async () => {
+  try {
+    let visits = localStorage.getItem('portfolio_visits');
+    if (visits) {
+      visits = parseInt(visits) + 1;
+    } else {
+      visits = 1;
+    }
+    localStorage.setItem('portfolio_visits', visits);
+    document.getElementById('visits').textContent = visits;
+  } catch(e) {
+    console.log("Counter error:", e);
+    document.getElementById('visits').textContent = '1K+';
+  }
+})();
+
+// Course Certification Modal
+const certModal = document.getElementById("certModal");
+const certModalTitle = document.getElementById("certModalTitle").querySelector('span');
+const certModalBody = document.getElementById("certModalBody");
+const certModalClose = document.getElementById("certModalClose");
+
+document.querySelectorAll(".cert").forEach(cert => {
+  cert.addEventListener("click", () => {
+    const title = cert.dataset.title || "Course";
+    const institution = cert.dataset.institution || "Training Institution";
+    const duration = cert.dataset.duration || "3 Months";
+    const date = cert.dataset.date || "2024";
+    const description = cert.dataset.description || "Comprehensive training course covering essential IT skills.";
+    const skills = cert.dataset.skills || "Technical Skills";
+    const topics = cert.dataset.topics || "Course Topics";
+    
+    certModalTitle.textContent = title;
+    
+    certModalBody.innerHTML = `
+      <h3>${title}</h3>
+      <span class="course-type"><i class="far fa-clock"></i> ${duration} Course</span>
+      <div class="cert-details">
+        <div class="detail-item">
+          <div class="label">Institution</div>
+          <div class="value">${institution}</div>
+        </div>
+        <div class="detail-item">
+          <div class="label">Completion Date</div>
+          <div class="value">${date}</div>
+        </div>
+        <div class="detail-item">
+          <div class="label">Duration</div>
+          <div class="value">${duration}</div>
+        </div>
+        <div class="detail-item">
+          <div class="label">Status</div>
+          <div class="value"><i class="fas fa-check-circle" style="color: var(--success);"></i> Completed</div>
+        </div>
+      </div>
+      <div class="description">
+        <strong>Course Description:</strong><br>
+        ${description}
+      </div>
+      <div class="certificate-note">
+        <i class="fas fa-certificate"></i>
+        Course completion certificate awarded upon successful completion of all modules and practical assessments.
+      </div>
+      <div style="margin-top: 20px;">
+        <h4 style="margin-bottom: 10px;">Key Skills Learned:</h4>
+        <div class="skills-list">
+          ${skills.split(',').map(skill => `<span class="skill-tag">${skill.trim()}</span>`).join('')}
+        </div>
+      </div>
+      <div style="margin-top: 20px;">
+        <h4 style="margin-bottom: 10px;">Course Topics:</h4>
+        <div class="skills-list">
+          ${topics.split(',').map(topic => `<span class="skill-tag">${topic.trim()}</span>`).join('')}
+        </div>
+      </div>
+    `;
+    
+    certModal.classList.add("show");
+  });
+});
+
+function closeCertModal() { 
+  certModal.classList.remove("show"); 
+}
+
+certModalClose.addEventListener("click", closeCertModal);
+certModal.addEventListener("click", (e) => { if(e.target === certModal) closeCertModal(); });
+
+// Project Modal
+const projectModal = document.getElementById("projectModal");
+const projectModalTitle = document.getElementById("projectModalTitle");
+const projectModalBody = document.getElementById("projectModalBody");
+const projectModalClose = document.getElementById("projectModalClose");
+
+document.querySelectorAll(".project").forEach(card => {
+  card.addEventListener("click", () => {
+    const title = card.dataset.title || "Project";
+    const description = card.dataset.desc || "";
+    
+    projectModalTitle.textContent = title;
+    
+    // FortiGate Lab specific details
+    if (title === "FortiGate Firewall Lab") {
+      projectModalBody.innerHTML = `
+        <h3>FortiGate Firewall Lab</h3>
+        <div class="network-topology">
+          <div class="device-row">
+            <div class="device-icon"><i class="fas fa-computer"></i></div>
+            <div class="device-details">
+              <div class="device-name">PC1</div>
+              <div class="device-ip">192.168.10.10/24</div>
+            </div>
+            <div><i class="fas fa-arrow-right"></i></div>
+            <div class="device-icon"><i class="fas fa-network-wired"></i></div>
+            <div class="device-details">
+              <div class="device-name">VPC5</div>
+              <div class="device-ip">192.168.10.0/24</div>
+            </div>
+          </div>
+          <div class="device-row">
+            <div class="device-icon"><i class="fas fa-code-branch"></i></div>
+            <div class="device-details">
+              <div class="device-name">Switch1</div>
+              <div class="device-ip">192.168.10.0/24</div>
+            </div>
+          </div>
+          <div class="device-row">
+            <div class="device-icon"><i class="fas fa-shield-halved"></i></div>
+            <div class="device-details">
+              <div class="device-name">FortiGate 7.0.9.1</div>
+              <div class="device-ip">192.168.163.130/24</div>
+            </div>
+            <div><i class="fas fa-arrow-right"></i></div>
+            <div class="device-icon"><i class="fas fa-cloud"></i></div>
+            <div class="device-details">
+              <div class="device-name">Internet/Cloud</div>
+            </div>
+          </div>
+        </div>
+        <div class="description">
+          <strong>Configuration Details:</strong><br>
+          ${description}
+        </div>
+        <div style="margin-top: 20px;">
+          <h4 style="margin-bottom: 10px;">Network Connections:</h4>
+          <ul style="color: var(--muted); line-height: 2;">
+            <li>PC1 (192.168.10.10/24) → Switch1 (192.168.10.0/24)</li>
+            <li>Switch1 → FortiGate 7.0.9.1 (192.168.163.130/24)</li>
+            <li>FortiGate → Internet/Cloud with NAT and firewall policies</li>
+          </ul>
+        </div>
+        <div style="margin-top: 20px;">
+          <h4 style="margin-bottom: 10px;">Technologies Used:</h4>
+          <div class="skills-list">
+            <span class="skill-tag">FortiGate 7.0.9.1</span>
+            <span class="skill-tag">NAT Policies</span>
+            <span class="skill-tag">Firewall Rules</span>
+            <span class="skill-tag">VPN Configuration</span>
+            <span class="skill-tag">VLAN</span>
+            <span class="skill-tag">IP Routing</span>
+          </div>
+        </div>
+      `;
+    } else if (title === "GNS3 Networking Lab") {
+      projectModalBody.innerHTML = `
+        <h3>GNS3 Networking Lab</h3>
+        <div class="description">
+          <strong>Lab Description:</strong><br>
+          ${description}
+        </div>
+        <div style="margin-top: 20px;">
+          <h4 style="margin-bottom: 10px;">Technologies Used:</h4>
+          <div class="skills-list">
+            <span class="skill-tag">GNS3</span>
+            <span class="skill-tag">OSPF</span>
+            <span class="skill-tag">EIGRP</span>
+            <span class="skill-tag">STP</span>
+            <span class="skill-tag">VLAN</span>
+            <span class="skill-tag">Cisco IOS</span>
+          </div>
+        </div>
+      `;
+    } else if (title === "CCTV Installation & Support") {
+      projectModalBody.innerHTML = `
+        <h3>CCTV Installation & Support</h3>
+        <div class="description">
+          <strong>Project Description:</strong><br>
+          ${description}
+        </div>
+        <div style="margin-top: 20px;">
+          <h4 style="margin-bottom: 10px;">Components Used:</h4>
+          <div class="skills-list">
+            <span class="skill-tag">IP Cameras</span>
+            <span class="skill-tag">NVR</span>
+            <span class="skill-tag">PoE Switch</span>
+            <span class="skill-tag">CAT6 Cabling</span>
+            <span class="skill-tag">Remote Viewing</span>
+            <span class="skill-tag">Motion Detection</span>
+          </div>
+        </div>
+      `;
+    } else {
+      projectModalBody.innerHTML = `
+        <h3>${title}</h3>
+        <div class="description">
+          ${description}
+        </div>
+      `;
+    }
+    
+    projectModal.classList.add("show");
+  });
+});
+
+function closeProjectModal() { 
+  projectModal.classList.remove("show"); 
+}
+
+projectModalClose.addEventListener("click", closeProjectModal);
+projectModal.addEventListener("click", (e) => { if(e.target === projectModal) closeProjectModal(); });
+
+// Global escape key handler
+document.addEventListener("keydown", (e) => { 
+  if(e.key === "Escape") {
+    closeCertModal();
+    closeProjectModal();
+  }
+});
+
+// Contact form
+const contactForm = document.getElementById("contactForm");
+if(contactForm){
+  contactForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const fd = new FormData(contactForm);
+    const first = fd.get("firstName") || "";
+    const last  = fd.get("lastName") || "";
+    const email = fd.get("email") || "";
+    const subj  = fd.get("subject") || "Portfolio Contact";
+    const msg   = fd.get("message") || "";
+
+    const body =
+      `Name: ${first} ${last}\n` +
+      `Email: ${email}\n\n` +
+      `Message:\n${msg}\n`;
+
+    const to = "japzashar@gmail.com";
+    window.location.href =
+      `mailto:${to}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
+  });
+}
+</script>
+</body>
+</html>
