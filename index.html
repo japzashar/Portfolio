@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Mohamed Ashar | IT Support & Network Engineer</title>
+<title>Mohamed Ashar | IT Support &amp; Network Engineer</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -32,7 +32,6 @@
   --ease: cubic-bezier(.2,.9,.2,1);
 }
 
-/* Dark mode */
 body.dark-mode {
   --bg: #0f172a;
   --panel: #1e293b;
@@ -47,63 +46,60 @@ body.dark-mode {
 html,body{height:100%}
 body{
   font-family:'Inter',system-ui,-apple-system,Segoe UI,Arial,sans-serif;
-  background:radial-gradient(circle at 20% 10%, rgba(17,24,39,.04), transparent 45%),
-             radial-gradient(circle at 80% 20%, rgba(17,24,39,.04), transparent 45%),
-             var(--bg);
+  background: #05080f;
   color:var(--ink2);
   overflow:hidden;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
+body.light-mode { background: #f6f7fb; }
 a{color:inherit}
 .wrap{width:min(1150px, 92%); margin:0 auto}
 
-/* Loader */
+/* ========== HIDE SCROLLBARS ========== */
+.page-inner { scrollbar-width: none; -ms-overflow-style: none; }
+.page-inner::-webkit-scrollbar { display: none; width: 0; height: 0; }
+html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; }
+
+/* ========== 3D BACKGROUND CANVAS ========== */
+#bg-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ========== LOADER ========== */
 .loader {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: white;
+  inset: 0;
+  background: #05080f;
   z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.6s ease;
 }
-body.dark-mode .loader {
-  background: #0f172a;
-}
+body.light-mode .loader { background: #f6f7fb; }
 .loader.hide { opacity: 0; pointer-events: none; }
 .loader-spinner {
-  width: 50px;
-  height: 50px;
-  border: 3px solid var(--border);
+  width: 60px; height: 60px;
+  border: 4px solid rgba(59,130,246,0.2);
   border-top-color: var(--primary);
   border-radius: 50%;
   animation: spin 1s ease infinite;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* Particle background */
-.particle-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* ===== NAV ===== */
+/* ========== NAV ========== */
 .nav{
   position:fixed; top:0; left:0; right:0;
   z-index:999;
-  background:rgba(255,255,255,.72);
-  backdrop-filter: blur(14px);
-  border-bottom:1px solid var(--border);
+  background:rgba(5,8,15,.55);
+  backdrop-filter: blur(16px);
+  border-bottom:1px solid rgba(51,65,85,.4);
 }
-body.dark-mode .nav {
-  background: rgba(30,41,59,.72);
-}
+body.light-mode .nav { background: rgba(255,255,255,.75); border-bottom-color: #e5e7eb; }
 .nav-inner{
   display:flex; align-items:center; justify-content:space-between;
   padding:14px 0;
@@ -111,7 +107,9 @@ body.dark-mode .nav {
 .brand{
   display:flex; align-items:center; gap:10px;
   font-weight:950; letter-spacing:-0.4px;
+  color: #f1f5f9;
 }
+body.light-mode .brand { color: #0b1220; }
 .brand-badge{
   width:34px;height:34px;border-radius:12px;
   background:var(--gradient);
@@ -119,6 +117,11 @@ body.dark-mode .nav {
   color:#fff;
   box-shadow:0 14px 34px rgba(37,99,235,.30);
   font-weight:950;
+  animation: pulseBadge 3s ease-in-out infinite;
+}
+@keyframes pulseBadge {
+  0%,100% { box-shadow: 0 14px 34px rgba(37,99,235,.30); }
+  50% { box-shadow: 0 14px 44px rgba(124,58,237,.50); }
 }
 .menu{display:flex; align-items:center; gap:6px;}
 .menu button{
@@ -131,61 +134,66 @@ body.dark-mode .nav {
   border-radius:999px;
   cursor:pointer;
   transition:.2s ease;
+  color: #e2e8f0;
 }
-.menu button:hover{opacity:1;background:rgba(17,24,39,.06)}
+body.light-mode .menu button { color: #111827; }
+.menu button:hover{opacity:1;background:rgba(59,130,246,.1)}
 .menu button.active{
   opacity:1;
   background:var(--gradient);
   color: white;
+  box-shadow: 0 8px 20px rgba(37,99,235,.35);
 }
 .right{display:flex; align-items:center; gap:10px;}
 .smallpill{
   font-size:12px;
   font-weight:900;
-  color:#374151;
-  background:rgba(17,24,39,.04);
-  border:1px solid var(--border);
+  color:#cbd5e1;
+  background:rgba(59,130,246,.1);
+  border:1px solid rgba(59,130,246,.2);
   padding:8px 10px;
   border-radius:999px;
 }
-
-/* Theme toggle */
+body.light-mode .smallpill { color: #374151; background: rgba(17,24,39,.04); border-color: #e5e7eb; }
 .theme-toggle {
   border: none;
-  background: rgba(17,24,39,0.06);
+  background: rgba(59,130,246,0.1);
   padding: 8px 12px;
   border-radius: 999px;
   cursor: pointer;
   font-size: 18px;
-  transition: 0.2s ease;
+  transition: 0.3s ease;
+  color: #e2e8f0;
 }
-.theme-toggle:hover {
-  transform: scale(1.1);
-}
-
-/* Mobile menu */
+body.light-mode .theme-toggle { color: #111827; }
+.theme-toggle:hover { transform: scale(1.15) rotate(20deg); }
 .mobile-menu-btn {
   display: none;
   border: none;
-  background: rgba(17,24,39,0.06);
+  background: rgba(59,130,246,0.1);
   padding: 10px 15px;
   border-radius: 999px;
   font-size: 20px;
   cursor: pointer;
+  color: #e2e8f0;
 }
+body.light-mode .mobile-menu-btn { color: #111827; }
 .mobile-menu {
   position: fixed;
-  top: 72px;
-  left: 0;
-  right: 0;
-  background: var(--panel);
-  border-bottom: 1px solid var(--border);
+  top: 72px; left: 0; right: 0;
+  background: rgba(5,8,15,.95);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(51,65,85,.4);
   padding: 20px;
   display: none;
   flex-direction: column;
   gap: 10px;
   z-index: 998;
-  backdrop-filter: blur(14px);
+  animation: slideDown 0.3s ease;
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 .mobile-menu.show { display: flex; }
 .mobile-menu button {
@@ -196,95 +204,76 @@ body.dark-mode .nav {
   border-radius: 12px;
   text-align: left;
   font-size: 16px;
-  border: 1px solid var(--border);
+  border: 1px solid rgba(51,65,85,.4);
+  color: #e2e8f0;
+  cursor: pointer;
 }
 
-/* ===== VIEWPORT ===== */
+/* ========== VIEWPORT ========== */
 .viewport{
   position:fixed;
   top:64px; left:0; right:0; bottom:0;
   overflow:hidden;
+  z-index: 10;
+  perspective: 1200px;
 }
 .page{
   position:absolute; inset:0;
   opacity:0;
   transform: translateY(18px) scale(.995);
   pointer-events:none;
-  transition: .55s var(--ease);
+  transition: .65s var(--ease);
+  transform-style: preserve-3d;
 }
 .page.active{
   opacity:1;
-  transform: translateY(0) scale(1);
+  transform: translateY(0) scale(1) rotateX(0deg);
   pointer-events:auto;
 }
 
-/* Enhanced scrollbar */
-.page-inner::-webkit-scrollbar {
-  width: 8px;
+/* ============================================================
+   SCROLL SNAP — DOWN-DOWN (SECTION BY SECTION)
+   ============================================================ */
+.page-inner{
+  height:100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  scroll-padding-top: 10px;
+  padding: 0;
 }
-.page-inner::-webkit-scrollbar-track {
-  background: rgba(17,24,39,0.03);
-  border-radius: 10px;
+.page-inner > .section-snap {
+  min-height: 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  padding: 40px 0 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-.page-inner::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #94a3b8, #64748b);
-  border-radius: 10px;
-  border: 2px solid transparent;
-}
-.page-inner::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #64748b, #475569);
+.page-inner > .section-snap.tall {
+  min-height: auto;
+  justify-content: flex-start;
+  padding-top: 40px;
 }
 
-/* ===== HERO ===== */
+/* ========== HERO ========== */
 .hero{
   height:100%;
   display:flex;
   align-items:center;
   position:relative;
   overflow:hidden;
-  background:
-    linear-gradient(135deg, rgba(17,24,39,.86), rgba(17,24,39,.62)),
-    url('images/hero-bg.jpg');
-  background-size:cover;
-  background-position:center;
 }
 .hero::after{
   content:"";
   position:absolute; inset:0;
   background:
-    radial-gradient(800px 520px at 18% 18%, rgba(255,255,255,0.10), transparent 55%),
-    radial-gradient(800px 520px at 86% 30%, rgba(255,255,255,0.08), transparent 60%);
+    radial-gradient(800px 520px at 18% 18%, rgba(59,130,246,0.10), transparent 55%),
+    radial-gradient(800px 520px at 86% 30%, rgba(124,58,237,0.08), transparent 60%);
   pointer-events:none;
 }
-
-/* Orbs */
-.orb{
-  position:absolute;
-  width:560px;height:560px;border-radius:50%;
-  background:radial-gradient(circle at 30% 30%, rgba(255,255,255,.18), transparent 60%);
-  left:-160px; top:-160px;
-  filter: blur(2px);
-  animation: floatOrb 9s var(--ease) infinite;
-  pointer-events:none;
-}
-.orb2{
-  position:absolute;
-  width:640px;height:640px;border-radius:50%;
-  background:radial-gradient(circle at 30% 30%, rgba(255,255,255,.12), transparent 62%);
-  right:-220px; bottom:-240px;
-  filter: blur(3px);
-  animation: floatOrb2 10s var(--ease) infinite;
-  pointer-events:none;
-}
-@keyframes floatOrb{
-  0%,100%{transform:translate(0,0) scale(1)}
-  50%{transform:translate(14px,18px) scale(1.03)}
-}
-@keyframes floatOrb2{
-  0%,100%{transform:translate(0,0) scale(1)}
-  50%{transform:translate(-18px,-14px) scale(1.04)}
-}
-
 .hero-inner{
   position:relative;
   display:grid;
@@ -296,17 +285,24 @@ body.dark-mode .nav {
 }
 .kicker{
   display:inline-flex; align-items:center; gap:10px;
-  border:1px solid rgba(255,255,255,0.22);
-  background:rgba(255,255,255,0.10);
+  border:1px solid rgba(59,130,246,0.35);
+  background:rgba(59,130,246,0.12);
   padding:10px 14px;
   border-radius:999px;
   font-weight:950;
   width:fit-content;
+  backdrop-filter: blur(10px);
+  color: #93c5fd;
 }
 .kdot{
   width:10px;height:10px;border-radius:50%;
-  background:#fff;
-  box-shadow:0 0 18px rgba(255,255,255,.7);
+  background:#60a5fa;
+  box-shadow:0 0 18px rgba(96,165,250,.8);
+  animation: pulse 2s ease infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.4); }
 }
 .h1{
   margin-top:14px;
@@ -314,24 +310,30 @@ body.dark-mode .nav {
   line-height:1.02;
   font-weight:950;
   letter-spacing:-1px;
-  background: linear-gradient(135deg, #fff, #e2e8f0);
+  background: linear-gradient(135deg, #fff, #93c5fd);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  animation: fadeInUp 1s ease;
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 .sub{
   margin-top:14px;
-  color:rgba(255,255,255,0.90);
+  color:rgba(255,255,255,0.88);
   font-weight:650;
   line-height:1.75;
   max-width:780px;
+  animation: fadeInUp 1.2s ease;
 }
 .role{
   display:inline-block;
   border-bottom:2px solid var(--primary-light);
   font-weight:950;
+  color: #60a5fa;
 }
-
 .btns{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;}
 .btn{
   display:inline-flex; align-items:center; justify-content:center;
@@ -346,19 +348,14 @@ body.dark-mode .nav {
 .btn::before {
   content: '';
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
+  top: 50%; left: 50%;
+  width: 0; height: 0;
   border-radius: 50%;
   background: rgba(255,255,255,0.3);
   transform: translate(-50%, -50%);
   transition: width 0.6s, height 0.6s;
 }
-.btn:hover::before {
-  width: 300px;
-  height: 300px;
-}
+.btn:hover::before { width: 300px; height: 300px; }
 .btn.primary{
   background:#fff;
   color:#111827;
@@ -366,19 +363,19 @@ body.dark-mode .nav {
 }
 .btn.primary:hover{transform:translateY(-3px)}
 .btn.ghost{
-  border:1px solid rgba(255,255,255,0.55);
+  border:1px solid rgba(255,255,255,0.4);
   color:#fff;
-  background:rgba(255,255,255,0.10)
+  background:rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
 }
 .btn.ghost:hover{transform:translateY(-3px);background:rgba(255,255,255,0.16)}
 .btn.link{
-  border:1px solid rgba(255,255,255,0.55);
+  border:1px solid rgba(255,255,255,0.4);
   color:#fff;
   background:transparent;
 }
 .btn.link:hover{transform:translateY(-3px);background:rgba(255,255,255,0.10)}
 
-/* KPI */
 .kpis{
   margin-top:20px;
   display:grid;
@@ -386,79 +383,79 @@ body.dark-mode .nav {
   gap:10px;
 }
 .kpi{
-  background:rgba(255,255,255,0.10);
-  border:1px solid rgba(255,255,255,0.18);
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.12);
   border-radius:16px;
   padding:12px;
   text-align:center;
   backdrop-filter: blur(5px);
   transition: transform 0.3s ease;
+  animation: fadeInUp 1.4s ease;
 }
 .kpi:hover {
-  transform: translateY(-5px);
-  background: rgba(255,255,255,0.15);
+  transform: translateY(-5px) scale(1.03);
+  background: rgba(59,130,246,0.15);
+  border-color: rgba(59,130,246,0.4);
 }
-.kpi .num{font-size:22px;font-weight:950}
-.kpi .lab{font-size:12px;font-weight:850;color:rgba(255,255,255,0.88)}
+.kpi .num{font-size:22px;font-weight:950;color:#60a5fa}
+.kpi .lab{font-size:12px;font-weight:850;color:rgba(255,255,255,0.75)}
 
-/* Profile card */
 .profile{
-  background:rgba(255,255,255,0.10);
-  border:1px solid rgba(255,255,255,0.18);
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.12);
   border-radius:var(--radius);
   padding:18px;
-  box-shadow: 0 28px 90px rgba(0,0,0,0.35);
+  box-shadow: 0 28px 90px rgba(0,0,0,0.5);
   animation: floatCard 6.5s var(--ease) infinite;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(15px);
 }
 @keyframes floatCard{
   0%,100%{transform:translateY(0)}
   50%{transform:translateY(-8px)}
 }
 .profile-img-container {
-  width: 140px;
-  height: 140px;
+  width: 140px; height: 140px;
   margin: 0 auto 14px;
   border-radius: 50%;
-  border: 4px solid rgba(255,255,255,0.9);
-  box-shadow: 0 0 0 8px rgba(255,255,255,0.14);
+  border: 4px solid rgba(59,130,246,0.6);
+  box-shadow: 0 0 0 8px rgba(59,130,246,0.15);
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, #2563eb, #7c3aed);
+  animation: profileGlow 3s ease-in-out infinite;
+}
+@keyframes profileGlow {
+  0%,100% { box-shadow: 0 0 0 8px rgba(59,130,246,0.15); }
+  50% { box-shadow: 0 0 0 12px rgba(124,58,237,0.35); }
 }
 .profile-img-container img {
-  width: 100%;
-  height: 100%;
+  width: 100%; height: 100%;
   object-fit: cover;
   display: block;
 }
-.profile h3{font-weight:950;text-align:center}
-.profile p{margin-top:8px;text-align:center;color:rgba(255,255,255,0.9);font-weight:750;font-size:13px}
+.profile h3{font-weight:950;text-align:center;color:#fff}
+.profile p{margin-top:8px;text-align:center;color:rgba(255,255,255,0.75);font-weight:750;font-size:13px}
 .badges{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:14px}
 .badge{
   font-size:12px;font-weight:950;
   padding:7px 10px;border-radius:999px;
-  border:1px solid rgba(255,255,255,0.20);
-  background:rgba(255,255,255,0.08);
-  color:#fff;
-  transition: 0.2s ease;
+  border:1px solid rgba(59,130,246,0.3);
+  background:rgba(59,130,246,0.1);
+  color:#93c5fd;
+  transition: 0.3s ease;
+  cursor: default;
 }
 .badge:hover {
   background: var(--gradient);
-  transform: scale(1.05);
+  color: #fff;
+  transform: scale(1.1) translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37,99,235,0.4);
+  border-color: transparent;
 }
 
-/* ===== PAGE CONTENT ===== */
-.page-inner{
-  height:100%;
-  overflow:auto;
-  padding:34px 0 60px;
-  scroll-behavior: smooth;
-}
-
-/* Gradient section titles */
+/* ========== SECTION TITLES ========== */
 .sectionTitle{
   font-size:34px;
   font-weight:950;
@@ -471,67 +468,68 @@ body.dark-mode .nav {
 }
 .sectionDesc{
   margin-top:10px;
-  color:var(--muted);
+  color:#94a3b8;
   font-weight:650;
   line-height:1.75;
   max-width:920px;
 }
+body.light-mode .sectionDesc { color: #6b7280; }
 
-/* Grid layouts */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit, minmax(280px,1fr));
   gap:18px;
   margin-top:22px;
 }
-
-/* Card styles with shine effect */
 .card{
-  background:var(--panel);
-  border:1px solid var(--border);
+  background:rgba(20,28,46,0.65);
+  border:1px solid rgba(51,65,85,0.55);
   border-radius:var(--radius);
-  box-shadow:var(--shadow2);
+  box-shadow:0 12px 28px rgba(0,0,0,0.35);
   overflow:hidden;
-  transition:.28s var(--ease);
+  transition:.4s var(--ease);
   position: relative;
+  backdrop-filter: blur(12px);
 }
+body.light-mode .card { background: #fff; border-color: #e5e7eb; box-shadow: 0 12px 28px rgba(17,24,39,0.08); }
 .card::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(59,130,246,0.1), transparent);
   transition: left 0.7s ease;
   pointer-events: none;
   z-index: 1;
 }
-.card:hover::before {
-  left: 100%;
-}
-.card:hover{transform: translateY(-10px); box-shadow: var(--shadow);}
+.card:hover::before { left: 100%; }
+.card:hover{transform: translateY(-10px) scale(1.02); box-shadow: 0 22px 60px rgba(37,99,235,0.3); border-color: rgba(59,130,246,0.5);}
 .card .card-img-container {
-  width: 100%;
-  height: 210px;
+  width: 100%; height: 210px;
   overflow: hidden;
-  background: #f3f4f6;
+  background: #0a0f1e;
+  position: relative;
+}
+.card .card-img-container::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 60%, rgba(5,8,15,0.6));
+  pointer-events: none;
 }
 .card .card-img-container img {
-  width: 100%;
-  height: 100%;
+  width: 100%; height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: transform 0.6s ease;
 }
-.card:hover img {
-  transform: scale(1.05);
-}
+.card:hover img { transform: scale(1.1); }
 .pad{padding:18px}
-.card h4{font-weight:950;margin-bottom:10px}
-.card ul{margin-left:18px;color:var(--muted);font-weight:650}
+.card h4{font-weight:950;margin-bottom:10px;color:#f1f5f9}
+body.light-mode .card h4 { color: #0b1220; }
+.card ul{margin-left:18px;color:#94a3b8;font-weight:650}
 .card li{margin:7px 0}
 
-/* Experience cards */
+/* Experience */
 .exp{
   display:grid;
   grid-template-columns:repeat(auto-fit, minmax(320px,1fr));
@@ -539,57 +537,55 @@ body.dark-mode .nav {
   margin-top:22px;
 }
 .exp-item{
-  background:var(--panel);
-  border:1px solid var(--border);
+  background:rgba(20,28,46,0.65);
+  border:1px solid rgba(51,65,85,0.55);
   border-radius:var(--radius);
-  box-shadow:var(--shadow2);
+  box-shadow:0 12px 28px rgba(0,0,0,0.35);
   padding:18px;
-  transition:.28s var(--ease);
+  transition:.4s var(--ease);
   text-align:center;
   position: relative;
   overflow: hidden;
+  backdrop-filter: blur(12px);
 }
+body.light-mode .exp-item { background: #fff; border-color: #e5e7eb; }
 .exp-item::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(59,130,246,0.08), transparent);
   transition: left 0.7s ease;
   pointer-events: none;
 }
-.exp-item:hover::before {
-  left: 100%;
-}
-.exp-item:hover{transform:translateY(-10px); box-shadow:var(--shadow);}
+.exp-item:hover::before { left: 100%; }
+.exp-item:hover{transform:translateY(-10px); box-shadow:0 22px 60px rgba(37,99,235,0.25); border-color: rgba(59,130,246,0.5);}
+.exp-item h4 { color: #f1f5f9; }
+body.light-mode .exp-item h4 { color: #0b1220; }
 .meta{
   display:flex; justify-content:center; flex-wrap:wrap;
   gap:8px; margin:10px 0 12px;
 }
 .pill{
-  background:rgba(17,24,39,0.04);
-  border:1px solid var(--border);
+  background:rgba(59,130,246,0.1);
+  border:1px solid rgba(59,130,246,0.2);
   padding:6px 10px;
   border-radius:999px;
   font-weight:900;
-  color:#374151;
+  color:#93c5fd;
   font-size:12px;
 }
-body.dark-mode .pill {
-  color: #e2e8f0;
-}
+body.light-mode .pill { color: #2563eb; }
 .exp-item ul{list-style:none; padding:0; margin:10px 0 0;}
 .exp-item li{
   margin:10px 0;
-  color:var(--muted);
+  color:#94a3b8;
   font-weight:650;
   line-height:1.65;
 }
-.exp-item li::before{content:"• "; font-weight:950; color: var(--primary)}
+.exp-item li::before{content:"• "; font-weight:950; color: #3b82f6}
 
-/* Course Certifications */
+/* Certifications */
 .certs-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit, minmax(280px,1fr));
@@ -597,51 +593,48 @@ body.dark-mode .pill {
   margin-top:22px;
 }
 .cert{
-  background:var(--panel);
-  border:1px solid var(--border);
+  background:rgba(20,28,46,0.65);
+  border:1px solid rgba(51,65,85,0.55);
   border-radius:var(--radius);
-  box-shadow:var(--shadow2);
+  box-shadow:0 12px 28px rgba(0,0,0,0.35);
   padding:18px;
-  transition:.28s var(--ease);
+  transition:.4s var(--ease);
   position: relative;
   overflow: hidden;
   cursor: pointer;
   border-top: 4px solid var(--course);
+  backdrop-filter: blur(12px);
 }
+body.light-mode .cert { background: #fff; border-color: #e5e7eb; }
 .cert::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(139,92,246,0.1), transparent);
   transition: left 0.7s ease;
   pointer-events: none;
 }
-.cert:hover::before {
-  left: 100%;
-}
-.cert:hover{transform:translateY(-10px); box-shadow:var(--shadow);}
+.cert:hover::before { left: 100%; }
+.cert:hover{transform:translateY(-10px) scale(1.02); box-shadow:0 22px 60px rgba(139,92,246,0.3); border-top-color: #a78bfa;}
 .cert h4{
   font-weight:950; 
   margin-bottom:8px;
   display: flex;
   align-items: center;
   gap: 8px;
+  color: #f1f5f9;
 }
-.cert h4 i {
-  color: var(--course);
-  font-size: 24px;
-}
-.cert p{color:var(--muted); font-weight:650; line-height:1.6}
+body.light-mode .cert h4 { color: #0b1220; }
+.cert h4 i { color: var(--course); font-size: 24px; }
+.cert p{color:#94a3b8; font-weight:650; line-height:1.6}
 .cert-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-top: 15px;
   padding-top: 15px;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid rgba(51,65,85,0.55);
 }
 .cert-badge {
   display: inline-block;
@@ -652,15 +645,10 @@ body.dark-mode .pill {
   padding: 4px 8px;
   border-radius: 999px;
 }
-.cert-date {
-  font-size: 12px;
-  color: var(--muted);
-  font-weight: 600;
-}
 .cert-duration {
   display: inline-block;
-  background: rgba(139, 92, 246, 0.1);
-  color: var(--course);
+  background: rgba(139, 92, 246, 0.15);
+  color: #a78bfa;
   font-size: 12px;
   font-weight: 900;
   padding: 4px 8px;
@@ -668,59 +656,54 @@ body.dark-mode .pill {
   margin-left: 8px;
 }
 
-/* Future Certifications */
-.future-section {
-  margin-top: 40px;
-}
+/* Future certs */
+.future-section { margin-top: 40px; }
 .future-title {
   font-size: 24px;
   font-weight: 950;
   margin-bottom: 20px;
-  color: var(--ink2);
+  color: #f1f5f9;
   display: flex;
   align-items: center;
   gap: 10px;
 }
-.future-title i {
-  color: var(--future);
-}
+body.light-mode .future-title { color: #0b1220; }
+.future-title i { color: var(--future); }
 .future-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 18px;
 }
 .future-card {
-  background: var(--panel);
-  border: 2px dashed var(--future);
+  background: rgba(20,28,46,0.65);
+  border: 2px dashed rgba(245,158,11,0.5);
   border-radius: var(--radius);
   padding: 20px;
   text-align: center;
-  opacity: 0.8;
-  transition: 0.3s ease;
+  opacity: 0.85;
+  transition: 0.4s ease;
+  backdrop-filter: blur(12px);
 }
+body.light-mode .future-card { background: #fff; }
 .future-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px) scale(1.03);
   opacity: 1;
+  border-color: var(--future);
+  box-shadow: 0 20px 40px rgba(245,158,11,0.25);
 }
 .future-card i {
   font-size: 32px;
   color: var(--future);
   margin-bottom: 10px;
 }
-.future-card h4 {
-  font-weight: 950;
-  margin-bottom: 5px;
-}
-.future-card p {
-  color: var(--muted);
-  font-size: 13px;
-  font-weight: 600;
-}
+.future-card h4 { font-weight: 950; margin-bottom: 5px; color: #f1f5f9; }
+body.light-mode .future-card h4 { color: #0b1220; }
+.future-card p { color:#94a3b8; font-size: 13px; font-weight: 600; }
 .future-card .target-date {
   display: inline-block;
   margin-top: 10px;
   padding: 4px 10px;
-  background: rgba(245, 158, 11, 0.1);
+  background: rgba(245, 158, 11, 0.15);
   color: var(--future);
   border-radius: 999px;
   font-size: 11px;
@@ -734,20 +717,36 @@ body.dark-mode .pill {
   font-weight: 650; 
   display: block;
   margin-bottom: 8px;
-  color: var(--ink2);
+  color: #e2e8f0;
 }
+body.light-mode .skill-item span { color: #111827; }
 .progress-bar {
   height: 8px;
-  background: var(--border);
+  background: rgba(51,65,85,0.8);
   border-radius: 999px;
   overflow: hidden;
+  position: relative;
 }
+body.light-mode .progress-bar { background: #e5e7eb; }
 .progress-bar div {
   height: 100%;
   background: var(--gradient);
   border-radius: 999px;
-  transition: width 1.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+  transition: width 1.8s cubic-bezier(0.2, 0.9, 0.3, 1);
   width: 0;
+  position: relative;
+  overflow: hidden;
+}
+.progress-bar div::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  animation: shimmer 2s infinite;
+}
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
 
 /* Testimonials */
@@ -758,28 +757,30 @@ body.dark-mode .pill {
   margin-top: 30px;
 }
 .testimonial-card {
-  background: var(--panel);
-  border: 1px solid var(--border);
+  background: rgba(20,28,46,0.65);
+  border: 1px solid rgba(51,65,85,0.55);
   border-radius: var(--radius);
   padding: 25px;
   position: relative;
-  transition: 0.3s ease;
+  transition: 0.4s ease;
+  backdrop-filter: blur(12px);
 }
+body.light-mode .testimonial-card { background: #fff; border-color: #e5e7eb; }
 .testimonial-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow);
+  transform: translateY(-8px);
+  box-shadow: 0 22px 60px rgba(37,99,235,0.25);
+  border-color: rgba(59,130,246,0.5);
 }
 .quote {
   font-size: 60px;
   color: var(--primary);
-  opacity: 0.3;
+  opacity: 0.2;
   position: absolute;
-  top: 10px;
-  right: 20px;
+  top: 10px; right: 20px;
   font-family: serif;
 }
 .testimonial-card p {
-  color: var(--muted);
+  color:#94a3b8;
   font-weight: 600;
   line-height: 1.7;
   margin-bottom: 20px;
@@ -787,71 +788,73 @@ body.dark-mode .pill {
 }
 .author {
   font-weight: 900;
-  color: var(--ink2);
-  border-top: 1px solid var(--border);
+  color: #f1f5f9;
+  border-top: 1px solid rgba(51,65,85,0.55);
   padding-top: 15px;
 }
+body.light-mode .author { color: #0b1220; border-top-color: #e5e7eb; }
 
 /* Projects */
 #projectsGrid .card .card-img-container {
   height: 260px;
-  background: #f3f4f6;
+  background: #0a0f1e;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  padding: 10px;
 }
 #projectsGrid .card img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  padding: 10px;
+  transition: transform 0.5s ease;
 }
+#projectsGrid .card:hover img { transform: scale(1.05); }
 .project{cursor:pointer}
 .network-diagram {
   font-family: 'Courier New', monospace;
-  background: #1e293b;
+  background: #0a0f1e;
   color: #e2e8f0;
   padding: 15px;
   border-radius: 8px;
   margin: 10px 0;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.8;
+  border-left: 3px solid #0891b2;
 }
-.diagram-ip {
-  color: var(--network);
-  font-weight: bold;
-}
-.diagram-device {
-  color: var(--primary-light);
-  font-weight: bold;
-}
+.diagram-ip { color: #22d3ee; font-weight: bold; }
+.diagram-device { color: #60a5fa; font-weight: bold; }
 
-/* Floating contact button */
+/* Floating contact */
 .floating-contact {
   position: fixed;
-  bottom: 30px;
-  right: 30px;
+  bottom: 30px; right: 30px;
   z-index: 1000;
 }
 .float-btn {
-  width: 60px;
-  height: 60px;
+  width: 60px; height: 60px;
   border-radius: 30px;
   background: var(--gradient);
   border: none;
   color: white;
   font-size: 24px;
   cursor: pointer;
-  box-shadow: 0 10px 25px rgba(37,99,235,0.3);
-  transition: all 0.3s ease;
+  box-shadow: 0 10px 25px rgba(37,99,235,0.5);
+  transition: all 0.4s ease;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  gap: 8px;
+  animation: floatPulse 3s ease-in-out infinite;
+}
+@keyframes floatPulse {
+  0%,100% { box-shadow: 0 10px 25px rgba(37,99,235,0.5); }
+  50% { box-shadow: 0 15px 40px rgba(124,58,237,0.7); }
 }
 .float-btn:hover {
-  width: 140px;
+  width: 150px;
   gap: 8px;
 }
 .float-btn:hover .float-text {
@@ -861,14 +864,15 @@ body.dark-mode .pill {
 }
 .float-text { display: none; }
 
-/* Animations */
-.reveal{opacity:0; transform: translateY(14px); transition: .55s var(--ease);}
-.reveal.show{opacity:1; transform: translateY(0);}
+/* Reveal animations */
+.reveal{opacity:0; transform: translateY(24px) translateZ(-50px); transition: .8s var(--ease);}
+.reveal.show{opacity:1; transform: translateY(0) translateZ(0);}
 
 /* Modal */
 .modal{
   position:fixed; inset:0;
-  background:rgba(0,0,0,0.65);
+  background:rgba(0,0,0,0.85);
+  backdrop-filter: blur(10px);
   display:none;
   align-items:center;
   justify-content:center;
@@ -878,44 +882,57 @@ body.dark-mode .pill {
 .modal.show{display:flex;}
 .modal-card{
   width:min(780px, 96vw);
-  background:var(--panel);
+  max-height: 90vh;
+  background:#0f172a;
+  border:1px solid #334155;
   border-radius:18px;
   overflow:hidden;
-  box-shadow:0 24px 80px rgba(0,0,0,0.35);
+  box-shadow:0 24px 80px rgba(0,0,0,0.7);
+  animation: modalIn 0.4s var(--ease);
+}
+body.light-mode .modal-card { background: #fff; border-color: #e5e7eb; }
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.95) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
 }
 .modal-top{
   display:flex; justify-content:space-between; align-items:center;
-  padding:14px 16px; border-bottom:1px solid var(--border);
+  padding:14px 16px; border-bottom:1px solid #334155;
 }
+body.light-mode .modal-top { border-bottom-color: #e5e7eb; }
 .modal-title{
   font-weight:950;
   display: flex;
   align-items: center;
   gap: 10px;
+  color: #f1f5f9;
 }
-.modal-title i {
-  color: var(--primary);
-  font-size: 24px;
-}
+body.light-mode .modal-title { color: #0b1220; }
+.modal-title i { color: var(--primary); font-size: 24px; }
 .modal-close{
   border:none;
-  background:rgba(17,24,39,0.06);
+  background:rgba(59,130,246,0.1);
   padding:10px 12px;
   border-radius:12px;
   cursor:pointer;
   font-weight:900;
+  color: #e2e8f0;
 }
+body.light-mode .modal-close { color: #111827; }
 .modal-body{
   padding: 24px;
   max-height: 70vh;
   overflow-y: auto;
+  color: #e2e8f0;
 }
+body.light-mode .modal-body { color: #111827; }
 .modal-body h3 {
   font-size: 24px;
   font-weight: 950;
   margin-bottom: 16px;
-  color: var(--ink2);
+  color: #f1f5f9;
 }
+body.light-mode .modal-body h3 { color: #0b1220; }
 .modal-body .course-type {
   display: inline-block;
   background: var(--course);
@@ -933,29 +950,31 @@ body.dark-mode .pill {
   margin: 20px 0;
 }
 .modal-body .detail-item {
-  background: rgba(37,99,235,0.04);
-  border: 1px solid var(--border);
+  background: rgba(59,130,246,0.08);
+  border: 1px solid #334155;
   border-radius: 12px;
   padding: 12px;
 }
+body.light-mode .modal-body .detail-item { border-color: #e5e7eb; }
 .modal-body .detail-item .label {
   font-size: 12px;
-  color: var(--muted);
+  color:#94a3b8;
   font-weight: 600;
   margin-bottom: 4px;
 }
 .modal-body .detail-item .value {
   font-weight: 950;
-  color: var(--ink2);
+  color: #f1f5f9;
   font-size: 16px;
 }
+body.light-mode .modal-body .detail-item .value { color: #0b1220; }
 .modal-body .description {
-  color: var(--muted);
+  color:#94a3b8;
   font-weight: 650;
   line-height: 1.7;
   margin: 20px 0;
   padding: 16px;
-  background: rgba(37,99,235,0.02);
+  background: rgba(59,130,246,0.05);
   border-radius: 12px;
   border-left: 4px solid var(--course);
 }
@@ -976,58 +995,17 @@ body.dark-mode .pill {
 .modal-body .certificate-note {
   margin-top: 20px;
   padding: 12px;
-  background: rgba(139, 92, 246, 0.1);
+  background: rgba(139, 92, 246, 0.15);
   border-radius: 12px;
-  color: var(--course);
+  color: #a78bfa;
   font-weight: 600;
   font-size: 14px;
   display: flex;
   align-items: center;
   gap: 8px;
 }
-.modal-body .network-topology {
-  background: #0f172a;
-  color: #e2e8f0;
-  padding: 20px;
-  border-radius: 12px;
-  margin: 20px 0;
-  font-family: 'Courier New', monospace;
-  border-left: 4px solid var(--network);
-}
-.modal-body .device-row {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding: 10px;
-  border-bottom: 1px solid #334155;
-}
-.modal-body .device-row:last-child {
-  border-bottom: none;
-}
-.modal-body .device-icon {
-  width: 40px;
-  height: 40px;
-  background: var(--network);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-}
-.modal-body .device-details {
-  flex: 1;
-}
-.modal-body .device-name {
-  font-weight: 900;
-  color: var(--primary-light);
-}
-.modal-body .device-ip {
-  color: var(--network);
-  font-family: monospace;
-  font-size: 14px;
-}
 
-/* Contact page */
+/* Contact */
 .contact-premium{height:100%;}
 .contact-header{
   display:flex; align-items:flex-end; justify-content:space-between;
@@ -1040,49 +1018,55 @@ body.dark-mode .pill {
   margin-top:22px;
 }
 .contact-card2{
-  background:var(--panel);
-  border:1px solid var(--border);
+  background:rgba(20,28,46,0.65);
+  border:1px solid rgba(51,65,85,0.55);
   border-radius:var(--radius);
-  box-shadow:var(--shadow2);
+  box-shadow:0 12px 28px rgba(0,0,0,0.35);
   padding:18px;
+  backdrop-filter: blur(12px);
 }
+body.light-mode .contact-card2 { background: #fff; border-color: #e5e7eb; }
 .contact-item{
   display:flex; gap:12px;
   padding:12px;
-  border:1px solid var(--border);
+  border:1px solid rgba(51,65,85,0.55);
   border-radius:16px;
-  background:rgba(17,24,39,0.02);
+  background:rgba(59,130,246,0.05);
   margin-top:12px;
   transition: 0.3s ease;
 }
+body.light-mode .contact-item { border-color: #e5e7eb; }
 .contact-item:hover {
-  transform: translateX(5px);
-  border-color: var(--primary);
+  transform: translateX(6px);
+  border-color: rgba(59,130,246,0.5);
+  box-shadow: 0 8px 20px rgba(37,99,235,0.2);
 }
 .ico{
   width:42px;height:42px;border-radius:14px;
   display:grid;place-items:center;
   background:var(--gradient);
-  border:1px solid var(--border);
+  border:1px solid rgba(51,65,85,0.55);
   font-weight:950;
   color: white;
 }
-.contact-item h5{font-weight:950;margin-bottom:4px}
-.contact-item p{color:var(--muted);font-weight:650;line-height:1.6}
+.contact-item h5{font-weight:950;margin-bottom:4px;color:#f1f5f9}
+body.light-mode .contact-item h5 { color: #0b1220; }
+.contact-item p{color:#94a3b8;font-weight:650;line-height:1.6}
 
 .formRow{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
 .fld{
   width:100%;
   padding:12px 12px;
-  border:1px solid var(--border);
+  border:1px solid rgba(51,65,85,0.55);
   border-radius:14px;
   outline:none;
   font-weight:650;
-  background:var(--panel);
-  color: var(--ink2);
+  background:rgba(5,8,15,0.6);
+  color: #e2e8f0;
   transition: 0.2s ease;
 }
-.fld:focus{border-color:var(--primary); box-shadow:0 0 0 4px rgba(37,99,235,.12)}
+body.light-mode .fld { background: #fff; border-color: #e5e7eb; color: #111827; }
+.fld:focus{border-color:var(--primary); box-shadow:0 0 0 4px rgba(37,99,235,.2)}
 textarea.fld{min-height:140px;resize:vertical}
 .actionRow{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;margin-top:10px;}
 .btnSolid{
@@ -1093,20 +1077,54 @@ textarea.fld{min-height:140px;resize:vertical}
   border-radius:999px;
   font-weight:950;
   cursor:pointer;
-  transition:.2s ease;
+  transition:.3s ease;
 }
-.btnSolid:hover{transform:translateY(-2px); box-shadow: 0 10px 20px rgba(37,99,235,0.3);}
+.btnSolid:hover{transform:translateY(-2px); box-shadow: 0 10px 20px rgba(37,99,235,0.5);}
 .btnOutline{
-  border:1px solid var(--border);
-  background:var(--panel);
-  color:var(--ink2);
+  border:1px solid rgba(51,65,85,0.55);
+  background:transparent;
+  color:#e2e8f0;
   padding:12px 16px;
   border-radius:999px;
   font-weight:950;
   cursor:pointer;
-  transition:.2s ease;
+  transition:.3s ease;
 }
-.btnOutline:hover{transform:translateY(-2px); background:var(--soft);}
+body.light-mode .btnOutline { color: #111827; border-color: #e5e7eb; }
+.btnOutline:hover{transform:translateY(-2px); background:rgba(59,130,246,0.1);}
+
+/* Scroll hint */
+.scroll-hint {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 900;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  pointer-events: none;
+  opacity: 0.65;
+  transition: opacity 0.4s ease;
+}
+.scroll-hint.hidden { opacity: 0; }
+.scroll-hint span {
+  font-size: 10px;
+  font-weight: 700;
+  color: #94a3b8;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.scroll-hint i {
+  font-size: 16px;
+  color: #60a5fa;
+  animation: bounceDown 1.6s infinite;
+}
+@keyframes bounceDown {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(8px); opacity: 0.4; }
+}
 
 /* Responsive */
 @media (max-width:980px){
@@ -1126,16 +1144,157 @@ textarea.fld{min-height:140px;resize:vertical}
   .floating-contact { bottom: 20px; right: 20px; }
 }
 </style>
+<!-- ============================================================
+     ADDED: EXTRA 3D ANIMATION LAYER (CSS)  — original code untouched
+     ============================================================ -->
+<style id="extra-3d-css">
+/* Foreground 3D hardware canvas (sits behind page content, above bg tunnel) */
+#fx3d-canvas{
+  position:fixed; inset:0; width:100%; height:100%;
+  z-index:5; pointer-events:none;
+}
+
+/* 3D page transitions */
+.viewport{ perspective: 1400px; perspective-origin: 50% 40%; }
+.page{
+  transform: translateY(30px) rotateX(10deg) scale(.96);
+  transform-origin: 50% 0%;
+  transition: transform .8s var(--ease), opacity .65s var(--ease);
+}
+.page.active{ transform: translateY(0) rotateX(0deg) scale(1); }
+.page.leaving-3d{ transform: translateY(-20px) rotateX(-8deg) scale(.97); }
+
+/* 3D scroll reveal */
+.reveal{
+  opacity:0;
+  transform: perspective(900px) translateY(40px) translateZ(-120px) rotateX(-16deg);
+  transform-origin: 50% 100%;
+  transition: transform .9s var(--ease), opacity .8s var(--ease), box-shadow .3s ease, border-color .3s ease;
+}
+.reveal.show{ opacity:1; transform: perspective(900px) translateY(0) translateZ(0) rotateX(0deg); }
+
+/* Tilt cards */
+.t3d{ will-change: transform; transform-style: preserve-3d; }
+.t3d-glare{
+  position:absolute; inset:0; border-radius:inherit; pointer-events:none; z-index:3;
+  opacity:0; transition: opacity .3s ease;
+  background: radial-gradient(circle at var(--gx,50%) var(--gy,50%), rgba(255,255,255,.22), rgba(96,165,250,.10) 35%, transparent 60%);
+  mix-blend-mode: screen;
+}
+.t3d.is-tilting .t3d-glare{ opacity:1; }
+.t3d.is-tilting{ box-shadow: 0 30px 70px rgba(37,99,235,.35), 0 0 0 1px rgba(96,165,250,.35) !important; }
+
+/* Profile card floats; orbit rings are attached to the card (not the clipped photo) */
+.profile{ animation: fx3dFloat 6s ease-in-out infinite; }
+@keyframes fx3dFloat{ 0%,100%{ translate: 0 0; } 50%{ translate: 0 -12px; } }
+.fx-orbit-wrap{
+  position:absolute; top:18px; left:50%; width:140px; height:140px; margin-left:-70px;
+  pointer-events:none; z-index:4;
+}
+.fx-orbit{
+  position:absolute; left:50%; top:50%; border-radius:50%; pointer-events:none;
+  border:1.5px solid rgba(96,165,250,.6);
+  box-shadow: 0 0 16px rgba(59,130,246,.35);
+}
+.fx-orbit.o1{ width:190px; height:190px; margin:-95px 0 0 -95px; animation: fxSpin1 8s linear infinite; }
+.fx-orbit.o2{ width:230px; height:230px; margin:-115px 0 0 -115px; border-color: rgba(167,139,250,.55); animation: fxSpin2 12s linear infinite; }
+.fx-orbit::after{
+  content:""; position:absolute; top:-5px; left:50%; width:10px; height:10px; margin-left:-5px; border-radius:50%;
+  background:#60a5fa; box-shadow:0 0 14px 4px rgba(96,165,250,.8);
+}
+.fx-orbit.o2::after{ background:#a78bfa; box-shadow:0 0 14px 4px rgba(167,139,250,.8); }
+@keyframes fxSpin1{ from{ transform: rotateX(72deg) rotateZ(0deg);} to{ transform: rotateX(72deg) rotateZ(360deg);} }
+@keyframes fxSpin2{ from{ transform: rotateX(72deg) rotateY(-28deg) rotateZ(360deg);} to{ transform: rotateX(72deg) rotateY(-28deg) rotateZ(0deg);} }
+
+/* Hero 3D title (mouse driven). drop-shadow stack works with the gradient text */
+.hero-inner{ perspective: 1100px; }
+.h1{
+  transform: perspective(900px) rotateY(var(--hx,0deg)) rotateX(var(--hy,0deg));
+  transition: transform .25s ease-out;
+  filter: drop-shadow(2px 2px 0 rgba(37,99,235,.55)) drop-shadow(4px 4px 0 rgba(124,58,237,.35)) drop-shadow(0 10px 18px rgba(0,0,0,.45));
+}
+body.light-mode .h1{ filter: drop-shadow(2px 2px 0 rgba(37,99,235,.25)) drop-shadow(0 8px 14px rgba(0,0,0,.15)); }
+
+/* 3D buttons / badges / tags */
+.btn{ transform-style: preserve-3d; transition: transform .25s var(--ease), box-shadow .25s ease; }
+.btn:hover{ transform: translateY(-4px) translateZ(20px) rotateX(8deg); }
+.btn:active{ transform: translateY(1px) scale(.97); }
+.badge, .skill-tag, .pill{ transition: transform .25s var(--ease), box-shadow .25s ease; }
+.badge:hover, .skill-tag:hover, .pill:hover{ transform: translateY(-4px) translateZ(14px) rotateX(12deg) scale(1.06); }
+
+/* Brand badge spins in 3D */
+.brand-badge{ transform-style: preserve-3d; animation: pulseBadge 3s ease-in-out infinite, fxBadgeSpin 8s ease-in-out infinite; }
+@keyframes fxBadgeSpin{ 0%,70%,100%{ transform: rotateY(0deg); } 85%{ transform: rotateY(360deg); } }
+
+/* Click ripple + cursor glow */
+.fx-click{
+  position:fixed; width:14px; height:14px; margin:-7px 0 0 -7px; border-radius:50%;
+  border:2px solid rgba(96,165,250,.9); pointer-events:none; z-index:10000;
+  animation: fxClick .7s ease-out forwards;
+}
+@keyframes fxClick{ to{ transform: scale(7) rotateX(60deg); opacity:0; } }
+#fx-cursor-glow{
+  position:fixed; left:0; top:0; width:420px; height:420px; margin:-210px 0 0 -210px;
+  border-radius:50%; pointer-events:none; z-index:6; opacity:0;
+  background: radial-gradient(circle, rgba(59,130,246,.16), rgba(124,58,237,.07) 40%, transparent 68%);
+  transition: opacity .4s ease; will-change: transform;
+}
+body.light-mode #fx-cursor-glow{ background: radial-gradient(circle, rgba(37,99,235,.10), transparent 65%); }
+
+/* ===== 3D IMAGE RING (uses your images/ folder — works even from file://) ===== */
+#fx-ring-scene{
+  position:fixed; left:50%; bottom:34px; width:0; height:0; z-index:4;
+  perspective:1100px; perspective-origin:50% -120%;
+  pointer-events:none; opacity:0; transition: opacity .8s ease;
+}
+#fx-ring-scene.on{ opacity:.6; }
+body.light-mode #fx-ring-scene.on{ opacity:.35; }
+.fx-ring{
+  position:absolute; left:0; top:0; transform-style:preserve-3d;
+  animation: fxRing 46s linear infinite;
+}
+@keyframes fxRing{
+  from{ transform: rotateX(-9deg) rotateY(0deg); }
+  to  { transform: rotateX(-9deg) rotateY(360deg); }
+}
+.fx-card{
+  position:absolute; width:236px; height:142px; left:-118px; top:-142px;
+  transform: rotateY(calc(var(--i) * 60deg)) translateZ(430px);
+  border-radius:12px; overflow:hidden; backface-visibility:hidden;
+  border:1px solid rgba(96,165,250,.55);
+  box-shadow: 0 0 34px rgba(59,130,246,.38);
+  -webkit-box-reflect: below 4px linear-gradient(transparent 55%, rgba(255,255,255,.22));
+}
+.fx-card img{ width:100%; height:100%; object-fit:cover; display:block; }
+.fx-card::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg, transparent 55%, rgba(5,8,15,.75)); }
+.fx-card span{
+  position:absolute; left:10px; bottom:8px; z-index:2;
+  font:800 11px Inter, Arial, sans-serif; letter-spacing:1.2px; color:#e0f2fe;
+  background:rgba(5,8,15,.65); padding:3px 9px; border-radius:999px; border:1px solid rgba(96,165,250,.4);
+}
+
+@media (max-width: 820px){
+  .profile{ animation-duration: 8s; }
+  .h1{ transform:none !important; }
+  #fx-cursor-glow, #fx-ring-scene{ display:none; }
+}
+@media (prefers-reduced-motion: reduce){
+  .profile, .fx-orbit, .brand-badge, .fx-ring{ animation:none !important; }
+  .page, .reveal{ transition-duration:.01s !important; }
+  #fx3d-canvas, #fx-cursor-glow{ display:none; }
+}
+</style>
+
 </head>
 
-<body>
+<body class="dark-mode">
 <!-- Loader -->
 <div class="loader" id="loader">
   <div class="loader-spinner"></div>
 </div>
 
-<!-- Particle Canvas -->
-<canvas id="particleCanvas" class="particle-bg"></canvas>
+<!-- 3D Wave Grid Background Canvas -->
+<canvas id="bg-canvas"></canvas>
 
 <!-- NAV -->
 <div class="nav">
@@ -1178,13 +1337,16 @@ textarea.fld{min-height:140px;resize:vertical}
   <button data-page="contact">Contact</button>
 </div>
 
+<!-- Scroll Hint -->
+<div class="scroll-hint hidden" id="scrollHint">
+  <span>Scroll</span>
+  <i class="fas fa-chevron-down"></i>
+</div>
+
 <div class="viewport">
   <!-- HOME -->
   <section class="page active" id="page-home">
     <div class="hero">
-      <div class="orb"></div>
-      <div class="orb2"></div>
-
       <div class="wrap hero-inner">
         <div class="reveal">
           <div class="kicker"><span class="kdot"></span> Premium IT Portfolio</div>
@@ -1230,42 +1392,50 @@ textarea.fld{min-height:140px;resize:vertical}
 
   <!-- ABOUT -->
   <section class="page" id="page-about">
-    <div class="wrap page-inner">
-      <div class="sectionTitle reveal">About</div>
-      <div class="sectionDesc reveal">
-        Results-driven IT professional with experience supporting enterprise environments in UAE and India.
-        Strong hands-on expertise in troubleshooting, networking, Windows Server, Active Directory, Office 365,
-        CCTV systems, and infrastructure operations. Focused on uptime, fast resolution, and secure IT operations.
-      </div>
-
-      <div class="grid">
-        <div class="card reveal">
-          <div class="card-img-container">
-            <img src="images/network.jpg" alt="Network Infrastructure">
-          </div>
-          <div class="pad">
-            <h4>Profile</h4>
-            <ul>
-              <li>4+ years in IT Support & Infrastructure</li>
-              <li>Networking + Windows Server + Office 365</li>
-              <li>CCTV support + cabling basics</li>
-              <li>Strong troubleshooting & documentation</li>
-            </ul>
+    <div class="page-inner">
+      <div class="section-snap">
+        <div class="wrap">
+          <div class="sectionTitle reveal">About</div>
+          <div class="sectionDesc reveal">
+            Results-driven IT professional with experience supporting enterprise environments in UAE and India.
+            Strong hands-on expertise in troubleshooting, networking, Windows Server, Active Directory, Office 365,
+            CCTV systems, and infrastructure operations. Focused on uptime, fast resolution, and secure IT operations.
           </div>
         </div>
+      </div>
 
-        <div class="card reveal">
-          <div class="card-img-container">
-            <img src="images/server.jpg" alt="Server Room">
-          </div>
-          <div class="pad">
-            <h4>Focus Areas</h4>
-            <ul>
-              <li>Helpdesk & end-user support</li>
-              <li>Network connectivity troubleshooting</li>
-              <li>Windows system maintenance</li>
-              <li>Security awareness best practices</li>
-            </ul>
+      <div class="section-snap tall">
+        <div class="wrap">
+          <div class="grid">
+            <div class="card reveal">
+              <div class="card-img-container">
+                <img src="images/network.jpg" alt="Network Infrastructure">
+              </div>
+              <div class="pad">
+                <h4>Profile</h4>
+                <ul>
+                  <li>4+ years in IT Support &amp; Infrastructure</li>
+                  <li>Networking + Windows Server + Office 365</li>
+                  <li>CCTV support + cabling basics</li>
+                  <li>Strong troubleshooting &amp; documentation</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="card reveal">
+              <div class="card-img-container">
+                <img src="images/server.jpg" alt="Server Room">
+              </div>
+              <div class="pad">
+                <h4>Focus Areas</h4>
+                <ul>
+                  <li>Helpdesk &amp; end-user support</li>
+                  <li>Network connectivity troubleshooting</li>
+                  <li>Windows system maintenance</li>
+                  <li>Security awareness best practices</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1274,108 +1444,97 @@ textarea.fld{min-height:140px;resize:vertical}
 
   <!-- SKILLS -->
   <section class="page" id="page-skills">
-    <div class="wrap page-inner">
-      <div class="sectionTitle reveal">Technical Skills</div>
-      <div class="sectionDesc reveal">Networking • Servers • Security • CCTV • Infrastructure • Operating Systems</div>
+    <div class="page-inner">
+      <div class="section-snap tall">
+        <div class="wrap">
+          <div class="sectionTitle reveal">Technical Skills</div>
+          <div class="sectionDesc reveal">Networking • Servers • Security • CCTV • Infrastructure</div>
 
-      <div class="grid">
-        <div class="card reveal">
-          <div class="card-img-container">
-            <img src="images/Operating Systems.jpg" alt="Operating Systems">
-          </div>
-          <div class="pad">
-            <h4>Operating Systems</h4>
-            <ul>
-              <li>Windows 7 / 8 / 10 / 11 – Installation, troubleshooting, user support</li>
-              <li>Active Directory, user management, basic server configuration</li>
-              <li>Kali Linux & Ubuntu – Networking, security tools, system handling</li>
-            </ul>
-          </div>
-        </div>
-        
-        <div class="card reveal">
-          <div class="card-img-container">
-            <img src="images/network.jpg" alt="Networking">
-          </div>
-          <div class="pad">
-            <h4>Networking</h4>
-            <ul>
-              <li>LAN/WAN basics, VLAN understanding</li>
-              <li>IP addressing & subnetting</li>
-              <li>Layer 1–3 troubleshooting</li>
-            </ul>
-          </div>
-        </div>
+          <div class="grid">
+            <div class="card reveal">
+              <div class="card-img-container">
+                <img src="images/network.jpg" alt="Networking">
+              </div>
+              <div class="pad">
+                <h4>Networking</h4>
+                <ul>
+                  <li>LAN/WAN basics, VLAN understanding</li>
+                  <li>IP addressing &amp; subnetting</li>
+                  <li>Layer 1–3 troubleshooting</li>
+                </ul>
+              </div>
+            </div>
 
-        <div class="card reveal">
-          <div class="card-img-container">
-            <img src="images/server.jpg" alt="Servers">
-          </div>
-          <div class="pad">
-            <h4>Windows Server & Active Directory</h4>
-            <ul>
-              <li>AD user/group management</li>
-              <li>Basic GPO understanding</li>
-              <li>Office 365 support</li>
-            </ul>
-          </div>
-        </div>
+            <div class="card reveal">
+              <div class="card-img-container">
+                <img src="images/server.jpg" alt="Servers">
+              </div>
+              <div class="pad">
+                <h4>Windows Server &amp; Active Directory</h4>
+                <ul>
+                  <li>AD user/group management</li>
+                  <li>Basic GPO understanding</li>
+                  <li>Office 365 support</li>
+                </ul>
+              </div>
+            </div>
 
-        <div class="card reveal">
-          <div class="card-img-container">
-            <img src="images/firewall.jpg" alt="Firewall">
-          </div>
-          <div class="pad">
-            <h4>Security & Firewall</h4>
-            <ul>
-              <li>FortiGate basics (policies/NAT)</li>
-              <li>Endpoint security basics</li>
-              <li>Backup & security best practices</li>
-            </ul>
-          </div>
-        </div>
+            <div class="card reveal">
+              <div class="card-img-container">
+                <img src="images/firewall.jpg" alt="Firewall">
+              </div>
+              <div class="pad">
+                <h4>Security &amp; Firewall</h4>
+                <ul>
+                  <li>FortiGate basics (policies/NAT)</li>
+                  <li>Endpoint security basics</li>
+                  <li>Backup &amp; security best practices</li>
+                </ul>
+              </div>
+            </div>
 
-        <div class="card reveal">
-          <div class="card-img-container">
-            <img src="images/cctv.jpg" alt="CCTV">
-          </div>
-          <div class="pad">
-            <h4>CCTV & Infrastructure</h4>
-            <ul>
-              <li>Camera install & NVR support</li>
-              <li>CAT5/CAT6 cabling</li>
-              <li>Basic fiber handling</li>
-            </ul>
+            <div class="card reveal">
+              <div class="card-img-container">
+                <img src="images/cctv.jpg" alt="CCTV">
+              </div>
+              <div class="pad">
+                <h4>CCTV &amp; Infrastructure</h4>
+                <ul>
+                  <li>Camera install &amp; NVR support</li>
+                  <li>CAT5/CAT6 cabling</li>
+                  <li>Basic fiber handling</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Skill Bars -->
-      <div class="skill-bars reveal">
-        <div class="sectionTitle" style="font-size:24px; margin-bottom:20px;">Proficiency Levels</div>
-        <div class="skill-item">
-          <span>Operating Systems</span>
-          <div class="progress-bar"><div style="width:0%" data-width="100"></div></div>
-        </div>
-        <div class="skill-item">
-          <span>Networking</span>
-          <div class="progress-bar"><div style="width:0%" data-width="85"></div></div>
-        </div>
-        <div class="skill-item">
-          <span>Windows Server</span>
-          <div class="progress-bar"><div style="width:0%" data-width="80"></div></div>
-        </div>
-        <div class="skill-item">
-          <span>Security & Firewall</span>
-          <div class="progress-bar"><div style="width:0%" data-width="75"></div></div>
-        </div>
-        <div class="skill-item">
-          <span>CCTV & Infrastructure</span>
-          <div class="progress-bar"><div style="width:0%" data-width="70"></div></div>
-        </div>
-        <div class="skill-item">
-          <span>Cloud (AWS)</span>
-          <div class="progress-bar"><div style="width:0%" data-width="65"></div></div>
+      <div class="section-snap tall">
+        <div class="wrap">
+          <div class="skill-bars reveal">
+            <div class="sectionTitle" style="font-size:24px; margin-bottom:24px;">Proficiency Levels</div>
+            <div class="skill-item">
+              <span>Networking</span>
+              <div class="progress-bar"><div style="width:0%" data-width="85"></div></div>
+            </div>
+            <div class="skill-item">
+              <span>Windows Server</span>
+              <div class="progress-bar"><div style="width:0%" data-width="80"></div></div>
+            </div>
+            <div class="skill-item">
+              <span>Security &amp; Firewall</span>
+              <div class="progress-bar"><div style="width:0%" data-width="75"></div></div>
+            </div>
+            <div class="skill-item">
+              <span>CCTV &amp; Infrastructure</span>
+              <div class="progress-bar"><div style="width:0%" data-width="70"></div></div>
+            </div>
+            <div class="skill-item">
+              <span>Cloud (AWS)</span>
+              <div class="progress-bar"><div style="width:0%" data-width="65"></div></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1383,59 +1542,59 @@ textarea.fld{min-height:140px;resize:vertical}
 
   <!-- EXPERIENCE -->
   <section class="page" id="page-experience">
-    <div class="wrap page-inner">
-      <div class="sectionTitle reveal">Experience</div>
-      <div class="sectionDesc reveal">Full responsibilities and work highlights</div>
+    <div class="page-inner">
+      <div class="section-snap tall">
+        <div class="wrap">
+          <div class="sectionTitle reveal">Experience</div>
+          <div class="sectionDesc reveal">Full responsibilities and work highlights</div>
 
-      <div class="exp">
-        <div class="exp-item reveal">
-          <h4>IT Support Engineer — Gulf Cars Auction LLC</h4>
-          <div class="meta">
-            <span class="pill">Sharjah, UAE</span>
-            <span class="pill">03/2025 – Present</span>
-          </div>
-          <ul>
-            <li>Provide daily IT support for end users and ensure minimal downtime.</li>
-            <li>Troubleshoot LAN/Wi-Fi, IP conflicts, DNS, gateway and switch port issues.</li>
-            <li>Install/configure desktops/laptops, OS, drivers and applications.</li>
-            <li>Support onboarding/offboarding, access requests and permission support.</li>
-            <li>Perform patching, antivirus checks, backups monitoring and health checks.</li>
-            <li>Support CCTV systems (camera/NVR troubleshooting and monitoring).</li>
-            <li>Assist infrastructure tasks (CAT6 checks, patch panels, basic fiber checks).</li>
-            <li>Coordinate with vendors/ISPs for escalations and SLA-based closure.</li>
-          </ul>
-        </div>
+          <div class="exp">
+            <div class="exp-item reveal">
+              <h4>IT Support Engineer — Gulf Cars Auction LLC</h4>
+              <div class="meta">
+                <span class="pill">Sharjah, UAE</span>
+                <span class="pill">03/2025 – Present</span>
+              </div>
+              <ul>
+                <li>Provide daily IT support for end users and ensure minimal downtime.</li>
+                <li>Troubleshoot LAN/Wi-Fi, IP conflicts, DNS, gateway and switch port issues.</li>
+                <li>Install/configure desktops/laptops, OS, drivers and applications.</li>
+                <li>Support onboarding/offboarding, access requests and permission support.</li>
+                <li>Perform patching, antivirus checks, backups monitoring and health checks.</li>
+                <li>Support CCTV systems (camera/NVR troubleshooting and monitoring).</li>
+                <li>Assist infrastructure tasks (CAT6 checks, patch panels, basic fiber checks).</li>
+                <li>Coordinate with vendors/ISPs for escalations and SLA-based closure.</li>
+              </ul>
+            </div>
 
-        <div class="exp-item reveal">
-          <h4>IT Executive — Ideas 4 Transformation</h4>
-          <div class="meta">
-            <span class="pill">Chennai, India</span>
-            <span class="pill">02/2024 – 12/2024</span>
-          </div>
-          <ul>
-            <li>Supported store IT operations including POS devices.</li>
-            <li>Troubleshot network and system issues for continuity.</li>
-            <li>Assisted with basic firewall/network configuration.</li>
-            <li>Managed inventory and coordinated vendors.</li>
-            <li>End-user support for laptops/desktops, printers and applications.</li>
-            <li>OS installation, driver setup and device optimization.</li>
-            <li>Resolved Wi-Fi/LAN connectivity and access issues.</li>
-            <li>Remote troubleshooting and ticket handling to meet SLAs.</li>
-          </ul>
-        </div>
+            <div class="exp-item reveal">
+              <h4>IT Executive — Ideas 4 Transformation</h4>
+              <div class="meta">
+                <span class="pill">Chennai, India</span>
+                <span class="pill">02/2024 – 12/2024</span>
+              </div>
+              <ul>
+                <li>Supported store IT operations including POS devices.</li>
+                <li>Troubleshot network and system issues for continuity.</li>
+                <li>Assisted with basic firewall/network configuration.</li>
+                <li>Managed inventory and coordinated vendors.</li>
+              </ul>
+            </div>
 
-        <div class="exp-item reveal">
-          <h4>System Administrator (L1 Support) — Systech</h4>
-          <div class="meta">
-            <span class="pill">Trichy, India</span>
-            <span class="pill">01/2021 – 07/2023</span>
+            <div class="exp-item reveal">
+              <h4>System Administrator (L1 Support) — Systech</h4>
+              <div class="meta">
+                <span class="pill">Trichy, India</span>
+                <span class="pill">01/2021 – 07/2023</span>
+              </div>
+              <ul>
+                <li>Maintained lab infrastructure and ensured systems readiness.</li>
+                <li>Installed Windows OS/software and performed troubleshooting.</li>
+                <li>Assisted with basic Active Directory tasks and user support.</li>
+                <li>Created documentation, maintenance logs, and asset records.</li>
+              </ul>
+            </div>
           </div>
-          <ul>
-            <li>Maintained lab infrastructure and ensured systems readiness.</li>
-            <li>Installed Windows OS/software and performed troubleshooting.</li>
-            <li>Assisted with basic Active Directory tasks and user support.</li>
-            <li>Created documentation, maintenance logs, and asset records.</li>
-          </ul>
         </div>
       </div>
     </div>
@@ -1443,253 +1602,228 @@ textarea.fld{min-height:140px;resize:vertical}
 
   <!-- EDUCATION -->
   <section class="page" id="page-education">
-    <div class="wrap page-inner">
-      <div class="sectionTitle reveal">Education</div>
-      <div class="sectionDesc reveal">Academic background</div>
+    <div class="page-inner">
+      <div class="section-snap">
+        <div class="wrap">
+          <div class="sectionTitle reveal">Education</div>
+          <div class="sectionDesc reveal">Academic background</div>
 
-      <div class="exp">
-        <div class="exp-item reveal">
-          <h4>B.Com (Computer Applications) — Bharathidasan University</h4>
-          <div class="meta">
-            <span class="pill">Trichy, India</span>
-            <span class="pill">07/2017 – 05/2020</span>
+          <div class="exp">
+            <div class="exp-item reveal">
+              <h4>B.Com (Computer Applications) — Bharathidasan University</h4>
+              <div class="meta">
+                <span class="pill">Trichy, India</span>
+                <span class="pill">07/2017 – 05/2020</span>
+              </div>
+              <ul>
+                <li>Computer Applications fundamentals, IT tools and business systems basics.</li>
+                <li>Improved technical and analytical skills for IT support roles.</li>
+              </ul>
+            </div>
           </div>
-          <ul>
-            <li>Computer Applications fundamentals, IT tools and business systems basics.</li>
-            <li>Improved technical and analytical skills for IT support roles.</li>
-          </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- COURSE CERTIFICATIONS - Completed -->
+  <!-- CERTIFICATIONS -->
   <section class="page" id="page-certifications">
-    <div class="wrap page-inner">
-      <div class="sectionTitle reveal">Certifications</div>
-      <div class="sectionDesc reveal">Completed course certifications • Click to view details</div>
+    <div class="page-inner">
+      <div class="section-snap tall">
+        <div class="wrap">
+          <div class="sectionTitle reveal">Certifications</div>
+          <div class="sectionDesc reveal">Completed course certifications • Click to view details</div>
 
-      <!-- Completed Course Certifications -->
-      <div class="certs-grid">
-        <div class="cert reveal" 
-             data-title="CCNA Routing & Switching"
-             data-institution="Cisco Networking Academy"
-             data-duration="3 Months"
-             data-date="2020"
-             data-description="Comprehensive 3-month course covering networking fundamentals, routing protocols, switching concepts, and network troubleshooting. Hands-on labs with Cisco routers and switches."
-             data-skills="OSPF, EIGRP, VLANs, STP, IP Addressing, Subnetting, Network Security, Troubleshooting"
-             data-topics="Router Configuration, Switch Configuration, VLAN Trunking, Routing Protocols, Network Services">
-          <h4><i class="fas fa-network-wired"></i> CCNA Certification Course</h4>
-          <p>3-month comprehensive networking course</p>
-          <div class="cert-footer">
-            <span class="cert-badge">View Course</span>
-            <span><span class="cert-duration"><i class="far fa-clock"></i> 3 Months</span></span>
-          </div>
-        </div>
+          <div class="certs-grid">
+            <div class="cert reveal" 
+                 data-title="CCNA Routing &amp; Switching"
+                 data-institution="Cisco Networking Academy"
+                 data-duration="3 Months"
+                 data-date="2020"
+                 data-description="Comprehensive 3-month course covering networking fundamentals, routing protocols, switching concepts, and network troubleshooting. Hands-on labs with Cisco routers and switches."
+                 data-skills="OSPF, EIGRP, VLANs, STP, IP Addressing, Subnetting, Network Security, Troubleshooting"
+                 data-topics="Router Configuration, Switch Configuration, VLAN Trunking, Routing Protocols, Network Services">
+              <h4><i class="fas fa-network-wired"></i> CCNA Certification Course</h4>
+              <p>3-month comprehensive networking course</p>
+              <div class="cert-footer">
+                <span class="cert-badge">View Course</span>
+                <span><span class="cert-duration"><i class="far fa-clock"></i> 3 Months</span></span>
+              </div>
+            </div>
 
-        <div class="cert reveal"
-             data-title="Windows Server Administration"
-             data-institution="Microsoft Learning Partner"
-             data-duration="3 Months"
-             data-date="2023"
-             data-description="Intensive 3-month course on Windows Server administration covering installation, configuration, and management of Windows Server environments including Active Directory, Group Policy, and core network services."
-             data-skills="Active Directory, Group Policy, DNS, DHCP, File Services, Server Core, PowerShell"
-             data-topics="Domain Controllers, User Management, Group Policy Objects, DNS Zones, DHCP Scopes">
-          <h4><i class="fab fa-windows"></i> Windows Server Course</h4>
-          <p>3-month server administration course</p>
-          <div class="cert-footer">
-            <span class="cert-badge">View Course</span>
-            <span><span class="cert-duration"><i class="far fa-clock"></i> 3 Months</span></span>
-          </div>
-        </div>
+            <div class="cert reveal"
+                 data-title="Windows Server Administration"
+                 data-institution="Microsoft Learning Partner"
+                 data-duration="3 Months"
+                 data-date="2023"
+                 data-description="Intensive 3-month course on Windows Server administration covering installation, configuration, and management of Windows Server environments including Active Directory, Group Policy, and core network services."
+                 data-skills="Active Directory, Group Policy, DNS, DHCP, File Services, Server Core, PowerShell"
+                 data-topics="Domain Controllers, User Management, Group Policy Objects, DNS Zones, DHCP Scopes">
+              <h4><i class="fab fa-windows"></i> Windows Server Course</h4>
+              <p>3-month server administration course</p>
+              <div class="cert-footer">
+                <span class="cert-badge">View Course</span>
+                <span><span class="cert-duration"><i class="far fa-clock"></i> 3 Months</span></span>
+              </div>
+            </div>
 
-        <div class="cert reveal"
-             data-title="Network Security & Firewall"
-             data-institution="Fortinet Training Institute"
-             data-duration="3 Months"
-             data-date="2020"
-             data-description="3-month course focused on network security concepts, firewall configuration, VPN setup, and security policies. Hands-on experience with FortiGate firewall configuration and management."
-             data-skills="Firewall Policies, NAT, VPN, IPS/IDS, Security Policies, Threat Prevention"
-             data-topics="FortiGate Configuration, Site-to-Site VPN, SSL VPN, Security Profiles, Logging & Monitoring">
-          <h4><i class="fas fa-shield-alt"></i> Network Security Course</h4>
-          <p>3-month firewall & security course</p>
-          <div class="cert-footer">
-            <span class="cert-badge">View Course</span>
-            <span><span class="cert-duration"><i class="far fa-clock"></i> 3 Months</span></span>
-          </div>
-        </div>
+            <div class="cert reveal"
+                 data-title="Network Security &amp; Firewall"
+                 data-institution="Fortinet Training Institute"
+                 data-duration="3 Months"
+                 data-date="2020"
+                 data-description="3-month course focused on network security concepts, firewall configuration, VPN setup, and security policies. Hands-on experience with FortiGate firewall configuration and management."
+                 data-skills="Firewall Policies, NAT, VPN, IPS/IDS, Security Policies, Threat Prevention"
+                 data-topics="FortiGate Configuration, Site-to-Site VPN, SSL VPN, Security Profiles, Logging &amp; Monitoring">
+              <h4><i class="fas fa-shield-alt"></i> Network Security Course</h4>
+              <p>3-month firewall &amp; security course</p>
+              <div class="cert-footer">
+                <span class="cert-badge">View Course</span>
+                <span><span class="cert-duration"><i class="far fa-clock"></i> 3 Months</span></span>
+              </div>
+            </div>
 
-        <div class="cert reveal"
-             data-title="CCTV & Surveillance Systems"
-             data-institution="Security Systems Training Center"
-             data-duration="3 Months"
-             data-date="2020"
-             data-description="Practical 3-month course on CCTV installation, configuration, and maintenance. Covers camera types, NVR setup, cabling standards, and remote viewing configuration."
-             data-skills="Camera Installation, NVR Configuration, IP Cameras, Analog Systems, Cabling, Remote Access"
-             data-topics="Camera Placement, Network Video Recorders, PoE Setup, Storage Calculation, Mobile Viewing">
-          <h4><i class="fas fa-video"></i> CCTV Systems Course</h4>
-          <p>3-month surveillance systems course</p>
-          <div class="cert-footer">
-            <span class="cert-badge">View Course</span>
-            <span><span class="cert-duration"><i class="far fa-clock"></i> 3 Months</span></span>
-          </div>
-        </div>
+            <div class="cert reveal"
+                 data-title="CCTV &amp; Surveillance Systems"
+                 data-institution="Security Systems Training Center"
+                 data-duration="3 Months"
+                 data-date="2020"
+                 data-description="Practical 3-month course on CCTV installation, configuration, and maintenance. Covers camera types, NVR setup, cabling standards, and remote viewing configuration."
+                 data-skills="Camera Installation, NVR Configuration, IP Cameras, Analog Systems, Cabling, Remote Access"
+                 data-topics="Camera Placement, Network Video Recorders, PoE Setup, Storage Calculation, Mobile Viewing">
+              <h4><i class="fas fa-video"></i> CCTV Systems Course</h4>
+              <p>3-month surveillance systems course</p>
+              <div class="cert-footer">
+                <span class="cert-badge">View Course</span>
+                <span><span class="cert-duration"><i class="far fa-clock"></i> 3 Months</span></span>
+              </div>
+            </div>
 
-        <div class="cert reveal"
-             data-title="AWS Cloud Practitioner"
-             data-institution="Amazon Web Services Training"
-             data-duration="3 Months"
-             data-date="2020"
-             data-description="3-month introductory course to AWS cloud computing covering core services, architecture, pricing, and security. Hands-on labs with EC2, S3, VPC, and IAM."
-             data-skills="EC2, S3, VPC, IAM, Lambda, CloudWatch, AWS Pricing, Cloud Concepts"
-             data-topics="Compute Services, Storage Services, Networking, Security & Identity, Monitoring">
-          <h4><i class="fab fa-aws"></i> AWS Cloud Course</h4>
-          <p>3-month cloud fundamentals course</p>
-          <div class="cert-footer">
-            <span class="cert-badge">View Course</span>
-            <span><span class="cert-duration"><i class="far fa-clock"></i> 3 Months</span></span>
-          </div>
-        </div>
+            <div class="cert reveal"
+                 data-title="AWS Cloud Practitioner"
+                 data-institution="Amazon Web Services Training"
+                 data-duration="3 Months"
+                 data-date="2020"
+                 data-description="3-month introductory course to AWS cloud computing covering core services, architecture, pricing, and security. Hands-on labs with EC2, S3, VPC, and IAM."
+                 data-skills="EC2, S3, VPC, IAM, Lambda, CloudWatch, AWS Pricing, Cloud Concepts"
+                 data-topics="Compute Services, Storage Services, Networking, Security &amp; Identity, Monitoring">
+              <h4><i class="fab fa-aws"></i> AWS Cloud Course</h4>
+              <p>3-month cloud fundamentals course</p>
+              <div class="cert-footer">
+                <span class="cert-badge">View Course</span>
+                <span><span class="cert-duration"><i class="far fa-clock"></i> 3 Months</span></span>
+              </div>
+            </div>
 
-        <div class="cert reveal"
-             data-title="Ethical Hacking Essentials"
-             data-institution="EC-Council"
-             data-duration="3 Months"
-             data-date="2020"
-             data-description="3-month course covering ethical hacking concepts, penetration testing methodologies, and security assessment techniques. Learn to identify vulnerabilities and strengthen system security."
-             data-skills="Penetration Testing, Vulnerability Assessment, Footprinting, Scanning, Enumeration, System Hacking"
-             data-topics="Information Gathering, Network Scanning, Vulnerability Analysis, System Hacking, Social Engineering">
-          <h4><i class="fas fa-lock"></i> Ethical Hacking Course</h4>
-          <p>3-month security testing course</p>
-          <div class="cert-footer">
-            <span class="cert-badge">View Course</span>
-            <span><span class="cert-duration"><i class="far fa-clock"></i> 3 Months</span></span>
+            <div class="cert reveal"
+                 data-title="Ethical Hacking Essentials"
+                 data-institution="EC-Council"
+                 data-duration="3 Months"
+                 data-date="2020"
+                 data-description="3-month course covering ethical hacking concepts, penetration testing methodologies, and security assessment techniques. Learn to identify vulnerabilities and strengthen system security."
+                 data-skills="Penetration Testing, Vulnerability Assessment, Footprinting, Scanning, Enumeration, System Hacking"
+                 data-topics="Information Gathering, Network Scanning, Vulnerability Analysis, System Hacking, Social Engineering">
+              <h4><i class="fas fa-lock"></i> Ethical Hacking Course</h4>
+              <p>3-month security testing course</p>
+              <div class="cert-footer">
+                <span class="cert-badge">View Course</span>
+                <span><span class="cert-duration"><i class="far fa-clock"></i> 3 Months</span></span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <!-- COMPLETED CERTIFICATIONS -->
-    <div class="certs-grid">
 
-      <!-- CCNA (UPDATED) -->
-      <div class="cert reveal" 
-     data-title="CCNA (Cisco Certified Network Associate)"
-     data-institution="Cisco"
-     data-duration="Exam Completed"
-     data-date="2026"
-     data-description="Successfully completed the CCNA certification exam covering networking fundamentals, IP connectivity, IP services, security fundamentals, automation, and troubleshooting."
-     data-skills="Routing & Switching, VLANs, Subnetting, IP Addressing, OSPF, Network Security, Troubleshooting"
-     data-topics="Network Fundamentals, Routing Protocols, Switching, IP Services, Security Fundamentals, Automation">
-
-  <h4>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Cisco_logo.svg" width="25" style="vertical-align:middle; margin-right:6px;">
-    CCNA Certification
-  </h4>
-
-  <p>
-    CCNA Exam Completed (Cisco Certified Network Associate)
-  </p>
-
-  <!-- DETAILS BADGES -->
-  <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
-
-    <span style="
-      background:#3b82f620;
-      color:#2563eb;
-      padding:4px 10px;
-      border-radius:999px;
-      font-size:12px;
-      font-weight:700;">
-      📅 Issued: 2026
-    </span>
-
-    <span style="
-      background:#f59e0b20;
-      color:#d97706;
-      padding:4px 10px;
-      border-radius:999px;
-      font-size:12px;
-      font-weight:700;">
-      ⏳ Expires: 2029
-    </span>
-
-    <span style="
-      background:#10b98120;
-      color:#059669;
-      padding:4px 10px;
-      border-radius:999px;
-      font-size:12px;
-      font-weight:700;">
-      🆔 ID: CSCO15127549
-    </span>
-
-  </div>
-
-  <div class="cert-footer">
-    <span class="cert-badge">Completed</span>
-    <span class="cert-duration"><i class="far fa-clock"></i> Cisco</span>
-  </div>
-</div>
-
-      <!-- Future Professional Certifications -->
-      <div class="future-section reveal">
-        <div class="future-title">
-          <i class="fas fa-clock"></i>
-          <span>Future Professional Certifications</span>
-        </div>
-        <div class="future-grid">
-          <div class="future-card">
-            <i class="fas fa-network-wired"></i>
-            <h4>CCNP</h4>
-            <p>Cisco Certified Network Professional</p>
-            <span class="target-date">Target: 2027</span>
+      <div class="section-snap tall">
+        <div class="wrap">
+          <div class="certs-grid">
+            <div class="cert reveal" 
+                 data-title="CCNA (Cisco Certified Network Associate)"
+                 data-institution="Cisco"
+                 data-duration="Exam Completed"
+                 data-date="2026"
+                 data-description="Successfully completed the CCNA certification exam covering networking fundamentals, IP connectivity, IP services, security fundamentals, automation, and troubleshooting."
+                 data-skills="Routing &amp; Switching, VLANs, Subnetting, IP Addressing, OSPF, Network Security, Troubleshooting"
+                 data-topics="Network Fundamentals, Routing Protocols, Switching, IP Services, Security Fundamentals, Automation">
+              <h4>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Cisco_logo.svg" width="25" style="vertical-align:middle; margin-right:6px;">
+                CCNA Certification
+              </h4>
+              <p>CCNA Exam Completed (Cisco Certified Network Associate)</p>
+              <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
+                <span style="background:#3b82f620; color:#2563eb; padding:4px 10px; border-radius:999px; font-size:12px; font-weight:700;">📅 Issued: 2026</span>
+                <span style="background:#f59e0b20; color:#d97706; padding:4px 10px; border-radius:999px; font-size:12px; font-weight:700;">⏳ Expires: 2029</span>
+                <span style="background:#10b98120; color:#059669; padding:4px 10px; border-radius:999px; font-size:12px; font-weight:700;">🆔 ID: CSCO15127549</span>
+              </div>
+              <div class="cert-footer">
+                <span class="cert-badge">Completed</span>
+                <span class="cert-duration"><i class="far fa-clock"></i> Cisco</span>
+              </div>
+            </div>
           </div>
-          <div class="future-card">
-            <i class="fas fa-shield-alt"></i>
-            <h4>CompTIA Security+</h4>
-            <p>Security Certification</p>
-            <span class="target-date">Target: 2027</span>
-          </div>
-          <div class="future-card">
-            <i class="fab fa-aws"></i>
-            <h4>AWS Solutions Architect</h4>
-            <p>Associate Level</p>
-            <span class="target-date">Target: 2027</span>
-          </div>
-          <div class="future-card">
-            <i class="fas fa-fire"></i>
-            <h4>Fortinet NSE</h4>
-            <p>Network Security Expert</p>
-            <span class="target-date">Target: 2027</span>
+
+          <div class="future-section reveal">
+            <div class="future-title">
+              <i class="fas fa-clock"></i>
+              <span>Future Professional Certifications</span>
+            </div>
+            <div class="future-grid">
+              <div class="future-card">
+                <i class="fas fa-network-wired"></i>
+                <h4>CCNP</h4>
+                <p>Cisco Certified Network Professional</p>
+                <span class="target-date">Target: 2027</span>
+              </div>
+              <div class="future-card">
+                <i class="fas fa-shield-alt"></i>
+                <h4>CompTIA Security+</h4>
+                <p>Security Certification</p>
+                <span class="target-date">Target: 2027</span>
+              </div>
+              <div class="future-card">
+                <i class="fab fa-aws"></i>
+                <h4>AWS Solutions Architect</h4>
+                <p>Associate Level</p>
+                <span class="target-date">Target: 2027</span>
+              </div>
+              <div class="future-card">
+                <i class="fas fa-fire"></i>
+                <h4>Fortinet NSE</h4>
+                <p>Network Security Expert</p>
+                <span class="target-date">Target: 2027</span>
+              </div>
+            </div>
           </div>
         </div>
-        <p style="color: var(--muted); font-size: 14px; margin-top: 20px; text-align: center;">
-          <i class="fas fa-info-circle"></i> These professional certifications will be added upon completion
-        </p>
       </div>
     </div>
   </section>
 
   <!-- TESTIMONIALS -->
   <section class="page" id="page-testimonials">
-    <div class="wrap page-inner">
-      <div class="sectionTitle reveal">Recommendations</div>
-      <div class="sectionDesc reveal">What colleagues and managers say</div>
+    <div class="page-inner">
+      <div class="section-snap tall">
+        <div class="wrap">
+          <div class="sectionTitle reveal">Recommendations</div>
+          <div class="sectionDesc reveal">What colleagues and managers say</div>
 
-      <div class="testimonial-grid">
-        <div class="testimonial-card reveal">
-          <div class="quote">"</div>
-          <p>Mohamed is exceptionally skilled in network troubleshooting and always delivers results under pressure. His dedication to IT infrastructure is commendable.</p>
-          <div class="author">- Senior IT Manager, Gulf Cars Auction</div>
-        </div>
-        <div class="testimonial-card reveal">
-          <div class="quote">"</div>
-          <p>A proactive IT professional with excellent problem-solving abilities. He consistently maintains high standards in system administration and user support.</p>
-          <div class="author">- Project Lead, Ideas 4 Transformation</div>
-        </div>
-        <div class="testimonial-card reveal">
-          <div class="quote">"</div>
-          <p>Great team player with deep knowledge of networking and security. His work on CCTV infrastructure was particularly impressive.</p>
-          <div class="author">- Operations Head, Systech</div>
+          <div class="testimonial-grid">
+            <div class="testimonial-card reveal">
+              <div class="quote">"</div>
+              <p>Mohamed is exceptionally skilled in network troubleshooting and always delivers results under pressure. His dedication to IT infrastructure is commendable.</p>
+              <div class="author">- Senior IT Manager, Gulf Cars Auction</div>
+            </div>
+            <div class="testimonial-card reveal">
+              <div class="quote">"</div>
+              <p>A proactive IT professional with excellent problem-solving abilities. He consistently maintains high standards in system administration and user support.</p>
+              <div class="author">- Project Lead, Team Computers</div>
+            </div>
+            <div class="testimonial-card reveal">
+              <div class="quote">"</div>
+              <p>Great team player with deep knowledge of networking and security. His work on CCTV infrastructure was particularly impressive.</p>
+              <div class="author">- Operations Head, Ideas 4 Transformation</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1697,51 +1831,52 @@ textarea.fld{min-height:140px;resize:vertical}
 
   <!-- PROJECTS -->
   <section class="page" id="page-projects">
-    <div class="wrap page-inner">
-      <div class="sectionTitle reveal">Projects / Labs</div>
-      <div class="sectionDesc reveal">Network topology diagrams • click to view full details</div>
+    <div class="page-inner">
+      <div class="section-snap tall">
+        <div class="wrap">
+          <div class="sectionTitle reveal">Projects / Labs</div>
+          <div class="sectionDesc reveal">Network topology diagrams • click to view full details</div>
 
-      <div class="grid" id="projectsGrid">
-        <div class="card project reveal"
-             data-title="FortiGate Firewall Lab"
-             data-img="images/proj-fortigate.jpg"
-             data-desc="Configured LAN → Switch → FortiGate → Cloud with NAT and firewall policies. Verified internet connectivity from client network. Implemented security policies, NAT rules, and VPN configurations for secure remote access.">
-          <div class="card-img-container">
-            <img src="images/proj-fortigate.jpg" alt="FortiGate Firewall Lab">
-          </div>
-          <div class="pad">
-            <h4>FortiGate Firewall Lab</h4>
-            <div class="network-diagram">
-              <div><span class="diagram-device">PC1</span> <span class="diagram-ip">192.168.10.10/24</span> → <span class="diagram-device">VPC5</span></div>
-              <div><span class="diagram-device">Switch1</span> <span class="diagram-ip">192.168.10.0/24</span></div>
-              <div><span class="diagram-device">FortiGate7.0.9.1</span> <span class="diagram-ip">192.168.163.130/24</span></div>
+          <div class="grid" id="projectsGrid">
+            <div class="card project reveal"
+                 data-title="FortiGate Firewall Lab"
+                 data-desc="Configured LAN → Switch → FortiGate → Cloud with NAT and firewall policies. Verified internet connectivity from client network. Implemented security policies, NAT rules, and VPN configurations for secure remote access.">
+              <div class="card-img-container">
+                <img src="images/proj-fortigate.jpg" alt="FortiGate Firewall Lab">
+              </div>
+              <div class="pad">
+                <h4>FortiGate Firewall Lab</h4>
+                <div class="network-diagram">
+                  <div><span class="diagram-device">PC1</span> <span class="diagram-ip">192.168.10.10/24</span> → <span class="diagram-device">VPC5</span></div>
+                  <div><span class="diagram-device">Switch1</span> <span class="diagram-ip">192.168.10.0/24</span></div>
+                  <div><span class="diagram-device">FortiGate7.0.9.1</span> <span class="diagram-ip">192.168.163.130/24</span></div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
 
-        <div class="card project reveal"
-             data-title="GNS3 Networking Lab"
-             data-img="images/network.jpg"
-             data-desc="Built routing/switching topologies and VLAN scenarios for troubleshooting practice. Configured OSPF, EIGRP, and STP protocols. Simulated enterprise network with multiple routers and switches for hands-on experience.">
-          <div class="card-img-container">
-            <img src="images/network.jpg" alt="GNS3 Network Simulator">
-          </div>
-          <div class="pad">
-            <h4>GNS3 Networking Lab</h4>
-            <p class="sectionDesc" style="margin-top:6px">Routing/Switching + VLAN practice</p>
-          </div>
-        </div>
+            <div class="card project reveal"
+                 data-title="GNS3 Networking Lab"
+                 data-desc="Built routing/switching topologies and VLAN scenarios for troubleshooting practice. Configured OSPF, EIGRP, and STP protocols. Simulated enterprise network with multiple routers and switches for hands-on experience.">
+              <div class="card-img-container">
+                <img src="images/proj-vlan Routing.jpg" alt="GNS3 Network Simulator">
+              </div>
+              <div class="pad">
+                <h4>GNS3 Networking Lab</h4>
+                <p class="sectionDesc" style="margin-top:6px">Routing/Switching + VLAN practice</p>
+              </div>
+            </div>
 
-        <div class="card project reveal"
-             data-title="CCTV Installation & Support"
-             data-img="images/cctv.jpg"
-             data-desc="Installed cameras, configured NVR, ensured stable connectivity, and performed maintenance/troubleshooting support. Set up remote viewing, motion detection, and recording schedules for comprehensive security coverage.">
-          <div class="card-img-container">
-            <img src="images/cctv.jpg" alt="CCTV System">
-          </div>
-          <div class="pad">
-            <h4>CCTV Installation & Support</h4>
-            <p class="sectionDesc" style="margin-top:6px">NVR setup + camera connectivity</p>
+            <div class="card project reveal"
+                 data-title="CCTV Installation &amp; Support"
+                 data-desc="Installed cameras, configured NVR, ensured stable connectivity, and performed maintenance/troubleshooting support. Set up remote viewing, motion detection, and recording schedules for comprehensive security coverage.">
+              <div class="card-img-container">
+                <img src="images/cctv.jpg" alt="CCTV System">
+              </div>
+              <div class="pad">
+                <h4>CCTV Installation &amp; Support</h4>
+                <p class="sectionDesc" style="margin-top:6px">NVR setup + camera connectivity</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1750,61 +1885,65 @@ textarea.fld{min-height:140px;resize:vertical}
 
   <!-- CONTACT -->
   <section class="page" id="page-contact">
-    <div class="wrap page-inner contact-premium">
-      <div class="contact-header reveal">
-        <div>
-          <div class="sectionTitle">Contact</div>
-          <div class="sectionDesc">Let's connect — for IT Support / Network Support / System Admin roles.</div>
-        </div>
-        <div class="smallpill">Usually replies within 24 hours</div>
-      </div>
-
-      <div class="contact-grid">
-        <div class="contact-card2 reveal">
-          <h4 style="font-weight:950;">Contact Details</h4>
-          <div class="sectionDesc" style="margin-top:8px;">You can reach me directly using the options below.</div>
-
-          <div class="contact-item">
-            <div class="ico"><i class="fas fa-envelope"></i></div>
-            <div><h5>Email</h5><p><a href="mailto:japzashar@gmail.com">japzashar@gmail.com</a></p></div>
+    <div class="page-inner">
+      <div class="section-snap tall">
+        <div class="wrap contact-premium">
+          <div class="contact-header reveal">
+            <div>
+              <div class="sectionTitle">Contact</div>
+              <div class="sectionDesc">Let's connect — for IT Support / Network Support / System Admin roles.</div>
+            </div>
+            <div class="smallpill">Usually replies within 24 hours</div>
           </div>
 
-          <div class="contact-item">
-            <div class="ico"><i class="fas fa-phone"></i></div>
-            <div><h5>Phone</h5><p><a href="tel:+971568313538">+971 56 831 3538</a></p></div>
-          </div>
+          <div class="contact-grid">
+            <div class="contact-card2 reveal">
+              <h4 style="font-weight:950;color:#f1f5f9;">Contact Details</h4>
+              <div class="sectionDesc" style="margin-top:8px;">You can reach me directly using the options below.</div>
 
-          <div class="contact-item">
-            <div class="ico"><i class="fas fa-map-marker-alt"></i></div>
-            <div><h5>Location</h5><p>Sharjah, UAE</p></div>
-          </div>
+              <div class="contact-item">
+                <div class="ico"><i class="fas fa-envelope"></i></div>
+                <div><h5>Email</h5><p><a href="mailto:japzashar@gmail.com">japzashar@gmail.com</a></p></div>
+              </div>
 
-          <div class="contact-item">
-            <div class="ico"><i class="fab fa-linkedin-in"></i></div>
-            <div><h5>LinkedIn</h5>
-              <p><a href="https://www.linkedin.com/in/mohamed-ashar-a013b4234/" target="_blank" rel="noopener noreferrer">Open Profile</a></p>
+              <div class="contact-item">
+                <div class="ico"><i class="fas fa-phone"></i></div>
+                <div><h5>Phone</h5><p><a href="tel:+971568313538">+971 56 831 3538</a></p></div>
+              </div>
+
+              <div class="contact-item">
+                <div class="ico"><i class="fas fa-map-marker-alt"></i></div>
+                <div><h5>Location</h5><p>Sharjah, UAE</p></div>
+              </div>
+
+              <div class="contact-item">
+                <div class="ico"><i class="fab fa-linkedin-in"></i></div>
+                <div><h5>LinkedIn</h5>
+                  <p><a href="https://www.linkedin.com/in/mohamed-ashar-a013b4234/" target="_blank" rel="noopener noreferrer">Open Profile</a></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-card2 reveal">
+              <h4 style="font-weight:950;color:#f1f5f9;">Send a Message</h4>
+              <div class="sectionDesc" style="margin-top:8px;">This opens your email app with the message.</div>
+
+              <form id="contactForm" style="margin-top:14px;">
+                <div class="formRow">
+                  <input class="fld" type="text" name="firstName" placeholder="First name" required>
+                  <input class="fld" type="text" name="lastName" placeholder="Last name" required>
+                </div>
+                <input class="fld" type="email" name="email" placeholder="Email" required style="margin-top:12px;">
+                <input class="fld" type="text" name="subject" placeholder="Subject (optional)" style="margin-top:12px;">
+                <textarea class="fld" name="message" placeholder="Write your message..." style="margin-top:12px;"></textarea>
+
+                <div class="actionRow">
+                  <button type="reset" class="btnOutline">Clear</button>
+                  <button type="submit" class="btnSolid">Send</button>
+                </div>
+              </form>
             </div>
           </div>
-        </div>
-
-        <div class="contact-card2 reveal">
-          <h4 style="font-weight:950;">Send a Message</h4>
-          <div class="sectionDesc" style="margin-top:8px;">This opens your email app with the message.</div>
-
-          <form id="contactForm" style="margin-top:14px;">
-            <div class="formRow">
-              <input class="fld" type="text" name="firstName" placeholder="First name" required>
-              <input class="fld" type="text" name="lastName" placeholder="Last name" required>
-            </div>
-            <input class="fld" type="email" name="email" placeholder="Email" required style="margin-top:12px;">
-            <input class="fld" type="text" name="subject" placeholder="Subject (optional)" style="margin-top:12px;">
-            <textarea class="fld" name="message" placeholder="Write your message..." style="margin-top:12px;"></textarea>
-
-            <div class="actionRow">
-              <button type="reset" class="btnOutline">Clear</button>
-              <button type="submit" class="btnSolid">Send</button>
-            </div>
-          </form>
         </div>
       </div>
     </div>
@@ -1829,9 +1968,7 @@ textarea.fld{min-height:140px;resize:vertical}
       </div>
       <button class="modal-close" id="certModalClose">✕</button>
     </div>
-    <div class="modal-body" id="certModalBody">
-      <!-- Content will be filled by JavaScript -->
-    </div>
+    <div class="modal-body" id="certModalBody"></div>
   </div>
 </div>
 
@@ -1842,11 +1979,12 @@ textarea.fld{min-height:140px;resize:vertical}
       <div class="modal-title" id="projectModalTitle">Project Details</div>
       <button class="modal-close" id="projectModalClose">✕</button>
     </div>
-    <div class="modal-body" id="projectModalBody">
-      <!-- Content will be filled by JavaScript -->
-    </div>
+    <div class="modal-body" id="projectModalBody"></div>
   </div>
 </div>
+
+<!-- ========== THREE.JS — FLOWING WAVE GRID TUNNEL ========== -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
 <script>
 // Loader
@@ -1856,70 +1994,302 @@ window.addEventListener('load', function() {
   }, 500);
 });
 
-// Particle background
-const canvas = document.getElementById('particleCanvas');
-const ctx = canvas.getContext('2d');
-let particles = [];
+// ============================================================
+// 3D FLOWING WAVE-GRID TUNNEL BACKGROUND
+// ============================================================
+let scene, camera, renderer;
+let gridLines = [];
+let dotsGroup, waveMesh;
+let scrollTarget = 0, scrollCurrent = 0;
+let mouseX = 0, mouseY = 0, targetMouseX = 0, targetMouseY = 0;
+let timeAccum = 0;
 
-function initParticles() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  
-  for (let i = 0; i < 50; i++) {
-    particles.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      radius: Math.random() * 2 + 1,
-      speedX: Math.random() * 2 - 1,
-      speedY: Math.random() * 2 - 1,
-      color: `rgba(37, 99, 235, ${Math.random() * 0.3})`
+function init3DBackground() {
+  const canvas = document.getElementById('bg-canvas');
+  const w = window.innerWidth;
+  const h = window.innerHeight;
+
+  scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2(0x05080f, 0.0028);
+
+  camera = new THREE.PerspectiveCamera(70, w / h, 0.1, 1500);
+  camera.position.set(0, 6, 40);
+
+  renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setSize(w, h);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setClearColor(0x05080f, 1);
+
+  // ---- LIGHTS ----
+  scene.add(new THREE.AmbientLight(0x3b82f6, 1.2));
+  const p1 = new THREE.PointLight(0x60a5fa, 3, 200);
+  p1.position.set(30, 40, 20);
+  scene.add(p1);
+  const p2 = new THREE.PointLight(0x8b5cf6, 2.5, 200);
+  p2.position.set(-30, -20, 20);
+  scene.add(p2);
+
+  // ============================================
+  // 1. LONGITUDINAL GRID LINES (speed tunnel)
+  // ============================================
+  const lineCount = 60;
+  const tunnelRadius = 30;
+  const tunnelLength = 300;
+
+  for (let i = 0; i < lineCount; i++) {
+    const angle = (i / lineCount) * Math.PI * 2;
+    const x = Math.cos(angle) * tunnelRadius;
+    const y = Math.sin(angle) * tunnelRadius;
+
+    // Random color
+    const colors = [0x3b82f6, 0x60a5fa, 0x8b5cf6, 0x22d3ee];
+    const color = colors[Math.floor(Math.random() * colors.length)];
+
+    // Create a thin line segment running along Z axis
+    const points = [
+      new THREE.Vector3(x, y, 5),
+      new THREE.Vector3(x, y, -tunnelLength)
+    ];
+    const geo = new THREE.BufferGeometry().setFromPoints(points);
+    const mat = new THREE.LineBasicMaterial({
+      color: color,
+      transparent: true,
+      opacity: 0.35,
+      blending: THREE.AdditiveBlending
     });
+    const line = new THREE.Line(geo, mat);
+    line.userData = { baseX: x, baseY: y, offset: Math.random() * 1000 };
+    scene.add(line);
+    gridLines.push(line);
   }
+
+  // ============================================
+  // 2. CROSS-SECTION WAVE RINGS (pulsing)
+  // ============================================
+  const ringCount = 25;
+  for (let i = 0; i < ringCount; i++) {
+    const z = -i * 12;
+    const segs = 96;
+    const ringGeo = new THREE.BufferGeometry();
+    const ringPos = [];
+    for (let j = 0; j <= segs; j++) {
+      const a = (j / segs) * Math.PI * 2;
+      ringPos.push(Math.cos(a) * tunnelRadius, Math.sin(a) * tunnelRadius, z);
+    }
+    ringGeo.setAttribute('position', new THREE.Float32BufferAttribute(ringPos, 3));
+
+    const ringColors = [0x60a5fa, 0x8b5cf6, 0x22d3ee];
+    const c = new THREE.Color(ringColors[i % 3]);
+    const ringMat = new THREE.LineBasicMaterial({
+      color: c,
+      transparent: true,
+      opacity: 0.28,
+      blending: THREE.AdditiveBlending
+    });
+    const ring = new THREE.Line(ringGeo, ringMat);
+    ring.userData = { baseZ: z, phase: Math.random() * Math.PI * 2 };
+    scene.add(ring);
+  }
+
+  // ============================================
+  // 3. FLOATING GLOWING DOTS (particle field)
+  // ============================================
+  const dotCount = 700;
+  const dotGeo = new THREE.BufferGeometry();
+  const dotPos = new Float32Array(dotCount * 3);
+  const dotCol = new Float32Array(dotCount * 3);
+  const dotSizes = new Float32Array(dotCount);
+
+  for (let i = 0; i < dotCount; i++) {
+    const r = 8 + Math.random() * 35;
+    const a = Math.random() * Math.PI * 2;
+    dotPos[i*3] = Math.cos(a) * r;
+    dotPos[i*3+1] = Math.sin(a) * r;
+    dotPos[i*3+2] = -Math.random() * 300 + 5;
+
+    const c = Math.random();
+    if (c < 0.5) { dotCol[i*3]=0.37; dotCol[i*3+1]=0.65; dotCol[i*3+2]=1; }
+    else if (c < 0.8) { dotCol[i*3]=0.55; dotCol[i*3+1]=0.36; dotCol[i*3+2]=0.97; }
+    else { dotCol[i*3]=0.13; dotCol[i*3+1]=0.83; dotCol[i*3+2]=0.87; }
+
+    dotSizes[i] = Math.random() * 1.5 + 0.4;
+  }
+  dotGeo.setAttribute('position', new THREE.BufferAttribute(dotPos, 3));
+  dotGeo.setAttribute('color', new THREE.BufferAttribute(dotCol, 3));
+  dotGeo.setAttribute('size', new THREE.BufferAttribute(dotSizes, 1));
+
+  const dotMat = new THREE.PointsMaterial({
+    size: 0.6,
+    vertexColors: true,
+    transparent: true,
+    opacity: 0.95,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false,
+    sizeAttenuation: true
+  });
+  dotsGroup = new THREE.Points(dotGeo, dotMat);
+  scene.add(dotsGroup);
+
+  // ============================================
+  // 4. CENTRAL WAVE MESH (flowing energy floor)
+  // ============================================
+  const waveW = 60, waveH = 80;
+  const waveGeo = new THREE.PlaneGeometry(waveW, waveH, 40, 40);
+  const waveMat = new THREE.MeshBasicMaterial({
+    color: 0x3b82f6,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.22,
+    blending: THREE.AdditiveBlending,
+    side: THREE.DoubleSide
+  });
+  waveMesh = new THREE.Mesh(waveGeo, waveMat);
+  waveMesh.rotation.x = -Math.PI / 2.4;
+  waveMesh.position.set(0, -12, -30);
+  scene.add(waveMesh);
+
+  // ============================================
+  // 5. DEEP STARFIELD (background dust)
+  // ============================================
+  const starCount = 900;
+  const starGeo = new THREE.BufferGeometry();
+  const starPos = new Float32Array(starCount * 3);
+  for (let i = 0; i < starCount; i++) {
+    starPos[i*3] = (Math.random() - 0.5) * 800;
+    starPos[i*3+1] = (Math.random() - 0.5) * 500;
+    starPos[i*3+2] = -Math.random() * 800 - 50;
+  }
+  starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+  const starMat = new THREE.PointsMaterial({
+    color: 0x93c5fd,
+    size: 0.9,
+    transparent: true,
+    opacity: 0.5,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false,
+    sizeAttenuation: true
+  });
+  const starField = new THREE.Points(starGeo, starMat);
+  scene.add(starField);
+
+  // ---- EVENTS ----
+  window.addEventListener('resize', onWindowResize);
+  window.addEventListener('mousemove', onMouseMove);
+
+  document.querySelectorAll('.page-inner').forEach(inner => {
+    inner.addEventListener('scroll', () => {
+      const maxScroll = inner.scrollHeight - inner.clientHeight;
+      scrollTarget = maxScroll > 0 ? inner.scrollTop / maxScroll : 0;
+    });
+  });
+
+  animate3D();
 }
 
-function animateParticles() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  
-  for (let particle of particles) {
-    ctx.beginPath();
-    ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-    ctx.fillStyle = particle.color;
-    ctx.fill();
-    
-    particle.x += particle.speedX;
-    particle.y += particle.speedY;
-    
-    if (particle.x < 0 || particle.x > canvas.width) particle.speedX *= -1;
-    if (particle.y < 0 || particle.y > canvas.height) particle.speedY *= -1;
-  }
-  
-  requestAnimationFrame(animateParticles);
+function onWindowResize() {
+  const w = window.innerWidth, h = window.innerHeight;
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+  renderer.setSize(w, h);
 }
 
-initParticles();
-animateParticles();
+function onMouseMove(e) {
+  targetMouseX = (e.clientX / window.innerWidth) * 2 - 1;
+  targetMouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+}
 
-window.addEventListener('resize', () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-});
+function animate3D() {
+  requestAnimationFrame(animate3D);
+  const time = Date.now() * 0.001;
+  timeAccum += 0.016;
 
-// Dark mode toggle
+  scrollCurrent += (scrollTarget - scrollCurrent) * 0.06;
+  mouseX += (targetMouseX - mouseX) * 0.05;
+  mouseY += (targetMouseY - mouseY) * 0.05;
+
+  // ---- CAMERA ----
+  camera.position.x = mouseX * 5;
+  camera.position.y = 6 + mouseY * 3;
+  camera.rotation.z = mouseX * 0.06;
+  camera.lookAt(mouseX * 3, mouseY * 2, -40);
+
+  // ---- GRID LINES SPEED TUNNEL ----
+  const speed = 60 + scrollCurrent * 200;
+  gridLines.forEach(line => {
+    line.position.z = ((time * speed + line.userData.offset) % 300) - 300;
+    // Alternate grid pull
+    line.material.opacity = 0.15 + Math.sin(time * 2 + line.userData.offset * 0.01) * 0.15 + 0.2;
+  });
+
+  // ---- CROSS-SECTION RINGS PULSE ----
+  scene.children.forEach(child => {
+    if (child.userData && child.userData.baseZ !== undefined) {
+      const wave = Math.sin(time * 1.5 + child.userData.phase) * 0.5 + 0.5;
+      // Radial scale pulse
+      child.scale.setScalar(1 + wave * 0.08);
+      // Slight Z drift for depth flow
+      child.position.z = child.userData.baseZ + ((time * 15) % 12);
+      if (child.position.z > 15) child.position.z -= 25 * 12;
+    }
+  });
+
+  // ---- DOTS FIELD DRIFT ----
+  if (dotsGroup) {
+    const dotPositions = dotsGroup.geometry.attributes.position.array;
+    for (let i = 2; i < dotPositions.length; i += 3) {
+      dotPositions[i] += 0.4 + scrollCurrent * 1.2;
+      if (dotPositions[i] > 15) {
+        dotPositions[i] = -300;
+      }
+    }
+    dotsGroup.geometry.attributes.position.needsUpdate = true;
+    dotsGroup.rotation.z = time * 0.02;
+  }
+
+  // ---- WAVE MESH ANIMATION ----
+  if (waveMesh) {
+    const wPositions = waveMesh.geometry.attributes.position.array;
+    for (let i = 0; i < wPositions.length; i += 3) {
+      const x = wPositions[i];
+      const y = wPositions[i+1];
+      wPositions[i+2] = Math.sin(x * 0.15 + time * 1.5) * 1.8 +
+                        Math.cos(y * 0.12 + time * 1.2) * 1.8;
+    }
+    waveMesh.geometry.attributes.position.needsUpdate = true;
+    waveMesh.rotation.z = Math.sin(time * 0.2) * 0.05;
+  }
+
+  renderer.render(scene, camera);
+}
+
+if (typeof THREE !== 'undefined') {
+  init3DBackground();
+} else {
+  const check = setInterval(() => {
+    if (typeof THREE !== 'undefined') { clearInterval(check); init3DBackground(); }
+  }, 100);
+}
+
+// ============================================================
+// UI INTERACTIONS
+// ============================================================
 const themeToggle = document.getElementById('themeToggle');
 themeToggle.addEventListener('click', () => {
   document.body.classList.toggle('dark-mode');
+  document.body.classList.toggle('light-mode');
   themeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+  if (scene && scene.fog) {
+    scene.fog.color.setHex(document.body.classList.contains('dark-mode') ? 0x05080f : 0xf6f7fb);
+  }
+  if (renderer) {
+    renderer.setClearColor(document.body.classList.contains('dark-mode') ? 0x05080f : 0xf6f7fb, 1);
+  }
 });
 
-// Mobile menu
 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
 const mobileMenu = document.getElementById('mobileMenu');
+mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.toggle('show'));
 
-mobileMenuBtn.addEventListener('click', () => {
-  mobileMenu.classList.toggle('show');
-});
-
-// Page switching
 const pages = ["home","about","skills","experience","education","certifications","testimonials","projects","contact"];
 const pageEls = Object.fromEntries(pages.map(p => [p, document.getElementById(`page-${p}`)]));
 const menuBtns = Array.from(document.querySelectorAll('#topMenu button, [data-page], .mobile-menu button')).filter(x=>x.dataset.page);
@@ -1928,8 +2298,6 @@ function runReveals(scope){
   const els = scope.querySelectorAll('.reveal');
   els.forEach(el => el.classList.remove('show'));
   els.forEach((el, i) => setTimeout(() => el.classList.add('show'), 60 + i*45));
-  
-  // Animate skill bars
   if (scope.id === 'page-skills') {
     setTimeout(() => {
       document.querySelectorAll('.progress-bar div').forEach(bar => {
@@ -1946,14 +2314,16 @@ function showPage(name){
   menuBtns.forEach(b => b.classList.toggle('active', b.dataset.page === name));
   const inner = pageEls[name].querySelector('.page-inner');
   if(inner) inner.scrollTop = 0;
+  scrollTarget = 0;
   requestAnimationFrame(()=> runReveals(pageEls[name]));
   mobileMenu.classList.remove('show');
+  setTimeout(updateScrollHint, 400);
 }
 
 menuBtns.forEach(btn => btn.addEventListener('click', () => showPage(btn.dataset.page)));
 runReveals(pageEls.home);
 
-// Typing roles
+// Typing
 const typingEl = document.getElementById("typing");
 const roles = ["IT Support Engineer","Network Engineer","System Administrator","CCTV & Infrastructure Support"];
 let r=0, i=0, del=false;
@@ -1970,22 +2340,17 @@ function type(){
 }
 type();
 
-// Counters with easing
+// Counters
 function animateCounter(el, start, end, duration) {
   const range = end - start;
   const increment = range / (duration / 16);
   let current = start;
-  
   const timer = setInterval(() => {
     current += increment;
-    if (current >= end) {
-      current = end;
-      clearInterval(timer);
-    }
+    if (current >= end) { current = end; clearInterval(timer); }
     el.textContent = Math.round(current);
   }, 16);
 }
-
 const startYear = 2021;
 const currentYear = new Date().getFullYear();
 const expYears = Math.max(1, currentYear - startYear);
@@ -1994,24 +2359,18 @@ animateCounter(document.getElementById("years"), 0, expYears, 1000);
 animateCounter(document.getElementById("companies"), 0, 4, 1000);
 animateCounter(document.getElementById("issues"), 0, 15, 1000);
 
-// Public visits counter
 (async () => {
   try {
     let visits = localStorage.getItem('portfolio_visits');
-    if (visits) {
-      visits = parseInt(visits) + 1;
-    } else {
-      visits = 1;
-    }
+    visits = visits ? parseInt(visits) + 1 : 1;
     localStorage.setItem('portfolio_visits', visits);
     document.getElementById('visits').textContent = visits;
   } catch(e) {
-    console.log("Counter error:", e);
     document.getElementById('visits').textContent = '1K+';
   }
 })();
 
-// Course Certification Modal
+// Cert modal
 const certModal = document.getElementById("certModal");
 const certModalTitle = document.getElementById("certModalTitle").querySelector('span');
 const certModalBody = document.getElementById("certModalBody");
@@ -2026,64 +2385,34 @@ document.querySelectorAll(".cert").forEach(cert => {
     const description = cert.dataset.description || "Comprehensive training course covering essential IT skills.";
     const skills = cert.dataset.skills || "Technical Skills";
     const topics = cert.dataset.topics || "Course Topics";
-    
+
     certModalTitle.textContent = title;
-    
     certModalBody.innerHTML = `
       <h3>${title}</h3>
       <span class="course-type"><i class="far fa-clock"></i> ${duration} Course</span>
       <div class="cert-details">
-        <div class="detail-item">
-          <div class="label">Institution</div>
-          <div class="value">${institution}</div>
-        </div>
-        <div class="detail-item">
-          <div class="label">Completion Date</div>
-          <div class="value">${date}</div>
-        </div>
-        <div class="detail-item">
-          <div class="label">Duration</div>
-          <div class="value">${duration}</div>
-        </div>
-        <div class="detail-item">
-          <div class="label">Status</div>
-          <div class="value"><i class="fas fa-check-circle" style="color: var(--success);"></i> Completed</div>
-        </div>
+        <div class="detail-item"><div class="label">Institution</div><div class="value">${institution}</div></div>
+        <div class="detail-item"><div class="label">Completion Date</div><div class="value">${date}</div></div>
+        <div class="detail-item"><div class="label">Duration</div><div class="value">${duration}</div></div>
+        <div class="detail-item"><div class="label">Status</div><div class="value"><i class="fas fa-check-circle" style="color: var(--success);"></i> Completed</div></div>
       </div>
-      <div class="description">
-        <strong>Course Description:</strong><br>
-        ${description}
+      <div class="description"><strong>Course Description:</strong><br>${description}</div>
+      <div class="certificate-note"><i class="fas fa-certificate"></i> Course completion certificate awarded upon successful completion of all modules and practical assessments.</div>
+      <div style="margin-top: 20px;"><h4 style="margin-bottom: 10px;">Key Skills Learned:</h4>
+        <div class="skills-list">${skills.split(',').map(s => `<span class="skill-tag">${s.trim()}</span>`).join('')}</div>
       </div>
-      <div class="certificate-note">
-        <i class="fas fa-certificate"></i>
-        Course completion certificate awarded upon successful completion of all modules and practical assessments.
-      </div>
-      <div style="margin-top: 20px;">
-        <h4 style="margin-bottom: 10px;">Key Skills Learned:</h4>
-        <div class="skills-list">
-          ${skills.split(',').map(skill => `<span class="skill-tag">${skill.trim()}</span>`).join('')}
-        </div>
-      </div>
-      <div style="margin-top: 20px;">
-        <h4 style="margin-bottom: 10px;">Course Topics:</h4>
-        <div class="skills-list">
-          ${topics.split(',').map(topic => `<span class="skill-tag">${topic.trim()}</span>`).join('')}
-        </div>
+      <div style="margin-top: 20px;"><h4 style="margin-bottom: 10px;">Course Topics:</h4>
+        <div class="skills-list">${topics.split(',').map(t => `<span class="skill-tag">${t.trim()}</span>`).join('')}</div>
       </div>
     `;
-    
     certModal.classList.add("show");
   });
 });
-
-function closeCertModal() { 
-  certModal.classList.remove("show"); 
-}
-
+function closeCertModal() { certModal.classList.remove("show"); }
 certModalClose.addEventListener("click", closeCertModal);
 certModal.addEventListener("click", (e) => { if(e.target === certModal) closeCertModal(); });
 
-// Project Modal
+// Project modal
 const projectModal = document.getElementById("projectModal");
 const projectModalTitle = document.getElementById("projectModalTitle");
 const projectModalBody = document.getElementById("projectModalBody");
@@ -2093,61 +2422,40 @@ document.querySelectorAll(".project").forEach(card => {
   card.addEventListener("click", () => {
     const title = card.dataset.title || "Project";
     const description = card.dataset.desc || "";
-    
     projectModalTitle.textContent = title;
-    
-    // FortiGate Lab specific details
+
     if (title === "FortiGate Firewall Lab") {
       projectModalBody.innerHTML = `
         <h3>FortiGate Firewall Lab</h3>
         <div class="network-topology">
           <div class="device-row">
             <div class="device-icon"><i class="fas fa-computer"></i></div>
-            <div class="device-details">
-              <div class="device-name">PC1</div>
-              <div class="device-ip">192.168.10.10/24</div>
-            </div>
+            <div class="device-details"><div class="device-name">PC1</div><div class="device-ip">192.168.10.10/24</div></div>
             <div><i class="fas fa-arrow-right"></i></div>
             <div class="device-icon"><i class="fas fa-network-wired"></i></div>
-            <div class="device-details">
-              <div class="device-name">VPC5</div>
-              <div class="device-ip">192.168.10.0/24</div>
-            </div>
+            <div class="device-details"><div class="device-name">VPC5</div><div class="device-ip">192.168.10.0/24</div></div>
           </div>
           <div class="device-row">
             <div class="device-icon"><i class="fas fa-code-branch"></i></div>
-            <div class="device-details">
-              <div class="device-name">Switch1</div>
-              <div class="device-ip">192.168.10.0/24</div>
-            </div>
+            <div class="device-details"><div class="device-name">Switch1</div><div class="device-ip">192.168.10.0/24</div></div>
           </div>
           <div class="device-row">
             <div class="device-icon"><i class="fas fa-shield-halved"></i></div>
-            <div class="device-details">
-              <div class="device-name">FortiGate 7.0.9.1</div>
-              <div class="device-ip">192.168.163.130/24</div>
-            </div>
+            <div class="device-details"><div class="device-name">FortiGate 7.0.9.1</div><div class="device-ip">192.168.163.130/24</div></div>
             <div><i class="fas fa-arrow-right"></i></div>
             <div class="device-icon"><i class="fas fa-cloud"></i></div>
-            <div class="device-details">
-              <div class="device-name">Internet/Cloud</div>
-            </div>
+            <div class="device-details"><div class="device-name">Internet/Cloud</div></div>
           </div>
         </div>
-        <div class="description">
-          <strong>Configuration Details:</strong><br>
-          ${description}
-        </div>
-        <div style="margin-top: 20px;">
-          <h4 style="margin-bottom: 10px;">Network Connections:</h4>
-          <ul style="color: var(--muted); line-height: 2;">
+        <div class="description"><strong>Configuration Details:</strong><br>${description}</div>
+        <div style="margin-top: 20px;"><h4 style="margin-bottom: 10px;">Network Connections:</h4>
+          <ul style="color: #94a3b8; line-height: 2;">
             <li>PC1 (192.168.10.10/24) → Switch1 (192.168.10.0/24)</li>
             <li>Switch1 → FortiGate 7.0.9.1 (192.168.163.130/24)</li>
             <li>FortiGate → Internet/Cloud with NAT and firewall policies</li>
           </ul>
         </div>
-        <div style="margin-top: 20px;">
-          <h4 style="margin-bottom: 10px;">Technologies Used:</h4>
+        <div style="margin-top: 20px;"><h4 style="margin-bottom: 10px;">Technologies Used:</h4>
           <div class="skills-list">
             <span class="skill-tag">FortiGate 7.0.9.1</span>
             <span class="skill-tag">NAT Policies</span>
@@ -2161,70 +2469,41 @@ document.querySelectorAll(".project").forEach(card => {
     } else if (title === "GNS3 Networking Lab") {
       projectModalBody.innerHTML = `
         <h3>GNS3 Networking Lab</h3>
-        <div class="description">
-          <strong>Lab Description:</strong><br>
-          ${description}
-        </div>
-        <div style="margin-top: 20px;">
-          <h4 style="margin-bottom: 10px;">Technologies Used:</h4>
+        <div class="description"><strong>Lab Description:</strong><br>${description}</div>
+        <div style="margin-top: 20px;"><h4 style="margin-bottom: 10px;">Technologies Used:</h4>
           <div class="skills-list">
-            <span class="skill-tag">GNS3</span>
-            <span class="skill-tag">OSPF</span>
-            <span class="skill-tag">EIGRP</span>
-            <span class="skill-tag">STP</span>
-            <span class="skill-tag">VLAN</span>
-            <span class="skill-tag">Cisco IOS</span>
+            <span class="skill-tag">GNS3</span><span class="skill-tag">OSPF</span>
+            <span class="skill-tag">EIGRP</span><span class="skill-tag">STP</span>
+            <span class="skill-tag">VLAN</span><span class="skill-tag">Cisco IOS</span>
           </div>
         </div>
       `;
     } else if (title === "CCTV Installation & Support") {
       projectModalBody.innerHTML = `
         <h3>CCTV Installation & Support</h3>
-        <div class="description">
-          <strong>Project Description:</strong><br>
-          ${description}
-        </div>
-        <div style="margin-top: 20px;">
-          <h4 style="margin-bottom: 10px;">Components Used:</h4>
+        <div class="description"><strong>Project Description:</strong><br>${description}</div>
+        <div style="margin-top: 20px;"><h4 style="margin-bottom: 10px;">Components Used:</h4>
           <div class="skills-list">
-            <span class="skill-tag">IP Cameras</span>
-            <span class="skill-tag">NVR</span>
-            <span class="skill-tag">PoE Switch</span>
-            <span class="skill-tag">CAT6 Cabling</span>
-            <span class="skill-tag">Remote Viewing</span>
-            <span class="skill-tag">Motion Detection</span>
+            <span class="skill-tag">IP Cameras</span><span class="skill-tag">NVR</span>
+            <span class="skill-tag">PoE Switch</span><span class="skill-tag">CAT6 Cabling</span>
+            <span class="skill-tag">Remote Viewing</span><span class="skill-tag">Motion Detection</span>
           </div>
         </div>
       `;
     } else {
-      projectModalBody.innerHTML = `
-        <h3>${title}</h3>
-        <div class="description">
-          ${description}
-        </div>
-      `;
+      projectModalBody.innerHTML = `<h3>${title}</h3><div class="description">${description}</div>`;
     }
-    
     projectModal.classList.add("show");
   });
 });
-
-function closeProjectModal() { 
-  projectModal.classList.remove("show"); 
-}
-
+function closeProjectModal() { projectModal.classList.remove("show"); }
 projectModalClose.addEventListener("click", closeProjectModal);
 projectModal.addEventListener("click", (e) => { if(e.target === projectModal) closeProjectModal(); });
 
-// Global escape key handler
-document.addEventListener("keydown", (e) => { 
-  if(e.key === "Escape") {
-    closeCertModal();
-    closeProjectModal();
-  }
+document.addEventListener("keydown", (e) => {
+  if(e.key === "Escape") { closeCertModal(); closeProjectModal(); }
 });
 
-// Contact form
 const contactForm = document.getElementById("contactForm");
 if(contactForm){
   contactForm.addEventListener("submit", (e) => {
@@ -2235,17 +2514,572 @@ if(contactForm){
     const email = fd.get("email") || "";
     const subj  = fd.get("subject") || "Portfolio Contact";
     const msg   = fd.get("message") || "";
-
-    const body =
-      `Name: ${first} ${last}\n` +
-      `Email: ${email}\n\n` +
-      `Message:\n${msg}\n`;
-
+    const body = `Name: ${first} ${last}\nEmail: ${email}\n\nMessage:\n${msg}\n`;
     const to = "japzashar@gmail.com";
-    window.location.href =
-      `mailto:${to}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
+    window.location.href = `mailto:${to}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
   });
 }
+
+// Scroll hint
+const scrollHint = document.getElementById('scrollHint');
+function updateScrollHint() {
+  const activePage = document.querySelector('.page.active');
+  if (!activePage) return;
+  const inner = activePage.querySelector('.page-inner');
+  if (inner && inner.scrollHeight > inner.clientHeight + 50) {
+    scrollHint.classList.remove('hidden');
+  } else {
+    scrollHint.classList.add('hidden');
+  }
+}
+document.querySelectorAll('.page-inner').forEach(inner => {
+  inner.addEventListener('scroll', () => {
+    if (inner.scrollTop > 80) scrollHint.classList.add('hidden');
+    else scrollHint.classList.remove('hidden');
+  });
+});
+setTimeout(updateScrollHint, 800);
 </script>
+<!-- ============================================================
+     ADDED: EXTRA 3D ANIMATION LAYER (JS)  — original code untouched
+     3D computer + server racks + networking gear + CCTV, with your images/
+     ============================================================ -->
+<script id="extra-3d-js">
+(function(){
+  const reduce  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isTouch = window.matchMedia('(hover: none)').matches;
+  const mouse = { x:0, y:0, sx:0, sy:0 };
+  let glow = null;
+
+  /* ---------- 1. 3D TILT + GLARE ON CARDS ---------- */
+  const TILT_SEL = '.card, .cert, .exp-item, .testimonial-card, .kpi, .profile, .contact-item, .future-card, .project, .contact-card2';
+  function bindTilt(el){
+    if (el.dataset.t3d) return;
+    el.dataset.t3d = '1';
+    el.classList.add('t3d');
+    if (getComputedStyle(el).position === 'static') el.style.position = 'relative';
+    const glare = document.createElement('div');
+    glare.className = 't3d-glare';
+    el.appendChild(glare);
+    if (isTouch || reduce) return;
+    const max = el.matches('.kpi, .contact-item') ? 9 : 12;
+    el.addEventListener('mousemove', e => {
+      if (el.classList.contains('reveal') && !el.classList.contains('show')) return;
+      const r = el.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width  - .5;
+      const py = (e.clientY - r.top)  / r.height - .5;
+      el.classList.add('is-tilting');
+      el.style.transition = 'transform .12s ease-out, box-shadow .3s ease';
+      el.style.transform = `perspective(900px) rotateX(${(-py*max).toFixed(2)}deg) rotateY(${(px*max*1.2).toFixed(2)}deg) translateZ(18px) scale(1.025)`;
+      el.style.setProperty('--gx', ((px+.5)*100)+'%');
+      el.style.setProperty('--gy', ((py+.5)*100)+'%');
+    });
+    el.addEventListener('mouseleave', () => {
+      el.classList.remove('is-tilting');
+      el.style.transition = '';
+      el.style.transform = '';
+    });
+  }
+  document.querySelectorAll(TILT_SEL).forEach(bindTilt);
+
+  /* ---------- 2. PROFILE ORBIT RINGS (attached to the card so they are not clipped) ---------- */
+  const profileCard = document.querySelector('.profile');
+  if (profileCard && !profileCard.querySelector('.fx-orbit-wrap')) {
+    const wrap = document.createElement('div'); wrap.className = 'fx-orbit-wrap';
+    ['o1','o2'].forEach(c => { const d = document.createElement('div'); d.className = 'fx-orbit ' + c; wrap.appendChild(d); });
+    profileCard.appendChild(wrap);
+  }
+
+  /* ---------- 3. 3D IMAGE RING (your images, plain CSS 3D) ---------- */
+  const RING = [
+    ['server.jpg','SERVER ROOM'], ['network.jpg','NETWORKING'], ['firewall.jpg','FIREWALL'],
+    ['cctv.jpg','CCTV'], ['Operating Systems.jpg','OPERATING SYSTEMS'], ['hero-bg.jpg','INFRASTRUCTURE']
+  ];
+  const ringScene = document.createElement('div');
+  ringScene.id = 'fx-ring-scene';
+  ringScene.innerHTML = '<div class="fx-ring">' + RING.map((r,i) =>
+    `<div class="fx-card" style="--i:${i}"><img src="images/${r[0]}" alt="${r[1]}" loading="lazy" onerror="this.parentNode.style.display='none'"><span>${r[1]}</span></div>`
+  ).join('') + '</div>';
+  document.body.appendChild(ringScene);
+  const homePage = document.getElementById('page-home');
+  const syncRing = () => ringScene.classList.toggle('on', !!(homePage && homePage.classList.contains('active')));
+  syncRing();
+  if (homePage) new MutationObserver(syncRing).observe(homePage, { attributes:true, attributeFilter:['class'] });
+
+  /* ---------- 4. MOUSE: HERO TITLE, CURSOR GLOW, RING PARALLAX ---------- */
+  const h1 = document.querySelector('.h1');
+  window.addEventListener('mousemove', e => {
+    mouse.x = (e.clientX / innerWidth)  * 2 - 1;
+    mouse.y = (e.clientY / innerHeight) * 2 - 1;
+    if (h1 && !isTouch && !reduce) {
+      h1.style.setProperty('--hx', (mouse.x * 8).toFixed(2) + 'deg');
+      h1.style.setProperty('--hy', (-mouse.y * 6).toFixed(2) + 'deg');
+    }
+    if (glow) { glow.style.opacity = 1; glow.style.transform = `translate(${e.clientX}px,${e.clientY}px)`; }
+    ringScene.style.marginLeft = (-mouse.x * 26) + 'px';
+  }, { passive:true });
+  if (!isTouch && !reduce) {
+    glow = document.createElement('div'); glow.id = 'fx-cursor-glow'; document.body.appendChild(glow);
+    document.addEventListener('mouseleave', () => glow.style.opacity = 0);
+  }
+  document.addEventListener('click', e => {
+    if (reduce) return;
+    const r = document.createElement('div');
+    r.className = 'fx-click'; r.style.left = e.clientX + 'px'; r.style.top = e.clientY + 'px';
+    document.body.appendChild(r); setTimeout(() => r.remove(), 750);
+  });
+
+  /* ---------- 5. PAGE-CHANGE HOOKS ---------- */
+  let impulse = 0;
+  document.addEventListener('click', e => {
+    const b = e.target.closest('[data-page]');
+    if (!b) return;
+    const cur = document.querySelector('.page.active');
+    if (cur) { cur.classList.add('leaving-3d'); setTimeout(() => cur.classList.remove('leaving-3d'), 700); }
+    impulse = 1;
+    setTimeout(() => document.querySelectorAll(TILT_SEL).forEach(bindTilt), 50);
+  });
+
+  /* ============================================================
+     6. THREE.JS — 3D COMPUTER, SERVER RACKS, NETWORK GEAR, CCTV
+     ============================================================ */
+  function initFX(){
+    if (reduce) return;
+    const canvas = document.createElement('canvas');
+    canvas.id = 'fx3d-canvas';
+    let renderer;
+    try { renderer = new THREE.WebGLRenderer({ canvas, alpha:true, antialias:true }); }
+    catch(err){ return; }
+    const bg = document.getElementById('bg-canvas');
+    (bg && bg.parentNode ? bg.parentNode : document.body).insertBefore(canvas, bg ? bg.nextSibling : document.body.firstChild);
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 1.75));
+    renderer.setClearColor(0x000000, 0);
+
+    const scene  = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 200);
+    camera.position.z = 16;
+
+    scene.add(new THREE.AmbientLight(0x8aa4ff, .9));
+    scene.add(new THREE.HemisphereLight(0x9db8ff, 0x1a1030, .6));
+    const dir = new THREE.DirectionalLight(0xbcd0ff, .9); dir.position.set(4, 8, 12); scene.add(dir);
+    const key = new THREE.PointLight(0x60a5fa, 1.6, 60); key.position.set(8, 6, 10); scene.add(key);
+    const rim = new THREE.PointLight(0xa78bfa, 1.5, 60); rim.position.set(-9, -4, 8); scene.add(rim);
+
+    /* ----- your images -> textures (falls back to drawn art if the browser blocks pixel access) ----- */
+    const SHOTS = [
+      { f:'server.jpg',            label:'SERVER ROOM',        hue:210 },
+      { f:'network.jpg',           label:'NETWORKING',         hue:190 },
+      { f:'firewall.jpg',          label:'FIREWALL',           hue:265 },
+      { f:'cctv.jpg',              label:'CCTV SURVEILLANCE',  hue:340 },
+      { f:'Operating Systems.jpg', label:'OPERATING SYSTEMS',  hue:150 }
+    ];
+    function cover(x, im, w, h){
+      const s = Math.max(w / im.naturalWidth, h / im.naturalHeight);
+      const dw = im.naturalWidth * s, dh = im.naturalHeight * s;
+      x.drawImage(im, (w - dw) / 2, (h - dh) / 2, dw, dh);
+    }
+    SHOTS.forEach(s => {
+      s.canvas = null;
+      const im = new Image();
+      im.onload = () => {
+        try {
+          const c = document.createElement('canvas'); c.width = 800; c.height = 450;
+          const x = c.getContext('2d'); cover(x, im, 800, 450);
+          x.getImageData(0, 0, 1, 1);          // throws if the browser treats the file as cross-origin
+          s.canvas = c;
+        } catch(e) { s.canvas = null; }
+      };
+      im.src = 'images/' + s.f;
+    });
+    function fallbackArt(x, w, h, s){
+      const g = x.createLinearGradient(0, 0, w, h);
+      g.addColorStop(0, `hsl(${s.hue},70%,14%)`); g.addColorStop(1, `hsl(${s.hue+50},75%,32%)`);
+      x.fillStyle = g; x.fillRect(0, 0, w, h);
+      x.strokeStyle = 'rgba(147,197,253,.18)'; x.lineWidth = 1;
+      for (let i = 0; i < w; i += 40){ x.beginPath(); x.moveTo(i,0); x.lineTo(i,h); x.stroke(); }
+      for (let j = 0; j < h; j += 40){ x.beginPath(); x.moveTo(0,j); x.lineTo(w,j); x.stroke(); }
+      x.fillStyle = 'rgba(255,255,255,.9)'; x.font = `900 ${Math.round(h*.1)}px Inter, Arial, sans-serif`;
+      x.textAlign = 'center'; x.fillText(s.label, w/2, h/2 + h*.03); x.textAlign = 'left';
+    }
+    function drawShot(x, w, h, s){ if (s.canvas) x.drawImage(s.canvas, 0, 0, w, h); else fallbackArt(x, w, h, s); }
+
+    function makeCanvasTex(w, h){
+      const c = document.createElement('canvas'); c.width = w; c.height = h;
+      const tex = new THREE.CanvasTexture(c);
+      tex.minFilter = THREE.LinearFilter; tex.generateMipmaps = false;
+      return { c, x:c.getContext('2d'), tex, w, h };
+    }
+
+    /* Monitor screen: cycles through your images with a terminal-style overlay */
+    const monitorScr = makeCanvasTex(1024, 576);
+    function drawMonitor(t){
+      const { x, w, h } = monitorScr;
+      const k = t / 5, i = Math.floor(k) % SHOTS.length, n = (i + 1) % SHOTS.length, f = k % 1;
+      const blend = f > .85 ? (f - .85) / .15 : 0;
+      x.globalAlpha = 1; drawShot(x, w, h, SHOTS[i]);
+      if (blend > 0){ x.globalAlpha = blend; drawShot(x, w, h, SHOTS[n]); x.globalAlpha = 1; }
+      const g = x.createLinearGradient(0, 0, 0, h);
+      g.addColorStop(0, 'rgba(5,10,25,.7)'); g.addColorStop(.4, 'rgba(5,10,25,.1)'); g.addColorStop(1, 'rgba(5,10,25,.8)');
+      x.fillStyle = g; x.fillRect(0, 0, w, h);
+      x.fillStyle = 'rgba(15,23,42,.9)'; x.fillRect(0, 0, w, 40);
+      ['#ef4444','#f59e0b','#22c55e'].forEach((c, j) => { x.fillStyle = c; x.beginPath(); x.arc(24 + j*24, 20, 7, 0, 7); x.fill(); });
+      x.fillStyle = '#93c5fd'; x.font = '700 18px Inter, Arial, sans-serif'; x.fillText('ashar@it-lab: ~/infrastructure', 112, 26);
+      const cur = SHOTS[blend > .5 ? n : i];
+      x.fillStyle = '#e0f2fe'; x.font = '900 40px Inter, Arial, sans-serif'; x.fillText(cur.label, 36, h - 88);
+      const cmd = '> ping 192.168.10.1  ...  reply OK  ';
+      const chars = Math.min(cmd.length, Math.floor((f * 5) * 14));
+      x.fillStyle = '#4ade80'; x.font = '600 22px "Courier New", monospace';
+      x.fillText(cmd.slice(0, chars) + (Math.floor(t * 2) % 2 ? '_' : ''), 36, h - 40);
+      x.fillStyle = 'rgba(0,0,0,.14)'; for (let y = 40; y < h; y += 4) x.fillRect(0, y, w, 1);
+      monitorScr.tex.needsUpdate = true;
+    }
+
+    /* Floating holo panel (server monitoring) */
+    const holoScr = makeCanvasTex(800, 480);
+    function drawHolo(t){
+      const { x, w, h } = holoScr;
+      const k = t / 6 + 2, i = Math.floor(k) % SHOTS.length, n = (i + 1) % SHOTS.length, f = k % 1;
+      const blend = f > .88 ? (f - .88) / .12 : 0;
+      x.globalAlpha = 1; drawShot(x, w, h, SHOTS[i]);
+      if (blend > 0){ x.globalAlpha = blend; drawShot(x, w, h, SHOTS[n]); x.globalAlpha = 1; }
+      x.fillStyle = 'rgba(0,120,255,.28)'; x.fillRect(0, 0, w, h);
+      const sy = ((t * .35) % 1) * h;
+      const sg = x.createLinearGradient(0, sy - 40, 0, sy + 40);
+      sg.addColorStop(0, 'rgba(120,200,255,0)'); sg.addColorStop(.5, 'rgba(160,220,255,.4)'); sg.addColorStop(1, 'rgba(120,200,255,0)');
+      x.fillStyle = sg; x.fillRect(0, sy - 40, w, 80);
+      x.strokeStyle = '#7dd3fc'; x.lineWidth = 4;
+      const L = 46, m = 10;
+      [[m,m,1,1],[w-m,m,-1,1],[m,h-m,1,-1],[w-m,h-m,-1,-1]].forEach(c => {
+        x.beginPath(); x.moveTo(c[0], c[1] + c[3]*L); x.lineTo(c[0], c[1]); x.lineTo(c[0] + c[2]*L, c[1]); x.stroke();
+      });
+      const cur = SHOTS[blend > .5 ? n : i];
+      x.fillStyle = Math.floor(t*2) % 2 ? '#ef4444' : '#7f1d1d'; x.beginPath(); x.arc(40, 44, 9, 0, 7); x.fill();
+      x.fillStyle = '#e0f2fe'; x.font = '800 28px Inter, Arial, sans-serif'; x.fillText('LIVE  ' + cur.label, 62, 54);
+      x.fillStyle = 'rgba(0,0,0,.16)'; for (let y = 0; y < h; y += 4) x.fillRect(0, y, w, 1);
+      holoScr.tex.needsUpdate = true;
+    }
+
+    /* Unit front textures for rack equipment (drawn once, shared) */
+    const unitTexCache = {};
+    function unitTex(type){
+      if (unitTexCache[type]) return unitTexCache[type];
+      const c = document.createElement('canvas'); c.width = 512; c.height = 96;
+      const x = c.getContext('2d');
+      x.fillStyle = '#0f1a30'; x.fillRect(0, 0, 512, 96);
+      x.fillStyle = '#1b2a4a'; x.fillRect(0, 0, 512, 6); x.fillRect(0, 90, 512, 6);
+      x.fillStyle = '#334155'; [14, 498].forEach(px => [16, 80].forEach(py => { x.beginPath(); x.arc(px, py, 5, 0, 7); x.fill(); }));
+      if (type === 'switch'){
+        for (let r = 0; r < 2; r++) for (let i = 0; i < 12; i++){
+          x.fillStyle = '#040a16'; x.fillRect(34 + i*30, 24 + r*34, 22, 22);
+          x.strokeStyle = '#475569'; x.lineWidth = 2; x.strokeRect(34 + i*30, 24 + r*34, 22, 22);
+          x.fillStyle = '#facc15'; x.fillRect(38 + i*30, 28 + r*34, 14, 4);
+        }
+      } else if (type === 'firewall'){
+        x.fillStyle = '#f97316'; x.fillRect(34, 22, 6, 52);
+        x.fillStyle = '#071226'; x.fillRect(56, 22, 130, 52);
+        x.fillStyle = '#fb923c'; x.font = '700 15px "Courier New", monospace';
+        x.fillText('FW-01  ACTIVE', 64, 44); x.fillStyle = '#4ade80'; x.fillText('THREATS: 0', 64, 64);
+        for (let i = 0; i < 8; i++){ x.fillStyle = '#040a16'; x.fillRect(210 + i*26, 34, 18, 28); x.strokeStyle = '#475569'; x.strokeRect(210 + i*26, 34, 18, 28); }
+      } else if (type === 'router'){
+        x.strokeStyle = '#38bdf8'; x.lineWidth = 4;
+        for (let i = 1; i <= 3; i++){ x.beginPath(); x.arc(70, 66, 12*i, -Math.PI*.8, -Math.PI*.2); x.stroke(); }
+        x.fillStyle = '#38bdf8'; x.beginPath(); x.arc(70, 66, 4, 0, 7); x.fill();
+        for (let i = 0; i < 6; i++){ x.fillStyle = '#040a16'; x.fillRect(150 + i*34, 36, 24, 26); x.strokeStyle = '#475569'; x.strokeRect(150 + i*34, 36, 24, 26); }
+      } else if (type === 'storage'){
+        for (let r = 0; r < 2; r++) for (let i = 0; i < 10; i++){
+          x.fillStyle = '#060d1c'; x.fillRect(30 + i*39, 20 + r*36, 34, 30);
+          x.strokeStyle = '#3b4a68'; x.lineWidth = 2; x.strokeRect(30 + i*39, 20 + r*36, 34, 30);
+          x.fillStyle = '#1e3a8a'; x.fillRect(34 + i*39, 24 + r*36, 26, 4);
+        }
+      } else { // server
+        for (let i = 0; i < 4; i++){
+          x.fillStyle = '#060d1c'; x.fillRect(30 + i*58, 20, 52, 56);
+          x.strokeStyle = '#3b4a68'; x.lineWidth = 2; x.strokeRect(30 + i*58, 20, 52, 56);
+          x.fillStyle = '#1d4ed8'; x.fillRect(36 + i*58, 26, 40, 5);
+        }
+        x.fillStyle = '#26354f'; for (let i = 0; i < 22; i++) x.fillRect(280 + i*7, 22, 3, 52);
+      }
+      const tex = new THREE.CanvasTexture(c); tex.minFilter = THREE.LinearFilter; tex.generateMipmaps = false;
+      return (unitTexCache[type] = tex);
+    }
+
+    /* ----- materials & helpers ----- */
+    const mat = {
+      body:  new THREE.MeshStandardMaterial({ color:0x0a1222, metalness:.75, roughness:.4 }),
+      unit:  new THREE.MeshStandardMaterial({ color:0x152036, metalness:.8,  roughness:.3 }),
+      metal: new THREE.MeshStandardMaterial({ color:0x334155, metalness:.9,  roughness:.25 }),
+      dark:  new THREE.MeshStandardMaterial({ color:0x0b1324, metalness:.6,  roughness:.35 }),
+      glass: new THREE.MeshStandardMaterial({ color:0x1e40af, metalness:.3,  roughness:.1, transparent:true, opacity:.22 })
+    };
+    const fadeMats = [];            // line/additive materials that dim in light mode
+    const lineMat = (c, o) => { const m = new THREE.LineBasicMaterial({ color:c, transparent:true, opacity:o, blending:THREE.AdditiveBlending }); fadeMats.push([m, o]); return m; };
+    const addMat  = (c, o) => { const m = new THREE.MeshBasicMaterial({ color:c, transparent:true, opacity:o, blending:THREE.AdditiveBlending, side:THREE.DoubleSide, depthWrite:false }); fadeMats.push([m, o]); return m; };
+    const box = (p, w, h, d, m, x, y, z) => { const o = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), m); o.position.set(x||0, y||0, z||0); p.add(o); return o; };
+    const edgesOf = (p, w, h, d, c, o, x, y, z) => { const l = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(w, h, d)), lineMat(c, o)); l.position.set(x||0, y||0, z||0); p.add(l); return l; };
+
+    const leds = [];
+    function addLED(p, x, y, z, s, color){
+      const m = new THREE.MeshBasicMaterial({ color });
+      const o = new THREE.Mesh(new THREE.BoxGeometry(s, s, .03), m); o.position.set(x, y, z); p.add(o);
+      leds.push({ m, on:new THREE.Color(color), off:new THREE.Color(color).multiplyScalar(.1), ph:Math.random()*10, sp:.6 + Math.random()*3.4 });
+    }
+    function glowDisc(p, size, color, y){
+      const c = document.createElement('canvas'); c.width = c.height = 128;
+      const x = c.getContext('2d'); const g = x.createRadialGradient(64, 64, 4, 64, 64, 64);
+      g.addColorStop(0, color); g.addColorStop(1, 'rgba(0,0,0,0)'); x.fillStyle = g; x.fillRect(0, 0, 128, 128);
+      const m = new THREE.Mesh(new THREE.PlaneGeometry(size, size), new THREE.MeshBasicMaterial({ map:new THREE.CanvasTexture(c), transparent:true, blending:THREE.AdditiveBlending, depthWrite:false }));
+      m.rotation.x = -Math.PI/2; m.position.y = y; p.add(m);
+      const ring = new THREE.Mesh(new THREE.RingGeometry(size*.36, size*.375, 64), addMat(0x60a5fa, .6));
+      ring.rotation.x = -Math.PI/2; ring.position.y = y + .01; p.add(ring);
+    }
+
+    const packets = [];
+    function addCable(p, pts, color, packetCount){
+      const curve = new THREE.CatmullRomCurve3(pts.map(a => new THREE.Vector3(a[0], a[1], a[2])));
+      const tube = new THREE.Mesh(new THREE.TubeGeometry(curve, 48, .035, 6, false), new THREE.MeshBasicMaterial({ color, transparent:true, opacity:.75 }));
+      p.add(tube);
+      for (let i = 0; i < packetCount; i++){
+        const m = new THREE.Mesh(new THREE.SphereGeometry(.09, 10, 8), new THREE.MeshBasicMaterial({ color:0xffffff, blending:THREE.AdditiveBlending }));
+        p.add(m); packets.push({ m, curve, t:Math.random(), sp:.12 + Math.random()*.18 });
+      }
+    }
+
+    /* ----- SERVER RACK ----- */
+    const RW = 2.3, RH = 5.4, RD = 1.9;
+    function makeRack(types){
+      const g = new THREE.Group();
+      box(g, RW, RH, RD, mat.body);
+      edgesOf(g, RW + .04, RH + .04, RD + .04, 0x3b82f6, .8);
+      box(g, RW + .12, .1, RD + .12, mat.metal, 0, -RH/2 - .05, 0);   // base
+      box(g, RW + .12, .1, RD + .12, mat.metal, 0,  RH/2 + .05, 0);   // top
+      types.forEach((t, i) => {
+        const y = RH/2 - .42 - i*.56;
+        box(g, RW - .26, .46, .1, mat.unit, 0, y, RD/2 + .02);
+        const front = new THREE.Mesh(new THREE.PlaneGeometry(RW - .3, .42), new THREE.MeshBasicMaterial({ map:unitTex(t) }));
+        front.position.set(0, y, RD/2 + .075); g.add(front);
+        for (let j = 0; j < 3; j++) addLED(g, .72 + j*.13, y, RD/2 + .08, .06, [0x22c55e, 0x38bdf8, 0xf59e0b][j]);
+      });
+      return g;
+    }
+
+    /* ----- RIGHT CLUSTER: two racks + holo monitor + uplink node ----- */
+    const serverCluster = new THREE.Group();
+    const rackA = makeRack(['router','firewall','switch','server','server','server','storage','server','server']);
+    const rackB = makeRack(['switch','server','server','storage','server','server','storage','server','server']);
+    rackA.position.x = -1.4; rackB.position.x = 1.4;
+    serverCluster.add(rackA, rackB);
+    glowDisc(serverCluster, 8, 'rgba(59,130,246,.55)', -RH/2 - .1);
+
+    // cables between the racks (switch -> servers), with data packets
+    const yU = i => RH/2 - .42 - i*.56;
+    addCable(serverCluster, [[-.5, yU(2), 1.0], [-.2, yU(2), 1.5], [.1, (yU(2)+yU(4))/2, 1.8], [.45, yU(4), 1.5], [.7, yU(4), 1.0]], 0x38bdf8, 2);
+    addCable(serverCluster, [[-.45, yU(2), 1.0], [-.1, yU(2)-.1, 1.6], [.2, (yU(2)+yU(5))/2, 2.0], [.5, yU(5), 1.55], [.7, yU(5), 1.0]], 0xa78bfa, 2);
+    addCable(serverCluster, [[-.55, yU(2), 1.0], [-.7, yU(3), 1.45], [-.85, yU(6), 1.4], [-.55, yU(6), 1.0]], 0x22d3ee, 2);
+    addCable(serverCluster, [[-.4, yU(1), 1.0], [-.05, yU(1), 1.55], [.3, (yU(1)+yU(1))/2, 1.9], [.6, yU(0)+.0, 1.5], [.7, yU(0), 1.0]], 0xf59e0b, 2);
+
+    // holo panel with your images
+    const holoG = new THREE.Group(); holoG.position.y = RH/2 + 1.9;
+    const holoPlane = new THREE.Mesh(new THREE.PlaneGeometry(3.4, 2.04), new THREE.MeshBasicMaterial({ map:holoScr.tex, transparent:true, opacity:.95, side:THREE.DoubleSide }));
+    holoG.add(holoPlane);
+    edgesOf(holoG, 3.5, 2.14, .02, 0x7dd3fc, .9);
+    serverCluster.add(holoG);
+    // uplink node
+    const nodeR = new THREE.Mesh(new THREE.SphereGeometry(.2, 16, 12), new THREE.MeshBasicMaterial({ color:0x93c5fd }));
+    const nodeRpos = new THREE.Vector3(0, RH/2 + 3.35, 0); nodeR.position.copy(nodeRpos); serverCluster.add(nodeR);
+    const haloR = new THREE.Mesh(new THREE.RingGeometry(.3, .34, 32), addMat(0x60a5fa, .8)); haloR.position.copy(nodeRpos); serverCluster.add(haloR);
+
+    /* ----- LEFT CLUSTER: desk, computer, router, CCTV mast ----- */
+    const deskCluster = new THREE.Group();
+    const deskTop = box(deskCluster, 5.8, .12, 2.8, new THREE.MeshStandardMaterial({ color:0x1e3a8a, metalness:.5, roughness:.15, transparent:true, opacity:.65 }), .1, -.06, 0);
+    edgesOf(deskCluster, 5.8, .12, 2.8, 0x60a5fa, .9, .1, -.06, 0);
+    box(deskCluster, .12, .9, .12, mat.metal, -2.6, -.55, -1.1); box(deskCluster, .12, .9, .12, mat.metal, 2.8, -.55, -1.1);
+    box(deskCluster, .12, .9, .12, mat.metal, -2.6, -.55, 1.1);  box(deskCluster, .12, .9, .12, mat.metal, 2.8, -.55, 1.1);
+    glowDisc(deskCluster, 9, 'rgba(124,58,237,.5)', -1.05);
+
+    // monitor
+    const monG = new THREE.Group(); monG.position.set(-.8, 0, .3); deskCluster.add(monG);
+    const base = new THREE.Mesh(new THREE.CylinderGeometry(.6, .7, .07, 32), mat.metal); base.position.y = .035; monG.add(base);
+    box(monG, .16, .95, .12, mat.metal, 0, .52, -.05);
+    box(monG, 3.4, 2.0, .12, mat.dark, 0, 2.0, 0);
+    edgesOf(monG, 3.4, 2.0, .12, 0x3b82f6, .7, 0, 2.0, 0);
+    const screen = new THREE.Mesh(new THREE.PlaneGeometry(3.16, 1.78), new THREE.MeshBasicMaterial({ map:monitorScr.tex }));
+    screen.position.set(0, 2.0, .07); monG.add(screen);
+    const screenGlow = new THREE.Mesh(new THREE.PlaneGeometry(4.4, 3), addMat(0x2563eb, .12)); screenGlow.position.set(0, 2.0, .2); monG.add(screenGlow);
+
+    // keyboard (backlit) + mouse
+    const kc = document.createElement('canvas'); kc.width = 512; kc.height = 170;
+    (function(){ const x = kc.getContext('2d'); x.fillStyle = '#0b1324'; x.fillRect(0, 0, 512, 170);
+      for (let r = 0; r < 5; r++) for (let i = 0; i < 15; i++){ x.fillStyle = 'rgba(30,64,175,.55)'; x.fillRect(10 + i*33, 10 + r*32, 28, 26); x.strokeStyle = 'rgba(147,197,253,.8)'; x.strokeRect(10 + i*33, 10 + r*32, 28, 26); } })();
+    const kb = new THREE.Mesh(new THREE.BoxGeometry(2.0, .07, .68), [mat.dark, mat.dark, new THREE.MeshBasicMaterial({ map:new THREE.CanvasTexture(kc) }), mat.dark, mat.dark, mat.dark]);
+    kb.position.set(-.8, .04, 1.0); kb.rotation.x = .06; deskCluster.add(kb);
+    box(deskCluster, .24, .08, .38, mat.dark, .6, .04, 1.05);
+
+    // tower PC with RGB strip + spinning fan
+    const tower = new THREE.Group(); tower.position.set(1.5, 1.2, -.2); deskCluster.add(tower);
+    box(tower, 1.1, 2.4, 1.7, mat.dark);
+    edgesOf(tower, 1.12, 2.42, 1.72, 0x8b5cf6, .8);
+    const rgb = box(tower, .06, 2.0, .03, new THREE.MeshBasicMaterial({ color:0xff00ff }), -.4, 0, .87);
+    const fan = new THREE.Group(); fan.position.set(.1, .45, .87); tower.add(fan);
+    fan.add(new THREE.Mesh(new THREE.TorusGeometry(.34, .03, 8, 32), mat.metal));
+    const bladeMat = new THREE.MeshBasicMaterial({ color:0x60a5fa });
+    for (let i = 0; i < 7; i++){ const pv = new THREE.Group(); box(pv, .09, .3, .02, bladeMat, 0, .17, 0); pv.rotation.z = i * Math.PI * 2 / 7; fan.add(pv); }
+    const fan2 = fan.clone(); fan2.position.y = -.45; tower.add(fan2);
+    addLED(tower, .35, .95, .87, .07, 0x22c55e);
+    addCable(deskCluster, [[1.0, .3, -.3], [.6, .05, -.7], [-.2, .05, -.5], [-.8, .12, .1]], 0x38bdf8, 1);
+
+    // desk router with antennas + wifi pulses
+    const router = new THREE.Group(); router.position.set(2.55, .08, .7); deskCluster.add(router);
+    box(router, .8, .14, .5, mat.dark);
+    [-.3, .3].forEach(ax => { const a = new THREE.Mesh(new THREE.CylinderGeometry(.025, .03, .7, 8), mat.metal); a.position.set(ax, .42, -.1); a.rotation.z = ax * -.3; router.add(a); });
+    for (let i = 0; i < 4; i++) addLED(router, -.28 + i*.14, .02, .26, .05, 0x22c55e);
+    const wifi = [];
+    for (let i = 0; i < 3; i++){
+      const w = new THREE.Mesh(new THREE.RingGeometry(.9, .96, 32, 1, Math.PI*.2, Math.PI*.6), addMat(0x38bdf8, .8));
+      w.position.set(0, .7, 0); router.add(w); wifi.push(w);
+    }
+    addCable(deskCluster, [[2.3, .1, .6], [1.8, .05, 1.1], [.4, .04, 1.25], [-.8, .06, .7]], 0x22d3ee, 1);
+
+    // CCTV mast (also the uplink anchor on the cluster axis)
+    const mast = new THREE.Mesh(new THREE.CylinderGeometry(.06, .08, 4.2, 10), mat.metal); mast.position.set(0, 2.1, 0); deskCluster.add(mast);
+    const camPivot = new THREE.Group(); camPivot.position.set(0, 4.25, 0); deskCluster.add(camPivot);
+    box(camPivot, .5, .14, .5, mat.metal, 0, -.1, 0);
+    const dome = new THREE.Mesh(new THREE.SphereGeometry(.36, 24, 12, 0, Math.PI*2, Math.PI/2, Math.PI/2), new THREE.MeshStandardMaterial({ color:0x111827, metalness:.9, roughness:.15 }));
+    dome.position.y = -.12; camPivot.add(dome);
+    const lens = new THREE.Mesh(new THREE.SphereGeometry(.1, 12, 10), new THREE.MeshBasicMaterial({ color:0x38bdf8 })); lens.position.set(.26, -.3, 0); camPivot.add(lens);
+    addLED(camPivot, .0, -.05, .26, .07, 0xef4444);
+    const coneGeo = new THREE.ConeGeometry(.9, 2.6, 24, 1, true); coneGeo.translate(0, -1.3, 0);
+    const cone = new THREE.Mesh(coneGeo, addMat(0x7dd3fc, .09)); cone.position.set(.26, -.3, 0); cone.rotation.z = 1.05; camPivot.add(cone);
+    const nodeL = new THREE.Mesh(new THREE.SphereGeometry(.2, 16, 12), new THREE.MeshBasicMaterial({ color:0xc4b5fd }));
+    const nodeLpos = new THREE.Vector3(0, 4.9, 0); nodeL.position.copy(nodeLpos); deskCluster.add(nodeL);
+    const haloL = new THREE.Mesh(new THREE.RingGeometry(.3, .34, 32), addMat(0xa78bfa, .8)); haloL.position.copy(nodeLpos); deskCluster.add(haloL);
+
+    scene.add(serverCluster, deskCluster);
+
+    /* ----- BACKBONE between both clusters (the "internet") ----- */
+    let backbone = null; const bbPackets = [], bbMeshes = [];
+    function buildBackbone(){
+      if (backbone){ scene.remove(backbone); backbone.geometry.dispose(); }
+      scene.updateMatrixWorld(true);
+      const a = nodeL.getWorldPosition(new THREE.Vector3());
+      const b = nodeR.getWorldPosition(new THREE.Vector3());
+      const mid = a.clone().lerp(b, .5); mid.y += 4.2 * (curS.v || 1); mid.z = -8;
+      const c1 = a.clone().lerp(mid, .55); c1.z = -3; c1.y += .8;
+      const c2 = b.clone().lerp(mid, .55); c2.z = -3; c2.y += .8;
+      const curve = new THREE.CatmullRomCurve3([a, c1, mid, c2, b]);
+      backbone = new THREE.Mesh(new THREE.TubeGeometry(curve, 120, .035, 6, false), new THREE.MeshBasicMaterial({ color:0x60a5fa, transparent:true, opacity:.4, blending:THREE.AdditiveBlending, depthWrite:false }));
+      scene.add(backbone);
+      bbPackets.length = 0;
+      for (let i = 0; i < 6; i++){
+        if (!bbMeshes[i]){ bbMeshes[i] = new THREE.Mesh(new THREE.SphereGeometry(.13, 10, 8), new THREE.MeshBasicMaterial({ color:0xbfdbfe, blending:THREE.AdditiveBlending })); scene.add(bbMeshes[i]); }
+        bbPackets.push({ m:bbMeshes[i], curve, t:i/6, sp:.05 + (i%3)*.02 });
+      }
+    }
+
+    /* ----- network globe + dust (kept) ----- */
+    const globe = new THREE.Group();
+    const N = 46, pts = [];
+    for (let i = 0; i < N; i++) {
+      const phi = Math.acos(1 - 2*(i+.5)/N), th = Math.PI * (1 + Math.sqrt(5)) * (i+.5);
+      pts.push(new THREE.Vector3(Math.cos(th)*Math.sin(phi), Math.sin(th)*Math.sin(phi), Math.cos(phi)).multiplyScalar(2.3));
+    }
+    const lp = [];
+    for (let i = 0; i < N; i++) for (let j = i+1; j < N; j++)
+      if (pts[i].distanceTo(pts[j]) < 1.55) lp.push(pts[i].x,pts[i].y,pts[i].z, pts[j].x,pts[j].y,pts[j].z);
+    const lg = new THREE.BufferGeometry(); lg.setAttribute('position', new THREE.Float32BufferAttribute(lp, 3));
+    globe.add(new THREE.LineSegments(lg, lineMat(0x38bdf8, .5)));
+    const pm = new THREE.PointsMaterial({ color:0xffffff, size:.13, transparent:true, opacity:.95, blending:THREE.AdditiveBlending }); fadeMats.push([pm, .95]);
+    globe.add(new THREE.Points(new THREE.BufferGeometry().setFromPoints(pts), pm));
+    globe.position.set(-2, -8.2, -6); scene.add(globe);
+
+    const P = 140, pp = new Float32Array(P*3);
+    for (let i = 0; i < P; i++) { pp[i*3] = (Math.random()-.5)*40; pp[i*3+1] = (Math.random()-.5)*24; pp[i*3+2] = -Math.random()*14 + 3; }
+    const dg = new THREE.BufferGeometry(); dg.setAttribute('position', new THREE.BufferAttribute(pp, 3));
+    const dm = new THREE.PointsMaterial({ color:0x93c5fd, size:.07, transparent:true, opacity:.7, blending:THREE.AdditiveBlending }); fadeMats.push([dm, .7]);
+    const dust = new THREE.Points(dg, dm); scene.add(dust);
+
+    /* ----- responsive layout ----- */
+    const curS = { v:1 };
+    function layout(){
+      const w = innerWidth, h = innerHeight, aspect = w / h;
+      renderer.setSize(w, h, false);
+      camera.aspect = aspect; camera.updateProjectionMatrix();
+      const halfH = Math.tan(THREE.MathUtils.degToRad(25)) * camera.position.z, halfW = halfH * aspect;
+      if (aspect < .9){                             // phones / portrait
+        curS.v = .42;
+        serverCluster.scale.setScalar(.42); deskCluster.scale.setScalar(.38);
+        serverCluster.position.set(halfW - 1.5, -halfH + .5 + 2.7*.42, 0);
+        deskCluster.position.set(-halfW + 1.7, 1.8, 0);
+      } else {
+        const s = Math.max(.5, Math.min(1, .5 + (aspect - .9) * .62));
+        curS.v = s;
+        serverCluster.scale.setScalar(s); deskCluster.scale.setScalar(s * 1.02);
+        serverCluster.position.set(halfW - 2.9*s, -halfH + .6 + 2.7*s, 0);
+        deskCluster.position.set(-(halfW - 3.1*s), -halfH + 1.0*s + 1.1, 0);
+      }
+      serverCluster.userData.baseX = serverCluster.position.x;
+      deskCluster.userData.baseX = deskCluster.position.x;
+      buildBackbone();
+    }
+    layout(); addEventListener('resize', layout);
+
+    /* ----- animation ----- */
+    const clock = new THREE.Clock();
+    let running = true, lastTex = 0, spring = { y:0, v:0 };
+    document.addEventListener('visibilitychange', () => { running = !document.hidden; if (running){ clock.getDelta(); loop(); } });
+
+    function loop(){
+      if (!running) return;
+      requestAnimationFrame(loop);
+      const dt = Math.min(clock.getDelta(), .05), t = clock.elapsedTime;
+      mouse.sx += (mouse.x - mouse.sx) * .05;
+      mouse.sy += (mouse.y - mouse.sy) * .05;
+
+      // page-change spring "spin"
+      if (impulse){ spring.v += impulse * .22; impulse = 0; }
+      spring.v += (-spring.y * .035); spring.v *= .93; spring.y += spring.v;
+
+      const light = document.body.classList.contains('light-mode');
+      fadeMats.forEach(([m, o]) => { m.opacity = light ? o * .55 : o; });
+
+      // clusters face the centre, sway with mouse, bob a little (axis-only motion keeps the backbone attached)
+      serverCluster.rotation.y = -.42 + mouse.sx * .22 + spring.y;
+      deskCluster.rotation.y   =  .42 + mouse.sx * .22 - spring.y;
+      serverCluster.rotation.x = deskCluster.rotation.x = mouse.sy * .04;
+
+      // LEDs
+      leds.forEach(l => { const v = Math.sin(t * l.sp + l.ph) + Math.sin(t * l.sp * 2.3 + l.ph * 1.7) * .5; l.m.color.copy(v > .1 ? l.on : l.off); });
+      // RGB strip + fans
+      rgb.material.color.setHSL((t * .25) % 1, 1, .55);
+      fan.rotation.z -= dt * 9; fan2.rotation.z += dt * 9;
+      // CCTV pan
+      camPivot.rotation.y = Math.sin(t * .5) * .6;
+      // wifi pulses
+      wifi.forEach((w, i) => { const k = ((t * .8 + i / 3) % 1); w.scale.setScalar(.35 + k * 1.1); w.material.opacity = (1 - k) * (light ? .45 : .8); });
+      // uplink halos
+      [haloL, haloR].forEach((hl, i) => { const k = (t * .6 + i * .5) % 1; hl.scale.setScalar(1 + k * 2.4); hl.lookAt(camera.position); });
+      // holo bob
+      holoG.position.y = RH/2 + 1.9 + Math.sin(t * 1.2) * .08;
+      // packets
+      packets.forEach(p => { p.t = (p.t + p.sp * dt) % 1; p.m.position.copy(p.curve.getPointAt(p.t)); });
+      bbPackets.forEach(p => { p.t = (p.t + p.sp * dt) % 1; p.m.position.copy(p.curve.getPointAt(p.t)); });
+
+      // canvas textures (~12 fps)
+      if (t - lastTex > .08){ lastTex = t; drawMonitor(t); drawHolo(t); }
+
+      globe.rotation.y = t * .15; globe.rotation.x = t * .06;
+      dust.rotation.y = t * .02 + mouse.sx * .08; dust.rotation.x = mouse.sy * .05;
+      camera.position.x = mouse.sx * .8; camera.position.y = -mouse.sy * .5;
+      camera.lookAt(0, 0, 0);
+      key.position.x = 8 + Math.sin(t * .7) * 4;
+      renderer.render(scene, camera);
+    }
+    loop();
+  }
+
+  if (typeof THREE !== 'undefined') initFX();
+  else { const c = setInterval(() => { if (typeof THREE !== 'undefined') { clearInterval(c); initFX(); } }, 120); }
+})();
+</script>
+
 </body>
 </html>
